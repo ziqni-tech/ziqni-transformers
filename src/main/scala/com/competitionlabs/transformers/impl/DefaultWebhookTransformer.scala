@@ -190,8 +190,6 @@ class DefaultWebhookTransformer extends CLWebhookTransformer {
 
 		val body = Map[String, Any](
 			"contestId" -> contestId,
-			"memberId" -> memberId,
-			"awardId" -> awardId,
 			"resourcePath" -> s"/api/${competitionLabsApi.spaceName}/awards/$awardId",
 			"timestamp" -> DateTime.now().getMillis
 		)

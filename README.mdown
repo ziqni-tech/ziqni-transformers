@@ -163,7 +163,7 @@ To transform an incoming message from a RabbitMQ Queue:
 
 You can use CompetitionLabs WebHook transformers to modify and send messages to your WebHook endpoints. You can map field in the CompetitionLabs data model to fields already implemented in your platform. You can also use the CompetitionLabs Transformer API to trigger additional actions and events.
 
-You can create a CompetitionLabs WebHook transformer for any of the built in WebHook events. If you have a customer WebHook transformer configured, your custom transformer is used instead of the built in WebHook transformer.
+You can create a CompetitionLabs WebHook transformer for any of the built in WebHook events. If you have a custom WebHook transformer configured, your custom transformer is used instead of the built in WebHook transformer.
 
 To create a CompetitionLabs WebHook transformer:
 
@@ -190,7 +190,7 @@ To create a CompetitionLabs WebHook transformer:
 
 2. Override one of the methods in CLWebhookTransformer with your implementation
 
-	The following are the built in WebHook transformers you can override with your own customer transformer:
+	The following are the built in WebHook transformers you can override with your own custom transformer:
 
 	* onNewProduct(): Executed when a new product is registered in your CompetitionLabs space
     * onNewMember(): Executed when a new member is registered in your CompetitionLabs space

@@ -46,14 +46,13 @@ class DefaultWebhookTransformer extends CLWebhookTransformer {
 	override def onCompetitionCreated(settings: WebhookSettings, competitionId: String, competitionLabsApi: CompetitionLabsApiExt): Unit = {
 
 		val body = Map[String, Any](
-			"accountId" -> competitionLabsApi.accountId,
 			"competitionId" -> competitionId,
 			"resourcePath" -> s"/api/${competitionLabsApi.spaceName}/competitions/$competitionId",
 			"timestamp" -> DateTime.now().getMillis
 		)
 
 		val json =  competitionLabsApi.toJsonFromMap(body)
-		val headers = settings.headers ++ competitionLabsApi.HTTPDefaultHeader(competitionLabsApi.accountId, "onNewMember")
+		val headers = settings.headers ++ competitionLabsApi.HTTPDefaultHeader(competitionLabsApi.accountId, "onCompetitionCreated")
 
 		competitionLabsApi.httpPost(settings.url, json, headers)
 	}
@@ -221,7 +220,7 @@ class DefaultWebhookTransformer extends CLWebhookTransformer {
 		val body = Map[String, Any](
 			"achievementId" -> achievementId,
 			"memberId" -> memberId,
-			"memberIdRefId" -> competitionLabsApi.memberRefIdFromMemberId(memberId),
+			"memberRefId" -> competitionLabsApi.memberRefIdFromMemberId(memberId),
 			"resourcePath" -> s"/api/${competitionLabsApi.spaceName}/achievement/$achievementId",
 			"timestamp" -> DateTime.now().getMillis
 		)
@@ -237,7 +236,7 @@ class DefaultWebhookTransformer extends CLWebhookTransformer {
 		val body = Map[String, Any](
 			"achievementId" -> achievementId,
 			"memberId" -> memberId,
-			"memberIdRefId" -> competitionLabsApi.memberRefIdFromMemberId(memberId),
+			"memberRefId" -> competitionLabsApi.memberRefIdFromMemberId(memberId),
 			"awardId" -> awardId,
 			"resourcePath" -> s"/api/${competitionLabsApi.spaceName}/awards/$awardId",
 			"timestamp" -> DateTime.now().getMillis

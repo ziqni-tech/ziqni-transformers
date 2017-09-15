@@ -120,7 +120,7 @@ class DefaultWebhookTransformer extends CLWebhookTransformer {
 
 		val body = Map[String, Any](
 			"contestId" -> contestId,
-			"resourcePath" -> s"/api/${competitionLabsApi.spaceName}/contest/$contestId",
+			"resourcePath" -> s"/api/${competitionLabsApi.spaceName}/contests/$contestId",
 			"timestamp" -> DateTime.now().getMillis
 		)
 
@@ -134,7 +134,7 @@ class DefaultWebhookTransformer extends CLWebhookTransformer {
 
 		val body = Map[String, Any](
 			"contestId" -> contestId,
-			"resourcePath" -> s"/api/${competitionLabsApi.spaceName}/contest/$contestId",
+			"resourcePath" -> s"/api/${competitionLabsApi.spaceName}/contests/$contestId",
 			"timestamp" -> DateTime.now().getMillis
 		)
 
@@ -148,7 +148,7 @@ class DefaultWebhookTransformer extends CLWebhookTransformer {
 
 		val body = Map[String, Any](
 			"contestId" -> contestId,
-			"resourcePath" -> s"/api/${competitionLabsApi.spaceName}/contest/$contestId",
+			"resourcePath" -> s"/api/${competitionLabsApi.spaceName}/contests/$contestId",
 			"timestamp" -> DateTime.now().getMillis
 		)
 
@@ -162,7 +162,7 @@ class DefaultWebhookTransformer extends CLWebhookTransformer {
 
 		val body = Map[String, Any](
 			"contestId" -> contestId,
-			"resourcePath" -> s"/api/${competitionLabsApi.spaceName}/contest/$contestId",
+			"resourcePath" -> s"/api/${competitionLabsApi.spaceName}/contests/$contestId",
 			"timestamp" -> DateTime.now().getMillis
 		)
 
@@ -176,7 +176,7 @@ class DefaultWebhookTransformer extends CLWebhookTransformer {
 
 		val body = Map[String, Any](
 			"contestId" -> contestId,
-			"resourcePath" -> s"/api/${competitionLabsApi.spaceName}/contest/$contestId",
+			"resourcePath" -> s"/api/${competitionLabsApi.spaceName}/contests/$contestId",
 			"timestamp" -> DateTime.now().getMillis
 		)
 

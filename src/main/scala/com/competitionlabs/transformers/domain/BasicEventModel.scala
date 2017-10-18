@@ -18,6 +18,7 @@ import org.joda.time.DateTime
   * @param sourceValue The value assigned to this event
   * @param transactionTimestamp The date and time in UTC when this transaction occurred
   * @param tags Additional meta data describing this event
+  * @param metadata Additional meta data in key value format describing this event
   */
 case class BasicEventModel(
 	                           memberRefId: String,
@@ -28,5 +29,5 @@ case class BasicEventModel(
 	                           sourceValue: Double,
 	                           transactionTimestamp: DateTime,
 	                           tags: Seq[String] = Seq.empty,
-							   metadata: Map[String, Seq[Any]] = Map.empty
+				   metadata: Map[String, Seq[Any]] = Map.empty
                            )

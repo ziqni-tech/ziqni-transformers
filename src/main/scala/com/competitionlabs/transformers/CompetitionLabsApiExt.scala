@@ -12,7 +12,7 @@ trait CompetitionLabsApiExt extends CompetitionLabsApi {
 	
 	def HTTPDefaultHeader(accountId: String = "", onEvent: String = "") = Map(
 		"Content-Type" -> Seq("application/json"),
-		"Accept-Encoding" -> Seq("gzip"),
+		"Content-Encoding" -> Seq("gzip"),
 		"User_Agent" -> Seq("CompetitionLabs/1.0"),
 		"X-Account" -> Seq(accountId),
 		"X-OnEvent" -> Seq(onEvent)

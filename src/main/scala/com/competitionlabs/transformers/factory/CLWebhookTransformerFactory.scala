@@ -15,7 +15,7 @@ object CLWebhookTransformerFactory {
 
 	val defaultWebhookTransformer = new DefaultWebhookTransformer
 
-	def apply[T <: WebhookTransformerTrigger](trigger : T, settings: WebhookSettings, competitionLabsApi: CompetitionLabsApiExt, cLWebhookTransformer: CLWebhookTransformer = defaultWebhookTransformer) = trigger match {
+	def apply[T <: WebhookTransformerTrigger](trigger : T, settings: WebhookSettings, competitionLabsApi: CompetitionLabsApiExt, cLWebhookTransformer: CLWebhookTransformer = defaultWebhookTransformer): Unit = trigger match {
 
 		case t: onNewProductTrigger => cLWebhookTransformer.onNewProduct(settings, t.productId, competitionLabsApi)
 
@@ -47,7 +47,7 @@ object CLWebhookTransformerFactory {
 
 		case t: onAchievementTriggeredTrigger => cLWebhookTransformer.onAchievementTriggered(settings, t.achievementId, t.memberId, competitionLabsApi)
 			
-		case t: onAchievementRewardIssuedTrigger => cLWebhookTransformer.onAchievementRewardIssued(settings, t.achievementId, t.memberId, t.awardId, competitionLabsApi)
+		case t: onAchievementRewardIssuedTrigger => cLWebhookTransformer.onAchievementRewardIssued(settings, t.achievementId, t.memberId, t.rewardId, t.awardId, t.rewardTypeKey, competitionLabsApi)
 
 	}
 }

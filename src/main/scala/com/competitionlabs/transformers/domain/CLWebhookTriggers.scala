@@ -84,4 +84,4 @@ object CLWebhookTriggers {
 
 	case class onAchievementTriggeredTrigger(accountId:String, achievementId: String, memberId: String) extends Serializable with WebhookTransformerTrigger
 
-	case class onAchievementRewardIssuedTrigger(accountId:String, achievementId: String, memberId: String, rewardId: String, awardId: String, rewardTypeKey: String) extends Serializable with WebhookTransformerTrigger
+	case class onAchievementRewardIssuedTrigger(accountId:String, achievementId: String, memberId: String, awardId: String, rewardTypeKey: String) extends Serializable with WebhookTransformerTrigger

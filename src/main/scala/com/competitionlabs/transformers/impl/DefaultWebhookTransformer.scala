@@ -233,7 +233,7 @@ class DefaultWebhookTransformer extends CLWebhookTransformer {
 		competitionLabsApi.httpPost(settings.url, json, headers)
 	}
 
-	override def onAchievementRewardIssued(settings: WebhookSettings, achievementId: String, memberId: String, rewardId: String, awardId: String, rewardTypeKey: String, competitionLabsApi: CompetitionLabsApiExt): Unit = {
+	override def onAchievementRewardIssued(settings: WebhookSettings, achievementId: String, memberId: String, awardId: String, rewardTypeKey: String, competitionLabsApi: CompetitionLabsApiExt): Unit = {
 
 		val body = Map[String, Any](
 			"achievementId" -> achievementId,

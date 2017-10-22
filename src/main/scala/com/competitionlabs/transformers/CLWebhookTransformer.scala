@@ -140,10 +140,9 @@ trait CLWebhookTransformer {
     * @param settings The user supplied settings
     * @param achievementId The CompetitionLabs achievement id
     * @param memberId The CompetitionLabs member id
-    * @param rewardId The CompetitionLabs reward id
     * @param awardId The CompetitionLabs award id
     * @param rewardTypeKey The user defined reward type key
     * @param competitionLabsApi The CompetitionLabs API
     */
-  def onAchievementRewardIssued(settings: WebhookSettings, achievementId: String, memberId: String, rewardId: String, awardId: String, rewardTypeKey: String, competitionLabsApi: CompetitionLabsApiExt): Unit = {}
+  def onAchievementRewardIssued(settings: WebhookSettings, achievementId: String, memberId: String, awardId: String, rewardTypeKey: String, competitionLabsApi: CompetitionLabsApiExt): Unit = {}
 }

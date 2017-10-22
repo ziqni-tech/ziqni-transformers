@@ -64,9 +64,10 @@ trait CLWebhookTransformer {
     * @param competitionId The CompetitionLabs competition id
     * @param memberId The CompetitionLabs member id
     * @param awardId The CompetitionLabs award id
+    * @param rewardTypeKey The user defined reward type key
     * @param competitionLabsApi The CompetitionLabs API
     */
-  def onCompetitionRewardIssued(settings: WebhookSettings, competitionId: String, memberId: String, awardId: String, competitionLabsApi: CompetitionLabsApiExt): Unit = {}
+  def onCompetitionRewardIssued(settings: WebhookSettings, competitionId: String, memberId: String, awardId: String, rewardTypeKey: String, competitionLabsApi: CompetitionLabsApiExt): Unit = {}
 
   /**
     * Executed when a new contest is created in your CompetitionLabs space
@@ -114,9 +115,10 @@ trait CLWebhookTransformer {
     * @param contestId The CompetitionLabs contest id
     * @param memberId The CompetitionLabs member id
     * @param awardId The CompetitionLabs award id
+    * @param rewardTypeKey The user defined reward type key
     * @param competitionLabsApi The CompetitionLabs API
     */
-  def onContestRewardIssued(settings: WebhookSettings, contestId: String, memberId: String, awardId: String, competitionLabsApi: CompetitionLabsApiExt): Unit = {}
+  def onContestRewardIssued(settings: WebhookSettings, contestId: String, memberId: String, awardId: String, rewardTypeKey: String, competitionLabsApi: CompetitionLabsApiExt): Unit = {}
 
   /**
     * Executed when a new contest is created in your CompetitionLabs space

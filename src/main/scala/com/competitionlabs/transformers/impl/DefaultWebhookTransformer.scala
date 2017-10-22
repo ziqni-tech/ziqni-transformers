@@ -99,7 +99,7 @@ class DefaultWebhookTransformer extends CLWebhookTransformer {
 		competitionLabsApi.httpPost(settings.url, json, headers)
 	}
 
-	override def onCompetitionRewardIssued(settings: WebhookSettings, competitionId: String, memberId: String, awardId: String, competitionLabsApi: CompetitionLabsApiExt): Unit = {
+	override def onCompetitionRewardIssued(settings: WebhookSettings, competitionId: String, memberId: String, awardId: String, rewardTypeKey: String, competitionLabsApi: CompetitionLabsApiExt): Unit = {
 
 		val body = Map[String, Any](
 			"competitionId" -> competitionId,
@@ -186,7 +186,7 @@ class DefaultWebhookTransformer extends CLWebhookTransformer {
 		competitionLabsApi.httpPost(settings.url, json, headers)
 	}
 
-	override def onContestRewardIssued(settings: WebhookSettings, contestId: String, memberId: String, awardId: String, competitionLabsApi: CompetitionLabsApiExt): Unit = {
+	override def onContestRewardIssued(settings: WebhookSettings, contestId: String, memberId: String, awardId: String, rewardTypeKey: String, competitionLabsApi: CompetitionLabsApiExt): Unit = {
 
 		val body = Map[String, Any](
 			"contestId" -> contestId,

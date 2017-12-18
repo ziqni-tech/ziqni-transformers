@@ -6,7 +6,7 @@
   */
 package com.competitionlabs.transformers
 
-import com.competitionlabs.transformers.domain.BasicAuthCredentials
+import com.competitionlabs.transformers.domain.{BasicAuthCredentials, HttpResponseEntity}
 
 trait CompetitionLabsApiExt extends CompetitionLabsApi {
 	
@@ -23,9 +23,9 @@ trait CompetitionLabsApiExt extends CompetitionLabsApi {
 	  * @param url The url to send the request too
 	  * @param headers The request headers
 	  * @param basicAuthCredentials Basic authentication
-	  * @return The http status code or -1 on error
+	  * @return HttpResponseEntity
 	  */
-	def httpGet(url: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[BasicAuthCredentials] = None): Int
+	def httpGet(url: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[BasicAuthCredentials] = None): HttpResponseEntity
 
 	/**
 	  * Send a http put request
@@ -33,9 +33,9 @@ trait CompetitionLabsApiExt extends CompetitionLabsApi {
 	  * @param body The request body
 	  * @param headers The request headers
 	  * @param basicAuthCredentials Basic authentication
-	  * @return The http status code or -1 on error
+	  * @return HttpResponseEntity
 	  */
-	def httpPut(url: String, body: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[BasicAuthCredentials] = None): Int
+	def httpPut(url: String, body: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[BasicAuthCredentials] = None): HttpResponseEntity
 
 	/**
 	  * Send a http post request
@@ -43,16 +43,16 @@ trait CompetitionLabsApiExt extends CompetitionLabsApi {
 	  * @param body The request body
 	  * @param headers The request headers
 	  * @param basicAuthCredentials Basic authentication
-	  * @return The http status code or -1 on error
+	  * @return HttpResponseEntity
 	  */
-	def httpPost(url: String, body: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[BasicAuthCredentials] = None): Int
+	def httpPost(url: String, body: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[BasicAuthCredentials] = None): HttpResponseEntity
 
 	/**
 	  * Send a http delete request
 	  * @param url The url to send the request too
 	  * @param headers The request headers
 	  * @param basicAuthCredentials Basic authentication
-	  * @return The http status code or -1 on error
+	  * @return HttpResponseEntity
 	  */
-	def httpDelete(url: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[BasicAuthCredentials] = None): Int
+	def httpDelete(url: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[BasicAuthCredentials] = None): HttpResponseEntity
 }

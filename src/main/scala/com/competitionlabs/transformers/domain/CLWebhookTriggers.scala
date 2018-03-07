@@ -14,39 +14,46 @@ object CLWebhookTriggers {
 
 	/**
 	  * Use the simple class name to get the trigger id
+	  * TriggerIds ending in '01' or '51' correspond to create operations
+	  * TriggerIds in '10s' correspond to actions
+	  * TriggerIds in '60s' correspond to reward actions
 	  */
 	val TriggersByClassName = Map[TriggerClass, (TriggerId, TriggerName)](
-		onNewProductTrigger.getClass.getSimpleName.replace("$","")          -> ("ET-1", "Product created"),
+		onNewProductTrigger.getClass.getSimpleName.replace("$","")          -> ("ET-101", "Product created"),
 
-		onNewMemberTrigger.getClass.getSimpleName.replace("$","")           -> ("ET-2", "Member created"),
+		onNewMemberTrigger.getClass.getSimpleName.replace("$","")           -> ("ET-201", "Member created"),
 
-		onCompetitionCreatedTrigger.getClass.getSimpleName.replace("$","")  -> ("ET-3", "Competition created"),
+		onCompetitionCreatedTrigger.getClass.getSimpleName.replace("$","")  -> ("ET-301", "Competition created"),
 
-		onCompetitionStartedTrigger.getClass.getSimpleName.replace("$","")  ->  ("ET-4", "Competition started"),
+		onCompetitionStartedTrigger.getClass.getSimpleName.replace("$","")  ->  ("ET-311", "Competition started"),
 
-		onCompetitionFinishedTrigger.getClass.getSimpleName.replace("$","") ->  ("ET-5", "Competition finished"),
+		onCompetitionFinishedTrigger.getClass.getSimpleName.replace("$","") ->  ("ET-312", "Competition finished"),
 
-		onCompetitionCancelledTrigger.getClass.getSimpleName.replace("$","") ->  ("ET-6", "Competition cancelled"),
+		onCompetitionCancelledTrigger.getClass.getSimpleName.replace("$","") ->  ("ET-313", "Competition cancelled"),
 
-		onCompetitionRewardIssuedTrigger.getClass.getSimpleName.replace("$","") ->  ("ET-7", "Competition reward issued"),
+		onCompetitionRewardIssuedTrigger.getClass.getSimpleName.replace("$","") ->  ("ET-321", "Competition reward issued"),
 
-		onContestCreatedTrigger.getClass.getSimpleName.replace("$","")      ->  ("ET-8", "Contest created"),
+		onContestCreatedTrigger.getClass.getSimpleName.replace("$","")      ->  ("ET-401", "Contest created"),
 
-		onContestStartedTrigger.getClass.getSimpleName.replace("$","")      ->  ("ET-9", "Contest started"),
+		onContestStartedTrigger.getClass.getSimpleName.replace("$","")      ->  ("ET-411", "Contest started"),
 
-		onContestFinishedTrigger.getClass.getSimpleName.replace("$","")     ->  ("ET-10", "Contest finished"),
+		onContestFinishedTrigger.getClass.getSimpleName.replace("$","")     ->  ("ET-412", "Contest finished"),
 
-		onContestFinalisedTrigger.getClass.getSimpleName.replace("$","")    ->  ("ET-10", "Contest finalised"),
+		onContestFinalisedTrigger.getClass.getSimpleName.replace("$","")    ->  ("ET-413", "Contest finalised"),
 
-		onContestCancelledTrigger.getClass.getSimpleName.replace("$","")    ->  ("ET-12", "Contest cancelled"),
+		onContestCancelledTrigger.getClass.getSimpleName.replace("$","")    ->  ("ET-414", "Contest cancelled"),
 
-		onContestRewardIssuedTrigger.getClass.getSimpleName.replace("$","") ->  ("ET-13", "Contest reward issued"),
+		onContestRewardCreatedTrigger.getClass.getSimpleName.replace("$","") ->  ("ET-451", "Contest reward created"),
 
-		onAchievementCreatedTrigger.getClass.getSimpleName.replace("$","")  ->  ("ET-14", "Achievement created"),
+		onContestRewardIssuedTrigger.getClass.getSimpleName.replace("$","") ->  ("ET-461", "Contest reward issued"),
 
-		onAchievementTriggeredTrigger.getClass.getSimpleName.replace("$","") ->  ("ET-15", "Achievement triggered"),
+		onAchievementCreatedTrigger.getClass.getSimpleName.replace("$","")  ->  ("ET-501", "Achievement created"),
 
-		onAchievementRewardIssuedTrigger.getClass.getSimpleName.replace("$","") ->  ("ET-16", "Achievement reward issued")
+		onAchievementTriggeredTrigger.getClass.getSimpleName.replace("$","") ->  ("ET-511", "Achievement triggered"),
+
+		onAchievementRewardCreatedTrigger.getClass.getSimpleName.replace("$","") ->  ("ET-551", "Achievement reward created"),
+
+		onAchievementRewardIssuedTrigger.getClass.getSimpleName.replace("$","") ->  ("ET-561", "Achievement reward issued")
 	)
 
 	val TriggersById = TriggersByClassName.map(t => t._2._1 -> t._1)
@@ -78,10 +85,14 @@ object CLWebhookTriggers {
 
 	case class onContestCancelledTrigger(accountId:String, contestId: String) extends Serializable with WebhookTransformerTrigger
 
+	case class onContestRewardCreatedTrigger(accountId:String, contestId: String, rewardId: String) extends Serializable with WebhookTransformerTrigger
+
 	case class onContestRewardIssuedTrigger(accountId:String, contestId: String, memberId: String, awardId: String, rewardTypeKey: String) extends Serializable with WebhookTransformerTrigger
 
 	case class onAchievementCreatedTrigger(accountId:String, achievementId: String) extends Serializable with WebhookTransformerTrigger
 
 	case class onAchievementTriggeredTrigger(accountId:String, achievementId: String, memberId: String) extends Serializable with WebhookTransformerTrigger
+
+	case class onAchievementRewardCreatedTrigger(accountId:String, achievementId: String, rewardId: String) extends Serializable with WebhookTransformerTrigger
 
 	case class onAchievementRewardIssuedTrigger(accountId:String, achievementId: String, memberId: String, awardId: String, rewardTypeKey: String) extends Serializable with WebhookTransformerTrigger

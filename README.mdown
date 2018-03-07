@@ -204,9 +204,11 @@ To create a CompetitionLabs WebHook transformer:
     * onContestFinished(): Executed when a contest finished
     * onContestFinalised(): Executed when a contest is finalised
     * onContestCancelled(): Executed when a contest is cancelled
+    * onContestRewardCreated(): Executed when a contest reward is created
     * onContestRewardIssued(): Executed when a contest reward is issued
     * onAchievementCreated(): Executed when a new achievement is created
     * onAchievementTriggered(): Executed when an achievement is triggered
+    * onAchievementRewardCreated(): Executed when an achievement reward is created
     * onAchievementRewardIssued(): Executed when a reward was awarded to a member
 
 

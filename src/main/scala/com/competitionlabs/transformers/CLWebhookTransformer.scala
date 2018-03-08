@@ -112,11 +112,10 @@ trait CLWebhookTransformer {
   /**
     * Executed when a new reward is created in your CompetitionLabs space
     * @param settings The user supplied settings
-    * @param contestId The CompetitionLabs contest id
     * @param rewardId The CompetitionLabs reward id
     * @param competitionLabsApi The CompetitionLabs API
     */
-  def onContestRewardCreated(settings: WebhookSettings, contestId: String, rewardId: String, competitionLabsApi: CompetitionLabsApiExt): Unit = {}
+  def onContestRewardCreated(settings: WebhookSettings, rewardId: String, competitionLabsApi: CompetitionLabsApiExt): Unit = {}
 
   /**
     * Executed when a contest finished
@@ -149,11 +148,10 @@ trait CLWebhookTransformer {
   /**
     * Executed when a new reward is created in your CompetitionLabs space
     * @param settings The user supplied settings
-    * @param achievementId The CompetitionLabs achievement id
     * @param rewardId The CompetitionLabs reward id
     * @param competitionLabsApi The CompetitionLabs API
     */
-  def onAchievementRewardCreated(settings: WebhookSettings, achievementId: String, rewardId: String, competitionLabsApi: CompetitionLabsApiExt): Unit = {}
+  def onAchievementRewardCreated(settings: WebhookSettings, rewardId: String, competitionLabsApi: CompetitionLabsApiExt): Unit = {}
 
   /**
     * Executed when a reward was awarded to a member

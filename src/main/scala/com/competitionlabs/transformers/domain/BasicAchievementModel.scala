@@ -61,12 +61,6 @@ abstract class BasicAchievementModel {
 
 	/**
 	  *
-	  * @return a list of rewards associated with this Achievement
-	  */
-	def getRewards: Seq[BasicRewardModel]
-
-	/**
-	  *
 	  * @return Product reference ids used in rules for this achievement
 	  */
 	def getProductRefIds: Option[Array[String]]

@@ -85,7 +85,7 @@ object CLWebhookTriggers {
 
 	case class onContestCancelledTrigger(accountId:String, contestId: String) extends Serializable with WebhookTransformerTrigger
 
-	case class onContestRewardCreatedTrigger(accountId:String, contestId: String, rewardId: String) extends Serializable with WebhookTransformerTrigger
+	case class onContestRewardCreatedTrigger(accountId:String, rewardId: String) extends Serializable with WebhookTransformerTrigger
 
 	case class onContestRewardIssuedTrigger(accountId:String, contestId: String, memberId: String, awardId: String, rewardTypeKey: String) extends Serializable with WebhookTransformerTrigger
 
@@ -93,6 +93,6 @@ object CLWebhookTriggers {
 
 	case class onAchievementTriggeredTrigger(accountId:String, achievementId: String, memberId: String) extends Serializable with WebhookTransformerTrigger
 
-	case class onAchievementRewardCreatedTrigger(accountId:String, achievementId: String, rewardId: String) extends Serializable with WebhookTransformerTrigger
+	case class onAchievementRewardCreatedTrigger(accountId:String, rewardId: String) extends Serializable with WebhookTransformerTrigger
 
 	case class onAchievementRewardIssuedTrigger(accountId:String, achievementId: String, memberId: String, awardId: String, rewardTypeKey: String) extends Serializable with WebhookTransformerTrigger

@@ -186,15 +186,14 @@ class DefaultWebhookTransformer extends CLWebhookTransformer {
 		competitionLabsApi.httpPost(settings.url, json, headers)
 	}
 
-	override def onContestRewardCreated(settings: WebhookSettings, contestId: String, rewardId: String, competitionLabsApi: CompetitionLabsApiExt): Unit = {
+	override def onContestRewardCreated(settings: WebhookSettings, rewardId: String, competitionLabsApi: CompetitionLabsApiExt): Unit = {
 		val body = Map[String, Any](
-			"contestId" -> contestId,
 			"rewardId" -> rewardId,
 			"timestamp" -> DateTime.now().getMillis
 		)
 
 		val json =  competitionLabsApi.toJsonFromMap(body)
-		val headers = settings.headers ++ competitionLabsApi.HTTPDefaultHeader(competitionLabsApi.accountId, "onAchievementRewardIssued")
+		val headers = settings.headers ++ competitionLabsApi.HTTPDefaultHeader(competitionLabsApi.accountId, "onContestRewardCreated")
 
 		competitionLabsApi.httpPost(settings.url, json, headers)
 	}
@@ -246,15 +245,14 @@ class DefaultWebhookTransformer extends CLWebhookTransformer {
 		competitionLabsApi.httpPost(settings.url, json, headers)
 	}
 
-	override def onAchievementRewardCreated(settings: WebhookSettings, achievementId: String, rewardId: String, competitionLabsApi: CompetitionLabsApiExt): Unit = {
+	override def onAchievementRewardCreated(settings: WebhookSettings, rewardId: String, competitionLabsApi: CompetitionLabsApiExt): Unit = {
 		val body = Map[String, Any](
-			"achievementId" -> achievementId,
 			"rewardId" -> rewardId,
 			"timestamp" -> DateTime.now().getMillis
 		)
 
 		val json =  competitionLabsApi.toJsonFromMap(body)
-		val headers = settings.headers ++ competitionLabsApi.HTTPDefaultHeader(competitionLabsApi.accountId, "onAchievementRewardIssued")
+		val headers = settings.headers ++ competitionLabsApi.HTTPDefaultHeader(competitionLabsApi.accountId, "onAchievementRewardCreated")
 
 		competitionLabsApi.httpPost(settings.url, json, headers)
 	}

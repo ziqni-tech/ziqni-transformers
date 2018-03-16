@@ -8,7 +8,7 @@ package com.competitionlabs.transformers
 
 import java.nio.charset.Charset
 
-import com.competitionlabs.transformers.domain.{BasicAchievementModel, BasicEventModel, BasicRewardModel}
+import com.competitionlabs.transformers.domain.{BasicAchievementModel, BasicAwardModel, BasicEventModel, BasicRewardModel}
 import org.joda.time.DateTime
 import org.json4s.JsonAST.JValue
 
@@ -130,6 +130,13 @@ trait CompetitionLabsApi {
 	  * @return BasicAchievementModel returns a basic achievement object
 	  */
 	def getReward(rewardId: String): Option[BasicRewardModel]
+
+	/**
+	  *
+	  * @param awardId CompetitionLabs Reward Id
+	  * @return BasicAchievementModel returns a basic achievement object
+	  */
+	def getAward(awardId: String): Option[BasicAwardModel]
 
 	/**
 	  * Converts a json string to a JValue

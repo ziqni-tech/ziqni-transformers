@@ -7,15 +7,6 @@
 
 package com.competitionlabs.transformers.domain
 
-//case class BasicRewardModel (
-//								clRewardId: String,
-//								rewardName: String,
-//								rewardValue: Double,
-//								rewardTypeId: String,
-//								rewardTypeName: String,
-//								rewardTypeKey: String
-//							)
-
 abstract class BasicRewardModel {
 
 	/**

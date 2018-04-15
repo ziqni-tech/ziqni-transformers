@@ -6,7 +6,7 @@
   */
 package utils
 
-import com.competitionlabs.transformers.domain.{BasicAuthCredentials, BasicEventModel}
+import com.competitionlabs.transformers.domain._
 import com.competitionlabs.transformers.{CompetitionLabsApi, CompetitionLabsApiExt}
 import org.joda.time.DateTime
 import org.json4s.{DefaultFormats, JsonAST}
@@ -87,6 +87,28 @@ class CompetitionLabsApiTest extends CompetitionLabsApi with CompetitionLabsApiE
 	}
 
 	/**
+	  *
+	  * @param displayName Display name
+	  * @param groups      The groups to add this member to
+	  * @return The id used in the CompetitionLabs system
+	  */
+	override def updateMember(memberReferenceId: String, displayName: String, groups: Seq[String]): Option[String] = {
+		val key = "CL-" + displayName
+		memberForTest.put(
+			memberReferenceId, displayName
+		)
+		Option(key)
+	}
+
+	/**
+	  *
+	  * @param memberId CompetitionLabs Reward Id
+	  * @return BasicMemberModel returns a basic member object
+	  */
+	override def getMember(memberId: String): Option[BasicMemberModel] = None
+
+
+	/**
 	  * Get the CompetitionLabs id for the product based on your reference id
 	  *
 	  * @param productReferenceId The id used to identify this product in the sending system
@@ -108,6 +130,27 @@ class CompetitionLabsApiTest extends CompetitionLabsApi with CompetitionLabsApiE
 		productForTest.put(productReferenceId, key)
 		Option(key)
 	}
+
+	/**
+	  *
+	  * @param displayName             Display name
+	  * @param providers               The providers of this product
+	  * @param productType             The type of product
+	  * @param defaultAdjustmentFactor The default adjustment factor to apply
+	  * @return The id used in the CompetitionLabs system
+	  */
+	override def updateProduct(productReferenceId: String, displayName: String, providers: Seq[String], productType: String, defaultAdjustmentFactor: Double): Option[String] = {
+		val key = "CL-" + productReferenceId
+		productForTest.put(productReferenceId, displayName)
+		Option(key)
+	}
+
+	/**
+	  *
+	  * @param productId CompetitionLabs Product Id
+	  * @return BasicProductModel returns a basic product object
+	  */
+	override def getProduct(productId: String): Option[BasicProductModel] = None
 
 	/**
 	  * Verify if the event action type exists in your space
@@ -237,4 +280,25 @@ class CompetitionLabsApiTest extends CompetitionLabsApi with CompetitionLabsApiE
 		httpRequests.put(url, ("", headers))
 		200
 	}
+
+	/**
+	  *
+	  * @param achievementId CompetitionLabs Achievement Id
+	  * @return BasicAchievementModel returns a basic achievement object
+	  */
+	override def getAchievement(achievementId: String): Option[BasicAchievementModel] = None
+
+	/**
+	  *
+	  * @param rewardId CompetitionLabs Reward Id
+	  * @return BasicAchievementModel returns a basic achievement object
+	  */
+	override def getReward(rewardId: String): Option[BasicRewardModel]= None
+
+	/**
+	  *
+	  * @param awardId CompetitionLabs Reward Id
+	  * @return BasicAchievementModel returns a basic achievement object
+	  */
+	override def getAward(awardId: String): Option[BasicAwardModel] = None
 }

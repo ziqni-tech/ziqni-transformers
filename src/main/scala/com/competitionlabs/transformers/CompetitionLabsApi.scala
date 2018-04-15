@@ -8,7 +8,7 @@ package com.competitionlabs.transformers
 
 import java.nio.charset.Charset
 
-import com.competitionlabs.transformers.domain.{BasicAchievementModel, BasicAwardModel, BasicEventModel, BasicRewardModel}
+import com.competitionlabs.transformers.domain._
 import org.joda.time.DateTime
 import org.json4s.JsonAST.JValue
 
@@ -70,6 +70,21 @@ trait CompetitionLabsApi {
 	def createMember(memberReferenceId: String, displayName: String, groups:Seq[String]): Option[String]
 
 	/**
+	  *
+	  * @param displayName Display name
+	  * @param groupsToUpdate The groups to add this member to
+	  * @return The id used in the CompetitionLabs system
+	  */
+	def updateMember(memberReferenceId: String, displayName: Option[String], groupsToUpdate:Option[Array[String]], metaData: Option[Map[String, String]]): Option[String]
+
+	/**
+	  *
+	  * @param memberId CompetitionLabs Reward Id
+	  * @return BasicMemberModel returns a basic member object
+	  */
+	def getMember(memberId: String): Option[BasicMemberModel]
+
+	/**
 	  * Get the CompetitionLabs id for the product based on your reference id
 	  * @param productReferenceId The id used to identify this product in the sending system
 	  * @return The id used in the CompetitionLabs system or None if the product does not exist
@@ -93,6 +108,23 @@ trait CompetitionLabsApi {
 	  * @return The id used in the CompetitionLabs system
 	  */
 	def createProduct(productReferenceId: String, displayName: String, providers:Seq[String], productType: String, defaultAdjustmentFactor: Double): Option[String]
+
+	/**
+	  *
+	  * @param displayName Display name
+	  * @param providers The providers of this product
+	  * @param productType The type of product
+	  * @param defaultAdjustmentFactor The default adjustment factor to apply
+	  * @return The id used in the CompetitionLabs system
+	  */
+	def updateProduct(productReferenceId: String, displayName: Option[String], providers:Option[Array[String]], productType: Option[String], defaultAdjustmentFactor: Option[Double]): Option[String]
+
+	/**
+	  *
+	  * @param productId CompetitionLabs Product Id
+	  * @return BasicProductModel returns a basic product object
+	  */
+	def getProduct(productId: String): Option[BasicProductModel]
 
 	/**
 	  * Verify if the event action type exists in your space

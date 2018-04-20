@@ -46,4 +46,16 @@ trait CLMQTransformer {
 				"key" -> key
 			)
 		)
+
+	/**
+	  * This method gets executed when a message is received as a POST on API
+	  * @param message The value for the incoming message from the Kafka broker
+	  * @param competitionLabsApi The CompetitionLabs API
+	  */
+	def http(message: Array[Byte], competitionLabsApi: CompetitionLabsApi): Unit =
+		apply(
+			message,
+			competitionLabsApi,
+			Map.empty
+		)
 }

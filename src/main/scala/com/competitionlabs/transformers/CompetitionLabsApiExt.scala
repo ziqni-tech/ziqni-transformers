@@ -25,7 +25,7 @@ trait CompetitionLabsApiExt extends CompetitionLabsApi {
 	  * @param basicAuthCredentials Basic authentication
 	  * @return HttpResponseEntity
 	  */
-	def httpGet(url: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[BasicAuthCredentials] = None): HttpResponseEntity
+	def httpGet(url: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[BasicAuthCredentials] = None, sendCompressed: Boolean = true): HttpResponseEntity
 
 	/**
 	  * Send a http put request
@@ -35,7 +35,7 @@ trait CompetitionLabsApiExt extends CompetitionLabsApi {
 	  * @param basicAuthCredentials Basic authentication
 	  * @return HttpResponseEntity
 	  */
-	def httpPut(url: String, body: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[BasicAuthCredentials] = None): HttpResponseEntity
+	def httpPut(url: String, body: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[BasicAuthCredentials] = None, sendCompressed: Boolean = true): HttpResponseEntity
 
 	/**
 	  * Send a http post request
@@ -45,7 +45,7 @@ trait CompetitionLabsApiExt extends CompetitionLabsApi {
 	  * @param basicAuthCredentials Basic authentication
 	  * @return HttpResponseEntity
 	  */
-	def httpPost(url: String, body: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[BasicAuthCredentials] = None): HttpResponseEntity
+	def httpPost(url: String, body: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[BasicAuthCredentials] = None, sendCompressed: Boolean = true): HttpResponseEntity
 
 	/**
 	  * Send a http delete request
@@ -54,5 +54,5 @@ trait CompetitionLabsApiExt extends CompetitionLabsApi {
 	  * @param basicAuthCredentials Basic authentication
 	  * @return HttpResponseEntity
 	  */
-	def httpDelete(url: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[BasicAuthCredentials] = None): HttpResponseEntity
+	def httpDelete(url: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[BasicAuthCredentials] = None, sendCompressed: Boolean = true): HttpResponseEntity
 }

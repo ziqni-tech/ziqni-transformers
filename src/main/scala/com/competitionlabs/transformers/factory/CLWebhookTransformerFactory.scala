@@ -45,6 +45,8 @@ object CLWebhookTransformerFactory {
 
 		case t: onContestRewardIssuedTrigger => cLWebhookTransformer.onContestRewardIssued(settings, t.contestId, t.memberId, t.awardId, t.rewardTypeKey, competitionLabsApi)
 
+		case t: onContestRewardClaimedTrigger => cLWebhookTransformer.onContestRewardClaimed(settings, t.contestId, t.memberId, t.awardId, t.rewardTypeKey, competitionLabsApi)
+
 		case t: onAchievementCreatedTrigger => cLWebhookTransformer.onAchievementCreated(settings, t.achievementId, competitionLabsApi)
 
 		case t: onAchievementTriggeredTrigger => cLWebhookTransformer.onAchievementTriggered(settings, t.achievementId, t.memberId, competitionLabsApi)
@@ -52,6 +54,8 @@ object CLWebhookTransformerFactory {
 		case t: onAchievementRewardCreatedTrigger => cLWebhookTransformer.onAchievementRewardCreated(settings, t.rewardId, competitionLabsApi)
 			
 		case t: onAchievementRewardIssuedTrigger => cLWebhookTransformer.onAchievementRewardIssued(settings, t.achievementId, t.memberId, t.awardId, t.rewardTypeKey, competitionLabsApi)
+
+		case t: onAchievementRewardClaimedTrigger => cLWebhookTransformer.onAchievementRewardClaimed(settings, t.achievementId, t.memberId, t.awardId, t.rewardTypeKey, competitionLabsApi)
 
 	}
 }

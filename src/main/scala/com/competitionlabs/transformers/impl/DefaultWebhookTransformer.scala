@@ -214,6 +214,21 @@ class DefaultWebhookTransformer extends CLWebhookTransformer {
 		competitionLabsApi.httpPost(settings.url, json, headers)
 	}
 
+	override def onContestRewardClaimed(settings: WebhookSettings, contestId: String, memberId: String, awardId: String, rewardTypeKey: String, competitionLabsApi: CompetitionLabsApiExt): Unit = {
+		val body = Map[String, Any](
+			"contestId" -> contestId,
+			"memberId" -> memberId,
+			"awardId" -> awardId,
+			"resourcePath" -> s"/api/${competitionLabsApi.spaceName}/awards/$awardId",
+			"timestamp" -> DateTime.now().getMillis
+		)
+
+		val json =  competitionLabsApi.toJsonFromMap(body)
+		val headers = settings.headers ++ competitionLabsApi.HTTPDefaultHeader(competitionLabsApi.accountId, "onContestRewardClaimed")
+
+		competitionLabsApi.httpPost(settings.url, json, headers)
+	}
+
 
 	override def onAchievementCreated(settings: WebhookSettings, achievementId: String, competitionLabsApi: CompetitionLabsApiExt): Unit = {
 
@@ -270,6 +285,22 @@ class DefaultWebhookTransformer extends CLWebhookTransformer {
 
 		val json =  competitionLabsApi.toJsonFromMap(body)
 		val headers = settings.headers ++ competitionLabsApi.HTTPDefaultHeader(competitionLabsApi.accountId, "onAchievementRewardIssued")
+
+		competitionLabsApi.httpPost(settings.url, json, headers)
+	}
+
+	override def onAchievementRewardClaimed(settings: WebhookSettings, achievementId: String, memberId: String, awardId: String, rewardTypeKey: String, competitionLabsApi: CompetitionLabsApiExt): Unit = {
+		val body = Map[String, Any](
+			"achievementId" -> achievementId,
+			"memberId" -> memberId,
+			"memberRefId" -> competitionLabsApi.memberRefIdFromMemberId(memberId),
+			"awardId" -> awardId,
+			"resourcePath" -> s"/api/${competitionLabsApi.spaceName}/awards/$awardId",
+			"timestamp" -> DateTime.now().getMillis
+		)
+
+		val json =  competitionLabsApi.toJsonFromMap(body)
+		val headers = settings.headers ++ competitionLabsApi.HTTPDefaultHeader(competitionLabsApi.accountId, "onAchievementRewardClaimed")
 
 		competitionLabsApi.httpPost(settings.url, json, headers)
 	}

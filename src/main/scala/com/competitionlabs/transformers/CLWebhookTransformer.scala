@@ -128,6 +128,18 @@ trait CLWebhookTransformer {
     */
   def onContestRewardIssued(settings: WebhookSettings, contestId: String, memberId: String, awardId: String, rewardTypeKey: String, competitionLabsApi: CompetitionLabsApiExt): Unit = {}
 
+
+  /**
+    * Executed when a contest reward is claimed
+    * @param settings The user supplied settings
+    * @param contestId The CompetitionLabs contest id
+    * @param memberId The CompetitionLabs member id
+    * @param awardId The CompetitionLabs award id
+    * @param rewardTypeKey The user defined reward type key
+    * @param competitionLabsApi The CompetitionLabs API
+    */
+  def onContestRewardClaimed(settings: WebhookSettings, contestId: String, memberId: String, awardId: String, rewardTypeKey: String, competitionLabsApi: CompetitionLabsApiExt): Unit = {}
+
   /**
     * Executed when a new contest is created in your CompetitionLabs space
     * @param settings The user supplied settings
@@ -163,4 +175,16 @@ trait CLWebhookTransformer {
     * @param competitionLabsApi The CompetitionLabs API
     */
   def onAchievementRewardIssued(settings: WebhookSettings, achievementId: String, memberId: String, awardId: String, rewardTypeKey: String, competitionLabsApi: CompetitionLabsApiExt): Unit = {}
+
+
+  /**
+    * Executed when a reward was claimed by a member
+    * @param settings The user supplied settings
+    * @param achievementId The CompetitionLabs achievement id
+    * @param memberId The CompetitionLabs member id
+    * @param awardId The CompetitionLabs award id
+    * @param rewardTypeKey The user defined reward type key
+    * @param competitionLabsApi The CompetitionLabs API
+    */
+  def onAchievementRewardClaimed(settings: WebhookSettings, achievementId: String, memberId: String, awardId: String, rewardTypeKey: String, competitionLabsApi: CompetitionLabsApiExt): Unit = {}
 }

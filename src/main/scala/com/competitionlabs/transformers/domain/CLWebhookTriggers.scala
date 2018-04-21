@@ -47,13 +47,17 @@ object CLWebhookTriggers {
 
 		onContestRewardIssuedTrigger.getClass.getSimpleName.replace("$","") ->  ("ET-461", "Contest reward issued"),
 
+		onContestRewardClaimedTrigger.getClass.getSimpleName.replace("$","") ->  ("ET-462", "Contest reward claimed"),
+
 		onAchievementCreatedTrigger.getClass.getSimpleName.replace("$","")  ->  ("ET-501", "Achievement created"),
 
 		onAchievementTriggeredTrigger.getClass.getSimpleName.replace("$","") ->  ("ET-511", "Achievement triggered"),
 
 		onAchievementRewardCreatedTrigger.getClass.getSimpleName.replace("$","") ->  ("ET-551", "Achievement reward created"),
 
-		onAchievementRewardIssuedTrigger.getClass.getSimpleName.replace("$","") ->  ("ET-561", "Achievement reward issued")
+		onAchievementRewardIssuedTrigger.getClass.getSimpleName.replace("$","") ->  ("ET-561", "Achievement reward issued"),
+
+		onAchievementRewardClaimedTrigger.getClass.getSimpleName.replace("$","") ->  ("ET-562", "Achievement reward claimed")
 	)
 
 	val TriggersById = TriggersByClassName.map(t => t._2._1 -> t._1)
@@ -89,6 +93,8 @@ object CLWebhookTriggers {
 
 	case class onContestRewardIssuedTrigger(accountId:String, contestId: String, memberId: String, awardId: String, rewardTypeKey: String) extends Serializable with WebhookTransformerTrigger
 
+	case class onContestRewardClaimedTrigger(accountId:String, contestId: String, memberId: String, awardId: String, rewardTypeKey: String) extends Serializable with WebhookTransformerTrigger
+
 	case class onAchievementCreatedTrigger(accountId:String, achievementId: String) extends Serializable with WebhookTransformerTrigger
 
 	case class onAchievementTriggeredTrigger(accountId:String, achievementId: String, memberId: String) extends Serializable with WebhookTransformerTrigger
@@ -96,3 +102,5 @@ object CLWebhookTriggers {
 	case class onAchievementRewardCreatedTrigger(accountId:String, rewardId: String) extends Serializable with WebhookTransformerTrigger
 
 	case class onAchievementRewardIssuedTrigger(accountId:String, achievementId: String, memberId: String, awardId: String, rewardTypeKey: String) extends Serializable with WebhookTransformerTrigger
+
+	case class onAchievementRewardClaimedTrigger(accountId:String, achievementId: String, memberId: String, awardId: String, rewardTypeKey: String) extends Serializable with WebhookTransformerTrigger

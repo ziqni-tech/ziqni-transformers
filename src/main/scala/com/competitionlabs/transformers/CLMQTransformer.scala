@@ -49,13 +49,14 @@ trait CLMQTransformer {
 
 	/**
 	  * This method gets executed when a message is received as a POST on API
-	  * @param message The value for the incoming message from the Kafka broker
+	  * @param message The value for the incoming message from the http
+	  * @param headers Header values for the incoming message
 	  * @param competitionLabsApi The CompetitionLabs API
 	  */
-	def http(message: Array[Byte], competitionLabsApi: CompetitionLabsApi): Unit =
+	def http(headers: Map[String, Seq[String]], message: Array[Byte], competitionLabsApi: CompetitionLabsApi): Unit =
 		apply(
 			message,
 			competitionLabsApi,
-			Map.empty
+			headers
 		)
 }

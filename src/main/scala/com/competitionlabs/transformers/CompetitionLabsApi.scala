@@ -71,11 +71,12 @@ trait CompetitionLabsApi {
 
 	/**
 	  *
+	  * @param clMemberId CL Member Id
 	  * @param displayName Display name
 	  * @param groupsToUpdate The groups to add this member to
 	  * @return The id used in the CompetitionLabs system
 	  */
-	def updateMember(memberReferenceId: String, displayName: Option[String], groupsToUpdate:Option[Array[String]], metaData: Option[Map[String, String]]): Option[String]
+	def updateMember(clMemberId: String, memberReferenceId: Option[String], displayName: Option[String], groupsToUpdate:Option[Array[String]], metaData: Option[Map[String, String]]): Option[String]
 
 	/**
 	  *
@@ -111,13 +112,14 @@ trait CompetitionLabsApi {
 
 	/**
 	  *
+	  * @param clProductId CL Product Id
 	  * @param displayName Display name
 	  * @param providers The providers of this product
 	  * @param productType The type of product
 	  * @param defaultAdjustmentFactor The default adjustment factor to apply
 	  * @return The id used in the CompetitionLabs system
 	  */
-	def updateProduct(productReferenceId: String, displayName: Option[String], providers:Option[Array[String]], productType: Option[String], defaultAdjustmentFactor: Option[Double]): Option[String]
+	def updateProduct(clProductId: String, productReferenceId: Option[String], displayName: Option[String], providers:Option[Array[String]], productType: Option[String], defaultAdjustmentFactor: Option[Double]): Option[String]
 
 	/**
 	  *

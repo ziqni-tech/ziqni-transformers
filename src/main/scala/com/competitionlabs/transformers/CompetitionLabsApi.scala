@@ -33,6 +33,11 @@ trait CompetitionLabsApi {
 	val spaceName: String
 
 	/**
+	  * Get sub accounts for this master account if any exists
+	  */
+	val subAccounts: Map[String, CompetitionLabsApiExt]
+
+	/**
 	  * Insert an event into your CompetitionLabs space
 	  * @param event The event to add
 	  * @return True on success, false on duplicate and exception if malformed
@@ -193,6 +198,5 @@ trait CompetitionLabsApi {
 	  * @return Decoded string or throws exception
 	  */
 	def convertByteArrayToString(body: Array[Byte], charset: String = "UTF-8"): String = new String(body, Charset.forName(charset))
-
 
 }

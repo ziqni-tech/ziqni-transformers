@@ -35,7 +35,7 @@ trait CompetitionLabsApi {
 	/**
 	  * Get sub accounts for this master account if any exists
 	  */
-	val subAccounts: Map[String, CompetitionLabsApiExt]
+	def subAccounts: Map[String, CompetitionLabsApiExt]
 
 	/**
 	  * Insert an event into your CompetitionLabs space

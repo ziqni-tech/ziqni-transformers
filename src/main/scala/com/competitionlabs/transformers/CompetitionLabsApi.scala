@@ -166,16 +166,30 @@ trait CompetitionLabsApi extends CompetitionLabsApiHttp {
 	/**
 	  *
 	  * @param rewardId CompetitionLabs Reward Id
-	  * @return BasicAchievementModel returns a basic achievement object
+	  * @return BasicRewardModel returns a basic reward object
 	  */
 	def getReward(rewardId: String): Option[BasicRewardModel]
 
 	/**
 	  *
-	  * @param awardId CompetitionLabs Reward Id
-	  * @return BasicAchievementModel returns a basic achievement object
+	  * @param awardId CompetitionLabs Award Id
+	  * @return BasicAwardModel returns a basic award object
 	  */
 	def getAward(awardId: String): Option[BasicAwardModel]
+
+	/**
+	  *
+	  * @param unitOfMeasureId CompetitionLabs Unit of Measure Id
+	  * @return BasicUnitOfMeasureModel returns a basic unit of measure object
+	  */
+	def getUnitOfMeasure(unitOfMeasureId: String): Option[BasicUnitOfMeasureModel]
+
+	/**
+	  *
+	  * @param unitOfMeasureKey CompetitionLabs UoM key
+	  * @return Double returns a multiplier associated with the UoM
+	  */
+	def getUoMMultiplierFromKey(unitOfMeasureKey: String): Option[Double]
 
 	/**
 	  * Converts a json string to a JValue

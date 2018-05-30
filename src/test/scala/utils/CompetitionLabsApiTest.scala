@@ -7,7 +7,7 @@
 package utils
 
 import com.competitionlabs.transformers.domain._
-import com.competitionlabs.transformers.{CompetitionLabsApi, CompetitionLabsApiExt}
+import com.competitionlabs.transformers.CompetitionLabsApi
 import org.joda.time.DateTime
 import org.json4s.{DefaultFormats, JsonAST}
 
@@ -16,7 +16,7 @@ import scala.collection.mutable.ListBuffer
 import org.json4s.jackson.JsonMethods.parse
 import org.json4s.jackson.Serialization
 
-class CompetitionLabsApiTest extends CompetitionLabsApi with CompetitionLabsApiExt {
+class CompetitionLabsApiTest extends CompetitionLabsApi {
 
 	implicit val formats = DefaultFormats
 
@@ -92,10 +92,10 @@ class CompetitionLabsApiTest extends CompetitionLabsApi with CompetitionLabsApiE
 	  * @param groups      The groups to add this member to
 	  * @return The id used in the CompetitionLabs system
 	  */
-	override def updateMember(memberReferenceId: String, displayName: String, groups: Seq[String]): Option[String] = {
+	override def updateMember(clMemberId: String, memberReferenceId: Option[String], displayName: Option[String], groups: Option[Array[String]], metaData: Option[Map[String, String]]): Option[String] = {
 		val key = "CL-" + displayName
 		memberForTest.put(
-			memberReferenceId, displayName
+			memberReferenceId.get, displayName.get
 		)
 		Option(key)
 	}
@@ -133,24 +133,24 @@ class CompetitionLabsApiTest extends CompetitionLabsApi with CompetitionLabsApiE
 
 	/**
 	  *
+	  * @param productId CompetitionLabs Product Id
+	  * @return BasicProductModel returns a basic product object
+	  */
+	override def getProduct(productId: String): Option[BasicProductModel] = None
+
+	/**
+	  *
 	  * @param displayName             Display name
 	  * @param providers               The providers of this product
 	  * @param productType             The type of product
 	  * @param defaultAdjustmentFactor The default adjustment factor to apply
 	  * @return The id used in the CompetitionLabs system
 	  */
-	override def updateProduct(productReferenceId: String, displayName: String, providers: Seq[String], productType: String, defaultAdjustmentFactor: Double): Option[String] = {
+	override def updateProduct(clProductId: String, productReferenceId: Option[String], displayName: Option[String], providers:Option[Array[String]], productType: Option[String], defaultAdjustmentFactor: Option[Double]): Option[String] = {
 		val key = "CL-" + productReferenceId
-		productForTest.put(productReferenceId, displayName)
+		productForTest.put(productReferenceId.get, displayName.get)
 		Option(key)
 	}
-
-	/**
-	  *
-	  * @param productId CompetitionLabs Product Id
-	  * @return BasicProductModel returns a basic product object
-	  */
-	override def getProduct(productId: String): Option[BasicProductModel] = None
 
 	/**
 	  * Verify if the event action type exists in your space
@@ -235,9 +235,9 @@ class CompetitionLabsApiTest extends CompetitionLabsApi with CompetitionLabsApiE
 	  * @param basicAuthCredentials Basic authentication
 	  * @return The http status code or -1 on error
 	  */
-	override def httpGet(url: String, headers: Map[String, Seq[String]], basicAuthCredentials: Option[BasicAuthCredentials]): Int = {
+	override def httpGet(url: String, body: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[BasicAuthCredentials] = None, sendCompressed: Boolean = true): HttpResponseEntity = {
 		httpRequests.put(url, ("", headers))
-		200
+		HttpResponseEntity("Thsi is test", 200)
 	}
 
 	/**

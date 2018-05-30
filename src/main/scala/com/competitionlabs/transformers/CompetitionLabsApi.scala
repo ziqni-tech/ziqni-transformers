@@ -12,7 +12,7 @@ import com.competitionlabs.transformers.domain._
 import org.joda.time.DateTime
 import org.json4s.JsonAST.JValue
 
-trait CompetitionLabsApi {
+trait CompetitionLabsApi extends CompetitionLabsApiHttp {
 
 	/***
 	  * Generate a unique time based UUID, this can be used to set the batchId value if
@@ -35,7 +35,7 @@ trait CompetitionLabsApi {
 	/**
 	  * Get sub accounts for this master account if any exists
 	  */
-	def subAccounts: Map[String, CompetitionLabsApiExt]
+	def subAccounts: Map[String, CompetitionLabsApi]
 
 	/**
 	  * Insert an event into your CompetitionLabs space

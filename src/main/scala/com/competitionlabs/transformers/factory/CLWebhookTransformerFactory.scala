@@ -9,13 +9,13 @@ package com.competitionlabs.transformers.factory
 import com.competitionlabs.transformers.domain._
 import com.competitionlabs.transformers.domain.WebhookSettings
 import com.competitionlabs.transformers.impl.DefaultWebhookTransformer
-import com.competitionlabs.transformers.{CLWebhookTransformer, CompetitionLabsApiExt}
+import com.competitionlabs.transformers.{CLWebhookTransformer, CompetitionLabsApi}
 
 object CLWebhookTransformerFactory {
 
 	val defaultWebhookTransformer = new DefaultWebhookTransformer
 
-	def apply[T <: WebhookTransformerTrigger](trigger : T, settings: WebhookSettings, competitionLabsApi: CompetitionLabsApiExt, cLWebhookTransformer: CLWebhookTransformer = defaultWebhookTransformer): Unit = trigger match {
+	def apply[T <: WebhookTransformerTrigger](trigger : T, settings: WebhookSettings, competitionLabsApi: CompetitionLabsApi, cLWebhookTransformer: CLWebhookTransformer = defaultWebhookTransformer): Unit = trigger match {
 
 		case t: onNewProductTrigger => cLWebhookTransformer.onNewProduct(settings, t.productId, competitionLabsApi)
 

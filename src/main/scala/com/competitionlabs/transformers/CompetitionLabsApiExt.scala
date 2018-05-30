@@ -8,7 +8,7 @@ package com.competitionlabs.transformers
 
 import com.competitionlabs.transformers.domain.{BasicAuthCredentials, HttpResponseEntity}
 
-trait CompetitionLabsApiExt extends CompetitionLabsApi {
+trait CompetitionLabsApiHttp {
 	
 	def HTTPDefaultHeader(accountId: String = "", onEvent: String = "") = Map(
 		"Content-Type" -> Seq("application/json"),

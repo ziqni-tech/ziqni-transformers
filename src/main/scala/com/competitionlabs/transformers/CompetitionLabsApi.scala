@@ -165,6 +165,13 @@ trait CompetitionLabsApi extends CompetitionLabsApiHttp {
 
 	/**
 	  *
+	  * @param contestId CompetitionLabs Contest Id
+	  * @return BasicContestModel returns a basic contest object
+	  */
+	def getContest(contestId: String): Option[BasicContestModel]
+
+	/**
+	  *
 	  * @param rewardId CompetitionLabs Reward Id
 	  * @return BasicRewardModel returns a basic reward object
 	  */

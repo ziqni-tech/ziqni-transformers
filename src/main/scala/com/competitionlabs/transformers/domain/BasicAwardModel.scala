@@ -69,4 +69,16 @@ abstract class BasicAwardModel {
 	  */
 	def getRewardTypeId: String
 
+	/**
+	  *
+	  * @return CL Reward Id
+	  */
+	def getRewardId: String
+
+	/**
+	  *
+	  * @return Key value pair of metadata information
+	  */
+	def getRewardMetaData: Option[Map[String, String]]
+
 }

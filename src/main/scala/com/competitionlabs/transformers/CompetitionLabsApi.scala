@@ -124,7 +124,7 @@ trait CompetitionLabsApi extends CompetitionLabsApiHttp {
 	  * @param defaultAdjustmentFactor The default adjustment factor to apply
 	  * @return The id used in the CompetitionLabs system
 	  */
-	def updateProduct(clProductId: String, productReferenceId: Option[String], displayName: Option[String], providers:Option[Array[String]], productType: Option[String], defaultAdjustmentFactor: Option[Double]): Option[String]
+	def updateProduct(clProductId: String, productReferenceId: Option[String], displayName: Option[String], providers:Option[Array[String]], productType: Option[String], defaultAdjustmentFactor: Option[Double], metaData: Option[Map[String, String]]): Option[String]
 
 	/**
 	  *

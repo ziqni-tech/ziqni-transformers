@@ -41,6 +41,12 @@ abstract class BasicProductModel {
 
 	/**
 	  *
+	  * @return Any metadata associated with product
+	  */
+	def getMetaData: Option[Map[String, String]]
+
+	/**
+	  *
 	  * @return CL Product id
 	  */
 	def getClProductId: String

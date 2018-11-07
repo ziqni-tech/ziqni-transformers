@@ -70,6 +70,12 @@ abstract class BasicRewardModel {
 	def getMetaData: Option[Map[String, String]]
 
 	/**
+	  * Update metadata of the Reward
+	  * @param metadata Key value pair of information
+	  */
+	def setMetaData(metadata: Map[String, String]): Unit
+
+	/**
 	  *
 	  * @return CL Reward id
 	  */

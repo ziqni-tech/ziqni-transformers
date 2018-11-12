@@ -67,6 +67,12 @@ abstract class BasicAchievementModel {
 
 	/**
 	  *
+	  * @return List of member groups this achievement is available to
+	  */
+	def getGroups: Option[Array[String]]
+
+	/**
+	  *
 	  * @return Returns the status of Achievement
 	  */
 	def getStatus: String
@@ -76,6 +82,8 @@ abstract class BasicAchievementModel {
 	  * @return Key value pair of metadata information
 	  */
 	def getMetaData: Option[Map[String, String]]
+
+
 
 	/**
 	  * Update metadata of the achievement

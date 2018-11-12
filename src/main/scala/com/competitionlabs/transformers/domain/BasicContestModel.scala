@@ -55,6 +55,12 @@ abstract class BasicContestModel {
 
 	/**
 	  *
+	  * @return List of member groups that can participate in this competition
+	  */
+	def getGroups: Option[Array[String]]
+
+	/**
+	  *
 	  * @return Returns the status of Contest
 	  */
 	def getStatus: String

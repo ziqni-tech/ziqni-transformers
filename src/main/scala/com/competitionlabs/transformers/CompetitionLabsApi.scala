@@ -72,7 +72,7 @@ trait CompetitionLabsApi extends CompetitionLabsApiHttp {
 	  * @param groups The groups to add this member to
 	  * @return The id used in the CompetitionLabs system
 	  */
-	def createMember(memberReferenceId: String, displayName: String, groups:Seq[String]): Option[String]
+	def createMember(memberReferenceId: String, displayName: String, groups:Seq[String], metaData: Option[Map[String, String]] = None): Option[String]
 
 	/**
 	  *
@@ -113,7 +113,7 @@ trait CompetitionLabsApi extends CompetitionLabsApiHttp {
 	  * @param defaultAdjustmentFactor The default adjustment factor to apply
 	  * @return The id used in the CompetitionLabs system
 	  */
-	def createProduct(productReferenceId: String, displayName: String, providers:Seq[String], productType: String, defaultAdjustmentFactor: Double): Option[String]
+	def createProduct(productReferenceId: String, displayName: String, providers:Seq[String], productType: String, defaultAdjustmentFactor: Double, metaData: Option[Map[String, String]] = None): Option[String]
 
 	/**
 	  *

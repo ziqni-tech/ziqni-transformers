@@ -52,6 +52,22 @@ trait CompetitionLabsApi extends CompetitionLabsApiHttp {
 	def pushEvents(events: Seq[BasicEventModel]): Boolean
 
 	/**
+	  * Insert an event into your CompetitionLabs space
+	  * @param event The event to add
+	  * @param delay The time in milliseconds to delay processing of event
+	  * @return True on success, false on duplicate and exception if malformed
+	  */
+	def pushEventWithDelay(event: BasicEventModel, delay:Long): Boolean
+
+	/**
+	  * Insert a sequence of events into your CompetitionLabs space
+	  * @param events The events to add
+	  * @param delay The time in milliseconds to delay processing of event
+	  * @return True on success, false on duplicate and exception if malformed
+	  */
+	def pushEventsWithDelay(events: Seq[BasicEventModel], delay:Long): Boolean
+
+	/**
 	  * Get the CompetitionLabs id for the member based on your reference id
 	  * @param memberReferenceId The id used to identify this member in the sending system
 	  * @return The id used in the CompetitionLabs system or None if the user does not exist

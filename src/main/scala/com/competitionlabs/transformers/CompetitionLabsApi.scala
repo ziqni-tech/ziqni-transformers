@@ -161,7 +161,7 @@ trait CompetitionLabsApi extends CompetitionLabsApiHttp {
 	  * @param action True on success false on failure
 	  * @return
 	  */
-	def createEventAction(action: String): Boolean
+	def createEventAction(action: String, name: Option[String] = None, metaData: Option[Map[String, String]] = None): Boolean
 	
 	/**
 	  * [PROTOTYPE]

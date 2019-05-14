@@ -162,6 +162,13 @@ trait CompetitionLabsApi extends CompetitionLabsApiHttp {
 	  * @return
 	  */
 	def createEventAction(action: String, name: Option[String] = None, metaData: Option[Map[String, String]] = None): Boolean
+
+	/***
+	  * Update the action in your space
+	  * @param action True on success false on failure
+	  * @return
+	  */
+	def updateEventAction(action: String, name: Option[String] = None, metaData: Option[Map[String, String]] = None, unitOfMeasureType: Option[String]= None): Boolean
 	
 	/**
 	  * [PROTOTYPE]

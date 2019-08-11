@@ -2,7 +2,7 @@
   *  Copyright (C) Competition Labs Ltd - All Rights Reserved
   *  Unauthorized copying of this file, via any medium is strictly prohibited
   *  Proprietary and confidential
-  *  Written by Competition Labs Ltd, 2017
+  *  Written by Competition Labs Ltd, 2019
   */
 package example.transformers
 
@@ -13,7 +13,7 @@ import org.joda.time.DateTime
 
 class exampleMQTransformer extends CLMQTransformer {
 
-	override def apply(message: Array[Byte], competitionLabsApi: CompetitionLabsApi) = {
+	override def apply(message: Array[Byte], competitionLabsApi: CompetitionLabsApi, args: Map[String, Any]): Unit = {
 
 		////////////////////////////////////////////////////
 		// 1. Extract the main data from our json body

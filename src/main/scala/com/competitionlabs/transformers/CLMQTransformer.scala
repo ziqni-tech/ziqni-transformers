@@ -2,7 +2,7 @@
   *  Copyright (C) Competition Labs Ltd - All Rights Reserved
   *  Unauthorized copying of this file, via any medium is strictly prohibited
   *  Proprietary and confidential
-  *  Written by Competition Labs Ltd, 2017
+  *  Written by Competition Labs Ltd, 2019
   */
 package com.competitionlabs.transformers
 
@@ -58,5 +58,19 @@ trait CLMQTransformer {
 			message,
 			competitionLabsApi,
 			headers
+		)
+
+	/**
+	  * This method gets executed when a message is received from an SQS endpoint
+	  * @param headers Message headers
+	  * @param message The message
+	  * @param messageId Message id
+	  * @param competitionLabsApi - The CompetitionLabs API
+	  */
+	def sqs(headers: Map[String, String], message: Array[Byte], messageId: String, competitionLabsApi: CompetitionLabsApi): Unit =
+		apply(
+			message,
+			competitionLabsApi,
+			headers + ("messageId" -> messageId)
 		)
 }

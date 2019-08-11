@@ -2,7 +2,7 @@
   *  Copyright (C) Competition Labs Ltd, Inc - All Rights Reserved
   *  Unauthorized copying of this file, via any medium is strictly prohibited
   *  Proprietary and confidential
-  *  Written by Competition Labs Ltd, 2017
+  *  Written by Competition Labs Ltd, 2019
  */
 
 /*** When developing locally do not modify this file ***/
@@ -10,7 +10,7 @@ name := "competitionlabs-transformers"
 
 organization := "com.competitionlabs"
 
-version := "1.12"
+version := "1.13"
 
 isSnapshot := true
 

@@ -25,6 +25,5 @@ libraryDependencies ++= Seq(
 	"org.json4s" % "json4s-native_2.11" % json4sVersion,
 	"org.json4s" % "json4s-jackson_2.11" % json4sVersion,
 	"org.scalatest" %% "scalatest" % "2.2.1" % "test",
-	"org.scalatestplus" %% "play" % "1.4.0-M3" % "test",
 	"org.apache.avro" % "avro" % "1.9.0"
 )

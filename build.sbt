@@ -10,11 +10,11 @@ name := "competitionlabs-transformers"
 
 organization := "com.competitionlabs"
 
-version := "1.13"
+version := "1.14"
 
 isSnapshot := true
 
-scalaVersion := "2.11.11"
+scalaVersion := "2.12.8"
 
 resolvers += Resolver.mavenLocal
 

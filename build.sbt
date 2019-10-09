@@ -18,12 +18,12 @@ scalaVersion := "2.12.8"
 
 resolvers += Resolver.mavenLocal
 
-val json4sVersion = "3.5.2"
+val json4sVersion = "3.6.7"
 
-libraryDependencies ++= Seq(
-	"org.json4s" % "json4s-ext_2.11" % json4sVersion,
-	"org.json4s" % "json4s-native_2.11" % json4sVersion,
-	"org.json4s" % "json4s-jackson_2.11" % json4sVersion,
-	"org.scalatest" %% "scalatest" % "2.2.1" % "test",
-	"org.apache.avro" % "avro" % "1.9.0"
-)
+libraryDependencies += "org.json4s" %% "json4s-ext" % json4sVersion
+libraryDependencies += "org.json4s" %% "json4s-native" % json4sVersion
+libraryDependencies += "org.json4s" %% "json4s-jackson" % json4sVersion
+libraryDependencies += "org.scalatest" %% "scalatest" % "3.1.0-M2" % Test
+libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "4.0.3" % Test
+libraryDependencies += "org.apache.avro" % "avro" % "1.9.0"
+

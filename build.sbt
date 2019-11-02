@@ -26,3 +26,4 @@ libraryDependencies += "org.json4s" %% "json4s-jackson" % json4sVersion
 libraryDependencies += "org.scalatest" %% "scalatest" % "3.1.0-M2" % Test
 libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "4.0.3" % Test
 libraryDependencies += "org.apache.avro" % "avro" % "1.9.0"
+

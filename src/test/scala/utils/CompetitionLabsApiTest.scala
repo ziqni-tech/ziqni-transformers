@@ -78,7 +78,7 @@ class CompetitionLabsApiTest extends CompetitionLabsApi {
 	  * @param groups            The groups to add this member to
 	  * @return The id used in the CompetitionLabs system
 	  */
-	override def createMember(memberReferenceId: String, displayName: String, groups: Seq[String]): Option[String] = {
+	override def createMember(memberReferenceId: String, displayName: String, groups: Seq[String], metaData: Option[Map[String, String]] = None): Option[String] = {
 		val key = "CL-" + memberReferenceId
 		memberForTest.put(
 			memberReferenceId, key
@@ -125,7 +125,7 @@ class CompetitionLabsApiTest extends CompetitionLabsApi {
 	  * @param defaultAdjustmentFactor The default adjustment factor to apply
 	  * @return The id used in the CompetitionLabs system
 	  */
-	override def createProduct(productReferenceId: String, displayName: String, providers: Seq[String], productType: String, defaultAdjustmentFactor: Double): Option[String] = {
+	override def createProduct(productReferenceId: String, displayName: String, providers: Seq[String], productType: String, defaultAdjustmentFactor: Double, metaData: Option[Map[String, String]] = None): Option[String] = {
 		val key = "CL-" + productReferenceId
 		productForTest.put(productReferenceId, key)
 		Option(key)
@@ -146,7 +146,7 @@ class CompetitionLabsApiTest extends CompetitionLabsApi {
 	  * @param defaultAdjustmentFactor The default adjustment factor to apply
 	  * @return The id used in the CompetitionLabs system
 	  */
-	override def updateProduct(clProductId: String, productReferenceId: Option[String], displayName: Option[String], providers:Option[Array[String]], productType: Option[String], defaultAdjustmentFactor: Option[Double]): Option[String] = {
+	override def updateProduct(clProductId: String, productReferenceId: Option[String], displayName: Option[String], providers: Option[Array[String]], productType: Option[String], defaultAdjustmentFactor: Option[Double], metaData: Option[Map[String, String]]): Option[String] = {
 		val key = "CL-" + productReferenceId
 		productForTest.put(productReferenceId.get, displayName.get)
 		Option(key)
@@ -166,7 +166,7 @@ class CompetitionLabsApiTest extends CompetitionLabsApi {
 	  * @param action True on success false on failure
 	  * @return
 	  */
-	override def createEventAction(action: String): Boolean = {
+	override def createEventAction(action: String, name: Option[String] = None, metaData: Option[Map[String, String]] = None): Boolean = {
 		eventActionsForTest += action
 		true
 	}
@@ -235,7 +235,7 @@ class CompetitionLabsApiTest extends CompetitionLabsApi {
 	  * @param basicAuthCredentials Basic authentication
 	  * @return The http status code or -1 on error
 	  */
-	override def httpGet(url: String, body: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[BasicAuthCredentials] = None, sendCompressed: Boolean = true): HttpResponseEntity = {
+	override def httpGet(url: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[BasicAuthCredentials] = None, sendCompressed: Boolean = true): HttpResponseEntity = {
 		httpRequests.put(url, ("", headers))
 		HttpResponseEntity("Thsi is test", 200)
 	}
@@ -249,9 +249,9 @@ class CompetitionLabsApiTest extends CompetitionLabsApi {
 	  * @param basicAuthCredentials Basic authentication
 	  * @return The http status code or -1 on error
 	  */
-	override def httpPut(url: String, body: String, headers: Map[String, Seq[String]], basicAuthCredentials: Option[BasicAuthCredentials]): Int = {
+	override def httpPut(url: String, body: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[BasicAuthCredentials] = None, sendCompressed: Boolean = true): HttpResponseEntity = {
 		httpRequests.put(url, (body, headers))
-		200
+		HttpResponseEntity("Thsi is test", 200)
 	}
 
 	/**
@@ -263,9 +263,9 @@ class CompetitionLabsApiTest extends CompetitionLabsApi {
 	  * @param basicAuthCredentials Basic authentication
 	  * @return The http status code or -1 on error
 	  */
-	override def httpPost(url: String, body: String, headers: Map[String, Seq[String]], basicAuthCredentials: Option[BasicAuthCredentials]): Int = {
+	override def httpPost(url: String, body: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[BasicAuthCredentials] = None, sendCompressed: Boolean = true): HttpResponseEntity = {
 		httpRequests.put(url, (body, headers))
-		200
+		HttpResponseEntity("Thsi is test", 200)
 	}
 
 	/**
@@ -276,9 +276,9 @@ class CompetitionLabsApiTest extends CompetitionLabsApi {
 	  * @param basicAuthCredentials Basic authentication
 	  * @return The http status code or -1 on error
 	  */
-	override def httpDelete(url: String, headers: Map[String, Seq[String]], basicAuthCredentials: Option[BasicAuthCredentials]): Int = {
+	override def httpDelete(url: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[BasicAuthCredentials] = None, sendCompressed: Boolean = true): HttpResponseEntity = {
 		httpRequests.put(url, ("", headers))
-		200
+		HttpResponseEntity("Thsi is test", 200)
 	}
 
 	/**
@@ -301,4 +301,58 @@ class CompetitionLabsApiTest extends CompetitionLabsApi {
 	  * @return BasicAchievementModel returns a basic achievement object
 	  */
 	override def getAward(awardId: String): Option[BasicAwardModel] = None
+
+	/**
+	  * Get sub accounts for this master account if any exists
+	  */
+	override def subAccounts: Map[String, CompetitionLabsApi] = Map.empty
+
+	override def getSubAccount(spaceName: String): Option[CompetitionLabsApi] = None
+
+	/**
+	  * Insert an event into your CompetitionLabs space
+	  *
+	  * @param event The event to add
+	  * @param delay The time in milliseconds to delay processing of event
+	  * @return True on success, false on duplicate and exception if malformed
+	  */
+	override def pushEventWithDelay(event: BasicEventModel, delay: Long): Boolean = true
+
+	/**
+	  * Insert a sequence of events into your CompetitionLabs space
+	  *
+	  * @param events The events to add
+	  * @param delay  The time in milliseconds to delay processing of event
+	  * @return True on success, false on duplicate and exception if malformed
+	  */
+	override def pushEventsWithDelay(events: Seq[BasicEventModel], delay: Long): Boolean = true
+
+	/** *
+	  * Update the action in your space
+	  *
+	  * @param action True on success false on failure
+	  * @return
+	  */
+	override def updateEventAction(action: String, name: Option[String], metaData: Option[Map[String, String]], unitOfMeasureType: Option[String]): Boolean = false
+
+	/**
+	  *
+	  * @param contestId CompetitionLabs Contest Id
+	  * @return BasicContestModel returns a basic contest object
+	  */
+	override def getContest(contestId: String): Option[BasicContestModel] = None
+
+	/**
+	  *
+	  * @param unitOfMeasureId CompetitionLabs Unit of Measure Id
+	  * @return BasicUnitOfMeasureModel returns a basic unit of measure object
+	  */
+	override def getUnitOfMeasure(unitOfMeasureId: String): Option[BasicUnitOfMeasureModel] = None
+
+	/**
+	  *
+	  * @param unitOfMeasureKey CompetitionLabs UoM key
+	  * @return Double returns a multiplier associated with the UoM
+	  */
+	override def getUoMMultiplierFromKey(unitOfMeasureKey: String): Option[Double] = None
 }

@@ -26,7 +26,7 @@ class exampleRabbitMQTest extends FunSpec with Matchers with GivenWhenThen with 
 			api.createProduct("490", "My Reels", Seq("Acme co."), "slot", 1)
 
 			When("the message is forwarded")
-			transformer.apply(json, api)
+			transformer.apply(json, api, Map.empty)
 
 			Then("the event should be received")
 			assert(api.eventsReceivedForTest.keySet.contains("490"))

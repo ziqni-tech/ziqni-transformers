@@ -10,7 +10,7 @@ name := "competitionlabs-transformers"
 
 organization := "com.competitionlabs"
 
-version := "1.16"
+version := "1.17"
 
 isSnapshot := true
 

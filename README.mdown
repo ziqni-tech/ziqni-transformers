@@ -252,8 +252,8 @@ This section covers the tools needed to begin writing and testing CompetitionLab
 
 These are the tools you will need to develop CompetitionLabs Transformers
 
-Scala 2.11.11
-Java 1.8 JDK
+Scala 2.12.8
+Java 10 JDK
 JetBrains IntelliJ (Optional)
 
 ### CompetitionLabs Transformer API

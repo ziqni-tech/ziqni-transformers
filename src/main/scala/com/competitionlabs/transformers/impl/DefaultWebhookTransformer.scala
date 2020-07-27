@@ -11,14 +11,16 @@ import com.competitionlabs.transformers.{CLWebhookTransformer, CompetitionLabsAp
 import org.joda.time.DateTime
 
 class DefaultWebhookTransformer extends CLWebhookTransformer {
-
+	//todo - add - object Type  and resource path and space
 	override def onNewProduct(settings: WebhookSettings, productId: String, competitionLabsApi: CompetitionLabsApi): Unit = {
 
 		val body = Map[String, Any](
 			"productId" -> productId,
 			"productRefId" -> competitionLabsApi.productRefIdFromProductId(productId),
 			"resourcePath" -> s"/api/${competitionLabsApi.spaceName}/products/$productId",
-			"timestamp" -> DateTime.now().getMillis
+			"timestamp" -> DateTime.now().getMillis,
+			"objectType" -> "NewProduct",
+			"spaceName" -> competitionLabsApi.spaceName
 		)
 
 		val json =  competitionLabsApi.toJsonFromMap(body)
@@ -33,7 +35,9 @@ class DefaultWebhookTransformer extends CLWebhookTransformer {
 			"memberId" -> memberId,
 			"memberRefId" -> competitionLabsApi.memberRefIdFromMemberId(memberId),
 			"resourcePath" -> s"/api/${competitionLabsApi.spaceName}/members/$memberId",
-			"timestamp" -> DateTime.now().getMillis
+			"timestamp" -> DateTime.now().getMillis,
+			"objectType" -> "NewMember",
+			"spaceName" -> competitionLabsApi.spaceName
 		)
 
 		val json =  competitionLabsApi.toJsonFromMap(body)
@@ -48,7 +52,9 @@ class DefaultWebhookTransformer extends CLWebhookTransformer {
 		val body = Map[String, Any](
 			"competitionId" -> competitionId,
 			"resourcePath" -> s"/api/${competitionLabsApi.spaceName}/competitions/$competitionId",
-			"timestamp" -> DateTime.now().getMillis
+			"timestamp" -> DateTime.now().getMillis,
+			"objectType" -> "CompetitionCreated",
+			"spaceName" -> competitionLabsApi.spaceName
 		)
 
 		val json =  competitionLabsApi.toJsonFromMap(body)
@@ -62,7 +68,9 @@ class DefaultWebhookTransformer extends CLWebhookTransformer {
 		val body = Map[String, Any](
 			"competitionId" -> competitionId,
 			"resourcePath" -> s"/api/${competitionLabsApi.spaceName}/competitions/$competitionId",
-			"timestamp" -> DateTime.now().getMillis
+			"timestamp" -> DateTime.now().getMillis,
+			"objectType" -> "CompetitionStarted",
+			"spaceName" -> competitionLabsApi.spaceName
 		)
 
 		val json =  competitionLabsApi.toJsonFromMap(body)
@@ -76,7 +84,9 @@ class DefaultWebhookTransformer extends CLWebhookTransformer {
 		val body = Map[String, Any](
 			"competitionId" -> competitionId,
 			"resourcePath" -> s"/api/${competitionLabsApi.spaceName}/competitions/$competitionId",
-			"timestamp" -> DateTime.now().getMillis
+			"timestamp" -> DateTime.now().getMillis,
+			"objectType" -> "CompetitionFinished",
+			"spaceName" -> competitionLabsApi.spaceName
 		)
 
 		val json =  competitionLabsApi.toJsonFromMap(body)
@@ -90,7 +100,9 @@ class DefaultWebhookTransformer extends CLWebhookTransformer {
 		val body = Map[String, Any](
 			"competitionId" -> competitionId,
 			"resourcePath" -> s"/api/${competitionLabsApi.spaceName}/competitions/$competitionId",
-			"timestamp" -> DateTime.now().getMillis
+			"timestamp" -> DateTime.now().getMillis,
+			"objectType" -> "CompetitionCancelled",
+			"spaceName" -> competitionLabsApi.spaceName
 		)
 
 		val json =  competitionLabsApi.toJsonFromMap(body)
@@ -106,7 +118,9 @@ class DefaultWebhookTransformer extends CLWebhookTransformer {
 			"memberId" -> memberId,
 			"awardId" -> awardId,
 			"resourcePath" -> s"/api/${competitionLabsApi.spaceName}/awards/$awardId",
-			"timestamp" -> DateTime.now().getMillis
+			"timestamp" -> DateTime.now().getMillis,
+			"objectType" -> "CompetitionRewardIssued",
+			"spaceName" -> competitionLabsApi.spaceName
 		)
 
 		val json =  competitionLabsApi.toJsonFromMap(body)
@@ -121,7 +135,9 @@ class DefaultWebhookTransformer extends CLWebhookTransformer {
 		val body = Map[String, Any](
 			"contestId" -> contestId,
 			"resourcePath" -> s"/api/${competitionLabsApi.spaceName}/contests/$contestId",
-			"timestamp" -> DateTime.now().getMillis
+			"timestamp" -> DateTime.now().getMillis,
+			"objectType" -> "ContestCreated",
+			"spaceName" -> competitionLabsApi.spaceName
 		)
 
 		val json =  competitionLabsApi.toJsonFromMap(body)
@@ -135,7 +151,9 @@ class DefaultWebhookTransformer extends CLWebhookTransformer {
 		val body = Map[String, Any](
 			"contestId" -> contestId,
 			"resourcePath" -> s"/api/${competitionLabsApi.spaceName}/contests/$contestId",
-			"timestamp" -> DateTime.now().getMillis
+			"timestamp" -> DateTime.now().getMillis,
+			"objectType" -> "ContestStarted",
+			"spaceName" -> competitionLabsApi.spaceName
 		)
 
 		val json =  competitionLabsApi.toJsonFromMap(body)
@@ -149,7 +167,9 @@ class DefaultWebhookTransformer extends CLWebhookTransformer {
 		val body = Map[String, Any](
 			"contestId" -> contestId,
 			"resourcePath" -> s"/api/${competitionLabsApi.spaceName}/contests/$contestId",
-			"timestamp" -> DateTime.now().getMillis
+			"timestamp" -> DateTime.now().getMillis,
+			"objectType" -> "ContestFinished",
+			"spaceName" -> competitionLabsApi.spaceName
 		)
 
 		val json =  competitionLabsApi.toJsonFromMap(body)
@@ -163,7 +183,9 @@ class DefaultWebhookTransformer extends CLWebhookTransformer {
 		val body = Map[String, Any](
 			"contestId" -> contestId,
 			"resourcePath" -> s"/api/${competitionLabsApi.spaceName}/contests/$contestId",
-			"timestamp" -> DateTime.now().getMillis
+			"timestamp" -> DateTime.now().getMillis,
+			"objectType" -> "ContestFinalised",
+			"spaceName" -> competitionLabsApi.spaceName
 		)
 
 		val json =  competitionLabsApi.toJsonFromMap(body)
@@ -177,7 +199,9 @@ class DefaultWebhookTransformer extends CLWebhookTransformer {
 		val body = Map[String, Any](
 			"contestId" -> contestId,
 			"resourcePath" -> s"/api/${competitionLabsApi.spaceName}/contests/$contestId",
-			"timestamp" -> DateTime.now().getMillis
+			"timestamp" -> DateTime.now().getMillis,
+			"objectType" -> "ContestCancelled",
+			"spaceName" -> competitionLabsApi.spaceName
 		)
 
 		val json =  competitionLabsApi.toJsonFromMap(body)
@@ -189,7 +213,10 @@ class DefaultWebhookTransformer extends CLWebhookTransformer {
 	override def onContestRewardCreated(settings: WebhookSettings, rewardId: String, competitionLabsApi: CompetitionLabsApi): Unit = {
 		val body = Map[String, Any](
 			"rewardId" -> rewardId,
-			"timestamp" -> DateTime.now().getMillis
+			"timestamp" -> DateTime.now().getMillis,
+			"resourcePath" -> s"/api/${competitionLabsApi.spaceName}/reward/$rewardId",
+			"objectType" -> "ContestRewardCreated",
+			"spaceName" -> competitionLabsApi.spaceName
 		)
 
 		val json =  competitionLabsApi.toJsonFromMap(body)
@@ -205,7 +232,9 @@ class DefaultWebhookTransformer extends CLWebhookTransformer {
 			"memberId" -> memberId,
 			"awardId" -> awardId,
 			"resourcePath" -> s"/api/${competitionLabsApi.spaceName}/awards/$awardId",
-			"timestamp" -> DateTime.now().getMillis
+			"timestamp" -> DateTime.now().getMillis,
+			"objectType" -> "ContestRewardIssued",
+			"spaceName" -> competitionLabsApi.spaceName
 		)
 
 		val json =  competitionLabsApi.toJsonFromMap(body)
@@ -220,7 +249,9 @@ class DefaultWebhookTransformer extends CLWebhookTransformer {
 			"memberId" -> memberId,
 			"awardId" -> awardId,
 			"resourcePath" -> s"/api/${competitionLabsApi.spaceName}/awards/$awardId",
-			"timestamp" -> DateTime.now().getMillis
+			"timestamp" -> DateTime.now().getMillis,
+			"objectType" -> "ContestRewardClaimed",
+			"spaceName" -> competitionLabsApi.spaceName
 		)
 
 		val json =  competitionLabsApi.toJsonFromMap(body)
@@ -235,7 +266,9 @@ class DefaultWebhookTransformer extends CLWebhookTransformer {
 		val body = Map[String, Any](
 			"achievementId" -> achievementId,
 			"resourcePath" -> s"/api/${competitionLabsApi.spaceName}/achievement/$achievementId",
-			"timestamp" -> DateTime.now().getMillis
+			"timestamp" -> DateTime.now().getMillis,
+			"objectType" -> "AchievementCreated",
+			"spaceName" -> competitionLabsApi.spaceName
 		)
 
 		val json =  competitionLabsApi.toJsonFromMap(body)
@@ -251,7 +284,9 @@ class DefaultWebhookTransformer extends CLWebhookTransformer {
 			"memberId" -> memberId,
 			"memberRefId" -> competitionLabsApi.memberRefIdFromMemberId(memberId),
 			"resourcePath" -> s"/api/${competitionLabsApi.spaceName}/achievement/$achievementId",
-			"timestamp" -> DateTime.now().getMillis
+			"timestamp" -> DateTime.now().getMillis,
+			"objectType" -> "AchievementTriggered",
+			"spaceName" -> competitionLabsApi.spaceName
 		)
 
 		val json =  competitionLabsApi.toJsonFromMap(body)
@@ -263,7 +298,10 @@ class DefaultWebhookTransformer extends CLWebhookTransformer {
 	override def onAchievementRewardCreated(settings: WebhookSettings, rewardId: String, competitionLabsApi: CompetitionLabsApi): Unit = {
 		val body = Map[String, Any](
 			"rewardId" -> rewardId,
-			"timestamp" -> DateTime.now().getMillis
+			"timestamp" -> DateTime.now().getMillis,
+			"resourcePath" -> s"/api/${competitionLabsApi.spaceName}/reward/$rewardId",
+			"objectType" -> "AchievementRewardCreated",
+			"spaceName" -> competitionLabsApi.spaceName
 		)
 
 		val json =  competitionLabsApi.toJsonFromMap(body)
@@ -280,7 +318,9 @@ class DefaultWebhookTransformer extends CLWebhookTransformer {
 			"memberRefId" -> competitionLabsApi.memberRefIdFromMemberId(memberId),
 			"awardId" -> awardId,
 			"resourcePath" -> s"/api/${competitionLabsApi.spaceName}/awards/$awardId",
-			"timestamp" -> DateTime.now().getMillis
+			"timestamp" -> DateTime.now().getMillis,
+			"objectType" -> "AchievementRewardIssued",
+			"spaceName" -> competitionLabsApi.spaceName
 		)
 
 		val json =  competitionLabsApi.toJsonFromMap(body)
@@ -296,7 +336,9 @@ class DefaultWebhookTransformer extends CLWebhookTransformer {
 			"memberRefId" -> competitionLabsApi.memberRefIdFromMemberId(memberId),
 			"awardId" -> awardId,
 			"resourcePath" -> s"/api/${competitionLabsApi.spaceName}/awards/$awardId",
-			"timestamp" -> DateTime.now().getMillis
+			"timestamp" -> DateTime.now().getMillis,
+			"objectType" -> "AchievementRewardClaimed",
+			"spaceName" -> competitionLabsApi.spaceName
 		)
 
 		val json =  competitionLabsApi.toJsonFromMap(body)

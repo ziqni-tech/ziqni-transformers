@@ -10,13 +10,26 @@ name := "competitionlabs-transformers"
 
 organization := "com.competitionlabs"
 
-version := "1.17"
+version := "1.18"
 
 isSnapshot := true
 
 scalaVersion := "2.12.8"
 
 resolvers += Resolver.mavenLocal
+
+// Publish to Github <start>
+// docs >>> https://github.com/djspiewak/sbt-github-packages
+// plugins.sbt >>> addSbtPlugin("com.codecommit" % "sbt-github-packages" % "0.5.2")
+githubOwner := "competitionlabs"
+githubRepository := "maven-repo"
+githubTokenSource := TokenSource.GitConfig("github.token")
+// GitHub package repo isn't supporting javadoc and sources
+publishArtifact in (Compile, packageDoc) := false
+publishArtifact in (Compile, packageSrc) := false
+// Publish to Github <end>
+
+publishMavenStyle := true
 
 val json4sVersion = "3.6.7"
 

@@ -18,6 +18,19 @@ scalaVersion := "2.12.8"
 
 resolvers += Resolver.mavenLocal
 
+// Publish to Github <start>
+// docs >>> https://github.com/djspiewak/sbt-github-packages
+// plugins.sbt >>> addSbtPlugin("com.codecommit" % "sbt-github-packages" % "0.5.2")
+githubOwner := "competitionlabs"
+githubRepository := "maven-repo"
+githubTokenSource := TokenSource.GitConfig("github.token")
+// GitHub package repo isn't supporting javadoc and sources
+publishArtifact in (Compile, packageDoc) := false
+publishArtifact in (Compile, packageSrc) := false
+// Publish to Github <end>
+
+publishMavenStyle := true
+
 val json4sVersion = "3.6.7"
 
 libraryDependencies += "org.json4s" %% "json4s-ext" % json4sVersion

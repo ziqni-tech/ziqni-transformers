@@ -10,7 +10,7 @@ name := "competitionlabs-transformers"
 
 organization := "com.competitionlabs"
 
-version := "1.18"
+version := "1.19"
 
 isSnapshot := true
 
@@ -26,7 +26,7 @@ githubRepository := "maven-repo"
 githubTokenSource := TokenSource.GitConfig("github.token")
 // GitHub package repo isn't supporting javadoc and sources
 publishArtifact in (Compile, packageDoc) := false
-publishArtifact in (Compile, packageSrc) := false
+publishArtifact in (Compile, packageSrc) := true
 // Publish to Github <end>
 
 publishMavenStyle := true

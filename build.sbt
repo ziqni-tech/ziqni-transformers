@@ -22,7 +22,7 @@ resolvers += Resolver.mavenLocal
 // docs >>> https://github.com/djspiewak/sbt-github-packages
 // plugins.sbt >>> addSbtPlugin("com.codecommit" % "sbt-github-packages" % "0.5.2")
 githubOwner := "competitionlabs"
-githubRepository := "maven-repo"
+githubRepository := "competitionlabs-transformers"
 githubTokenSource := TokenSource.GitConfig("github.token")
 // GitHub package repo isn't supporting javadoc and sources
 publishArtifact in (Compile, packageDoc) := false

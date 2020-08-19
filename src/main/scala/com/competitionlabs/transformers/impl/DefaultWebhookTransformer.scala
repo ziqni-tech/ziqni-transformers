@@ -11,7 +11,7 @@ import com.competitionlabs.transformers.{CLWebhookTransformer, CompetitionLabsAp
 import org.joda.time.DateTime
 
 class DefaultWebhookTransformer extends CLWebhookTransformer {
-	//todo - add - object Type  and resource path and space
+
 	override def onNewProduct(settings: WebhookSettings, productId: String, competitionLabsApi: CompetitionLabsApi): Unit = {
 
 		val body = Map[String, Any](
@@ -116,6 +116,7 @@ class DefaultWebhookTransformer extends CLWebhookTransformer {
 		val body = Map[String, Any](
 			"competitionId" -> competitionId,
 			"memberId" -> memberId,
+			"memberRefId" -> competitionLabsApi.memberRefIdFromMemberId(memberId),
 			"awardId" -> awardId,
 			"resourcePath" -> s"/api/${competitionLabsApi.spaceName}/awards/$awardId",
 			"timestamp" -> DateTime.now().getMillis,
@@ -230,6 +231,7 @@ class DefaultWebhookTransformer extends CLWebhookTransformer {
 		val body = Map[String, Any](
 			"contestId" -> contestId,
 			"memberId" -> memberId,
+			"memberRefId" -> competitionLabsApi.memberRefIdFromMemberId(memberId),
 			"awardId" -> awardId,
 			"resourcePath" -> s"/api/${competitionLabsApi.spaceName}/awards/$awardId",
 			"timestamp" -> DateTime.now().getMillis,
@@ -247,6 +249,7 @@ class DefaultWebhookTransformer extends CLWebhookTransformer {
 		val body = Map[String, Any](
 			"contestId" -> contestId,
 			"memberId" -> memberId,
+			"memberRefId" -> competitionLabsApi.memberRefIdFromMemberId(memberId),
 			"awardId" -> awardId,
 			"resourcePath" -> s"/api/${competitionLabsApi.spaceName}/awards/$awardId",
 			"timestamp" -> DateTime.now().getMillis,

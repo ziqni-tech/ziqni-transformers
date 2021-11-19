@@ -1,15 +1,18 @@
 /***
-  *  Copyright (C) Competition Labs Ltd - All Rights Reserved
+  *  Copyright (C) Ziqni Ltd - All Rights Reserved
   *  Unauthorized copying of this file, via any medium is strictly prohibited
   *  Proprietary and confidential
-  *  Written by Competition Labs Ltd, 2019
+  *  Written by Ziqni Ltd, 2021
   */
-package com.competitionlabs
+package com.ziqni
 
 import java.text.SimpleDateFormat
 
 import org.joda.time.format.DateTimeFormatter
 import org.json4s.DefaultFormats
+import org.json4s._
+import org.json4s.JsonAST.JString
+import org.json4s.jackson.Serialization
 
 package object transformers {
 
@@ -36,16 +39,12 @@ package object transformers {
 		}
 
 		def dateFormatter(format: String) = new SimpleDateFormat(format)
-		def getFriendlyDate(dateTime: DateTime, format: String) = dateFormatter(format).format(dateTime.toDate)
+		def getFriendlyDate(dateTime: DateTime, format: String): String = dateFormatter(format).format(dateTime.toDate)
 	}
 
 
 	object Json {
-		implicit val formats = DefaultFormats
-		import org.json4s._
-		import org.json4s.JsonAST.JString
-		import org.json4s.jackson.Serialization
-
+		implicit val formats: DefaultFormats.type = DefaultFormats
 
 		case object JodaDateTimeSerializer extends CustomSerializer[DateTime](ser = _ => ( {
 			case JString(s) => FormatDateTime.parseDateTime(s).get.withZone(DateTimeZone.UTC)
@@ -85,11 +84,11 @@ package object transformers {
 		def getFromJValue[T <: Any: Manifest](a: JValue): T =
 			a.extract[T]
 
-		def getFromJValueAsOption[T <: Any: Manifest](jValue: JValue, key: String) = {
+		def getFromJValueAsOption[T <: Any: Manifest](jValue: JValue, key: String): Option[T] = {
 			val lookup = jValue.\(key)
 			if(lookup.canEqual(JNothing)) None else Option( lookup.extract[T] )
 		}
 
-		def keyExists(jValue: JValue, key: String) = if(jValue.\(key).canEqual(JNothing)) false else true
+		def keyExists(jValue: JValue, key: String): Boolean = if(jValue.\(key).canEqual(JNothing)) false else true
 	}
 }

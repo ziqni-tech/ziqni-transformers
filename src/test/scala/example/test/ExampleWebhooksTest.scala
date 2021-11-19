@@ -1,29 +1,29 @@
 /***
-  *  Copyright (C) Competition Labs Ltd - All Rights Reserved
+  *  Copyright (C) Ziqni Ltd - All Rights Reserved
   *  Unauthorized copying of this file, via any medium is strictly prohibited
   *  Proprietary and confidential
-  *  Written by Competition Labs Ltd, 2019
+  *  Written by Ziqni Ltd, 2021
   */
 package example.test
 
-import com.competitionlabs.transformers.domain.WebhookSettings
-import example.transformers.exampleOnNewProductWebhook
+import com.ziqni.transformers.domain.WebhookSettings
+import example.transformers.ExampleWebhookTransformer
 import org.scalatest._
-import utils.CompetitionLabsApiTest
+import utils.ZiqniApiTest
 
-class exampleWebhooksTest extends FunSpec with Matchers with GivenWhenThen with BeforeAndAfterEach with BeforeAndAfterAll {
+class ExampleWebhooksTest extends FunSpec with Matchers with GivenWhenThen with BeforeAndAfterEach with BeforeAndAfterAll {
 
 	describe("Test the webhook implementation") {
 		
 		it("should receive a published a message and transform it into a CompetitionLabs event") {
 
 			// Prepare the test
-			val webhook = new exampleOnNewProductWebhook()
+			val webhook = new ExampleWebhookTransformer()
 			val settings = new WebhookSettings() {
 				override def url = "http://domain.local"
 				override def headers = Map("test" -> Seq("true"))
 			}
-			val api = new CompetitionLabsApiTest()
+			val api = new ZiqniApiTest()
 			api.createMember("109172","bob", Seq("vip"))
 			api.createEventAction("bet")
 			val productId = api.createProduct("490","Neon Reels", Seq("ISB"),"slot", 1)

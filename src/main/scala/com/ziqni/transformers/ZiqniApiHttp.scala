@@ -1,19 +1,19 @@
 /***
-  *  Copyright (C) Competition Labs Ltd - All Rights Reserved
+  *  Copyright (C) Ziqni Ltd - All Rights Reserved
   *  Unauthorized copying of this file, via any medium is strictly prohibited
   *  Proprietary and confidential
-  *  Written by Competition Labs Ltd, 2019
+  *  Written by Ziqni Ltd, 2021
   */
-package com.competitionlabs.transformers
+package com.ziqni.transformers
 
-import com.competitionlabs.transformers.domain.{BasicAuthCredentials, HttpResponseEntity}
+import com.ziqni.transformers.domain.{BasicAuthCredentials, HttpResponseEntity}
 
-trait CompetitionLabsApiHttp {
+trait ZiqniApiHttp {
 	
 	def HTTPDefaultHeader(accountId: String = "", onEvent: String = "") = Map(
 		"Content-Type" -> Seq("application/json"),
 		"Content-Encoding" -> Seq("gzip"),
-		"User_Agent" -> Seq("CompetitionLabs/1.0"),
+		"User_Agent" -> Seq("Ziqni/1.0"),
 		"X-Account" -> Seq(accountId),
 		"X-OnEvent" -> Seq(onEvent)
 	)

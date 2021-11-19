@@ -1,11 +1,11 @@
 /***
-  *  Copyright (C) Competition Labs Ltd, Inc - All Rights Reserved
+  *  Copyright (C) Ziqni Ltd, Inc - All Rights Reserved
   *  Unauthorized copying of this file, via any medium is strictly prohibited
   *  Proprietary and confidential
-  *  Written by Competition Labs Ltd, 2019
+  *  Written by Ziqni Ltd, 2021
   */
 
-package com.competitionlabs.transformers.domain
+package com.ziqni.transformers.domain
 
 abstract class BasicRewardModel {
 

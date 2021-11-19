@@ -1,27 +1,27 @@
 /***
-  *  Copyright (C) Competition Labs Ltd - All Rights Reserved
+  *  Copyright (C) Ziqni Ltd - All Rights Reserved
   *  Unauthorized copying of this file, via any medium is strictly prohibited
   *  Proprietary and confidential
-  *  Written by Competition Labs Ltd, 2019
+  *  Written by Ziqni Ltd, 2021
   */
 package example.transformers
 
 // Do not add additional imports from non-standard libraries
-import com.competitionlabs.transformers._
-import com.competitionlabs.transformers.domain.BasicEventModel
+import com.ziqni.transformers._
+import com.ziqni.transformers.domain.BasicEventModel
 import org.joda.time.DateTime
 
-class exampleMQTransformer extends CLMQTransformer {
+class ExampleMqTransformer extends ZiqniMqTransformer {
 
-	override def apply(message: Array[Byte], competitionLabsApi: CompetitionLabsApi, args: Map[String, Any]): Unit = {
+	override def apply(message: Array[Byte], ziqniApi: ZiqniApi, args: Map[String, Any]): Unit = {
 
 		////////////////////////////////////////////////////
 		// 1. Extract the main data from our json body
 		////////////////////////////////////////////////////
 
 
-		val messageAsString = competitionLabsApi.convertByteArrayToString(message)
-		val messageAsJson = competitionLabsApi.fromJsonString(messageAsString)
+		val messageAsString = ziqniApi.convertByteArrayToString(message)
+		val messageAsJson = ziqniApi.fromJsonString(messageAsString)
 		val jsonObj = messageAsJson.\("transaction")
 
 		val action = Json.getFromJValue[String](jsonObj, "action")
@@ -37,19 +37,19 @@ class exampleMQTransformer extends CLMQTransformer {
 		// 2. Create data points if they are missing
 		////////////////////////////////////////////////////
 
-		competitionLabsApi.memberIdFromMemberRefId(memberRefId).getOrElse{
+		ziqniApi.memberIdFromMemberRefId(memberRefId).getOrElse{
 			// Create a new member  ->
-			competitionLabsApi.createMember(memberRefId, "unknown", Seq("new"))
+			ziqniApi.createMember(memberRefId, "unknown", Seq("new"))
 		}
 
-		competitionLabsApi.productIdFromProductRefId(entityRefId).getOrElse{
+		ziqniApi.productIdFromProductRefId(entityRefId).getOrElse{
 			// Create a new product
-			competitionLabsApi.createProduct(entityRefId, "unknown", Seq.empty, "slot", 0)
+			ziqniApi.createProduct(entityRefId, "unknown", Seq.empty, "slot", 0)
 		}
 
-		if(!competitionLabsApi.eventActionExists(action)) {
+		if(!ziqniApi.eventActionExists(action)) {
 			// Create the action
-			competitionLabsApi.createEventAction(action)
+			ziqniApi.createEventAction(action)
 		}
 
 		////////////////////////////////////////////////////
@@ -81,6 +81,6 @@ class exampleMQTransformer extends CLMQTransformer {
 			transactionTimestamp = transactionTimestamp
 		)
 
-		competitionLabsApi.pushEvent(event)
+		ziqniApi.pushEvent(event)
 	}
 }

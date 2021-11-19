@@ -6,9 +6,8 @@
 
 .idea
 .idea/*
-competitionlabs-public/src/
 project/target
-project/target/
+project/target/*
 target
-target/
+target/*
 

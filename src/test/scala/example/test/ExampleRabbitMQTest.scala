@@ -1,26 +1,28 @@
 /***
-  *  Copyright (C) Competition Labs Ltd - All Rights Reserved
+  *  Copyright (C) Ziqni Ltd - All Rights Reserved
   *  Unauthorized copying of this file, via any medium is strictly prohibited
   *  Proprietary and confidential
-  *  Written by Competition Labs Ltd, 2019
+  *  Written by Ziqni Ltd, 2021
   */
 package example.test
 
-import example.transformers.exampleMQTransformer
+import example.transformers.ExampleMqTransformer
 import org.scalatest._
-import utils.CompetitionLabsApiTest
+import org.scalatest.flatspec.AnyFlatSpec
+import org.scalatest.matchers.must.Matchers
+import utils.ZiqniApiTest
 
-class exampleRabbitMQTest extends FunSpec with Matchers with GivenWhenThen with BeforeAndAfterEach with BeforeAndAfterAll {
+class ExampleRabbitMQTest extends AnyFlatSpec with GivenWhenThen with BeforeAndAfterEach with BeforeAndAfterAll {
 
-	describe("Test the message queue receiver implementation") {
+
 
 		//  Run the test
-		it("should receive a published a message and transform it into a CompetitionLabs event") {
+		it should "receive a published a message and transform it into a CompetitionLabs event" in {
 
 			// Prepare the test
-			val transformer = new exampleMQTransformer()
-			val json = exampleRabbitMQTest.jsonStringFromMq.toCharArray.map(_.toByte)
-			val api = new CompetitionLabsApiTest()
+			val transformer = new ExampleMqTransformer()
+			val json = ExampleRabbitMQTest.jsonStringFromMq.toCharArray.map(_.toByte)
+			val api = new ZiqniApiTest()
 			api.createMember("109172", "bob", Seq("vip"))
 			api.createEventAction("bet")
 			api.createProduct("490", "My Reels", Seq("Acme co."), "slot", 1)
@@ -31,10 +33,10 @@ class exampleRabbitMQTest extends FunSpec with Matchers with GivenWhenThen with 
 			Then("the event should be received")
 			assert(api.eventsReceivedForTest.keySet.contains("490"))
 		}
-	}
+
 }
 
-object exampleRabbitMQTest {
+object ExampleRabbitMQTest {
 	val jsonStringFromMq: String =
 		"""{
 		  	"transaction": {

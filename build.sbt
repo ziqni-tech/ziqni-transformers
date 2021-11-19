@@ -1,42 +1,31 @@
 /***
-  *  Copyright (C) Competition Labs Ltd, Inc - All Rights Reserved
+  *  Copyright (C) Ziqni Ltd, Inc - All Rights Reserved
   *  Unauthorized copying of this file, via any medium is strictly prohibited
   *  Proprietary and confidential
-  *  Written by Competition Labs Ltd, 2019
+  *  Written by Ziqni Ltd, 2021
  */
 
 /*** When developing locally do not modify this file ***/
-name := "competitionlabs-transformers"
+name := "ziqni-transformers"
 
-organization := "com.competitionlabs"
+organization := "com.ziqni"
 
-version := "1.19"
+version := "1.0"
 
 isSnapshot := true
 
-scalaVersion := "2.12.8"
+scalaVersion := "2.13.7"
 
 resolvers += Resolver.mavenLocal
 
-// Publish to Github <start>
-// docs >>> https://github.com/djspiewak/sbt-github-packages
-// plugins.sbt >>> addSbtPlugin("com.codecommit" % "sbt-github-packages" % "0.5.2")
-githubOwner := "competitionlabs"
-githubRepository := "competitionlabs-transformers"
-githubTokenSource := TokenSource.GitConfig("github.token")
-// GitHub package repo isn't supporting javadoc and sources
-publishArtifact in (Compile, packageDoc) := false
-publishArtifact in (Compile, packageSrc) := true
-// Publish to Github <end>
-
-publishMavenStyle := true
-
-val json4sVersion = "3.6.7"
+val json4sVersion = "4.0.3"
+val scalaTestVersion = "3.2.8"
+val avroVersion = "1.11.0"
 
 libraryDependencies += "org.json4s" %% "json4s-ext" % json4sVersion
 libraryDependencies += "org.json4s" %% "json4s-native" % json4sVersion
 libraryDependencies += "org.json4s" %% "json4s-jackson" % json4sVersion
-libraryDependencies += "org.scalatest" %% "scalatest" % "3.1.0-M2" % Test
-libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "4.0.3" % Test
-libraryDependencies += "org.apache.avro" % "avro" % "1.9.0"
+libraryDependencies += "org.scalatest" %% "scalatest" % scalaTestVersion % Test
+libraryDependencies += "org.scalatest" %% "scalatest-funsuite" % scalaTestVersion % Test
+libraryDependencies += "org.apache.avro" % "avro" % avroVersion
 

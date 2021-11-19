@@ -1,13 +1,13 @@
 /***
-  *  Copyright (C) Competition Labs Ltd - All Rights Reserved
+  *  Copyright (C) Ziqni Ltd - All Rights Reserved
   *  Unauthorized copying of this file, via any medium is strictly prohibited
   *  Proprietary and confidential
-  *  Written by Competition Labs Ltd, 2019
+  *  Written by Ziqni Ltd, 2021
   */
 package utils
 
-import com.competitionlabs.transformers.domain._
-import com.competitionlabs.transformers.CompetitionLabsApi
+import com.ziqni.transformers.domain._
+import com.ziqni.transformers.ZiqniApi
 import org.joda.time.DateTime
 import org.json4s.{DefaultFormats, JsonAST}
 
@@ -16,7 +16,7 @@ import scala.collection.mutable.ListBuffer
 import org.json4s.jackson.JsonMethods.parse
 import org.json4s.jackson.Serialization
 
-class CompetitionLabsApiTest extends CompetitionLabsApi {
+class ZiqniApiTest extends ZiqniApi {
 
 	implicit val formats = DefaultFormats
 
@@ -40,7 +40,7 @@ class CompetitionLabsApiTest extends CompetitionLabsApi {
 	override val accountId: String = "yourAccountId"
 
 	/**
-	  * Insert an event into your CompetitionLabs space
+	  * Insert an event into your Ziqni space
 	  *
 	  * @param event The event to add
 	  * @return True on success, false on duplicate and exception if malformed
@@ -55,7 +55,7 @@ class CompetitionLabsApiTest extends CompetitionLabsApi {
 	}
 
 	/**
-	  * Insert a sequence of events into your CompetitionLabs space
+	  * Insert a sequence of events into your Ziqni space
 	  *
 	  * @param events The events to add
 	  * @return True on success, false on duplicate and exception if malformed
@@ -63,23 +63,23 @@ class CompetitionLabsApiTest extends CompetitionLabsApi {
 	override def pushEvents(events: Seq[BasicEventModel]): Boolean = !events.forall(pushEvent)
 
 	/**
-	  * Get the CompetitionLabs id for the member based on your reference id
+	  * Get the Ziqni id for the member based on your reference id
 	  *
 	  * @param memberReferenceId The id used to identify this member in the sending system
-	  * @return The id used in the CompetitionLabs system or None if the user does not exist
+	  * @return The id used in the Ziqni system or None if the user does not exist
 	  */
 	override def memberIdFromMemberRefId(memberReferenceId: String): Option[String] = memberForTest.get(memberReferenceId)
 
 	/**
-	  * Create a member in the CompetitionLabs system
+	  * Create a member in the Ziqni system
 	  *
 	  * @param memberReferenceId The id used to identify this member in the sending system
 	  * @param displayName       Display name
 	  * @param groups            The groups to add this member to
-	  * @return The id used in the CompetitionLabs system
+	  * @return The id used in the Ziqni system
 	  */
 	override def createMember(memberReferenceId: String, displayName: String, groups: Seq[String], metaData: Option[Map[String, String]] = None): Option[String] = {
-		val key = "CL-" + memberReferenceId
+		val key = "Z-" + memberReferenceId
 		memberForTest.put(
 			memberReferenceId, key
 		)
@@ -90,10 +90,10 @@ class CompetitionLabsApiTest extends CompetitionLabsApi {
 	  *
 	  * @param displayName Display name
 	  * @param groups      The groups to add this member to
-	  * @return The id used in the CompetitionLabs system
+	  * @return The id used in the Ziqni system
 	  */
 	override def updateMember(clMemberId: String, memberReferenceId: Option[String], displayName: Option[String], groups: Option[Array[String]], metaData: Option[Map[String, String]]): Option[String] = {
-		val key = "CL-" + displayName
+		val key = "Z-" + displayName
 		memberForTest.put(
 			memberReferenceId.get, displayName.get
 		)
@@ -102,17 +102,17 @@ class CompetitionLabsApiTest extends CompetitionLabsApi {
 
 	/**
 	  *
-	  * @param memberId CompetitionLabs Reward Id
+	  * @param memberId Ziqni Reward Id
 	  * @return BasicMemberModel returns a basic member object
 	  */
 	override def getMember(memberId: String): Option[BasicMemberModel] = None
 
 
 	/**
-	  * Get the CompetitionLabs id for the product based on your reference id
+	  * Get the Ziqni id for the product based on your reference id
 	  *
 	  * @param productReferenceId The id used to identify this product in the sending system
-	  * @return The id used in the CompetitionLabs system or None if the product does not exist
+	  * @return The id used in the Ziqni system or None if the product does not exist
 	  */
 	override def productIdFromProductRefId(productReferenceId: String): Option[String] = productForTest.get(productReferenceId)
 
@@ -123,17 +123,17 @@ class CompetitionLabsApiTest extends CompetitionLabsApi {
 	  * @param providers               The providers of this product
 	  * @param productType             The type of product
 	  * @param defaultAdjustmentFactor The default adjustment factor to apply
-	  * @return The id used in the CompetitionLabs system
+	  * @return The id used in the Ziqni system
 	  */
 	override def createProduct(productReferenceId: String, displayName: String, providers: Seq[String], productType: String, defaultAdjustmentFactor: Double, metaData: Option[Map[String, String]] = None): Option[String] = {
-		val key = "CL-" + productReferenceId
+		val key = "Z-" + productReferenceId
 		productForTest.put(productReferenceId, key)
 		Option(key)
 	}
 
 	/**
 	  *
-	  * @param productId CompetitionLabs Product Id
+	  * @param productId Ziqni Product Id
 	  * @return BasicProductModel returns a basic product object
 	  */
 	override def getProduct(productId: String): Option[BasicProductModel] = None
@@ -144,10 +144,10 @@ class CompetitionLabsApiTest extends CompetitionLabsApi {
 	  * @param providers               The providers of this product
 	  * @param productType             The type of product
 	  * @param defaultAdjustmentFactor The default adjustment factor to apply
-	  * @return The id used in the CompetitionLabs system
+	  * @return The id used in the Ziqni system
 	  */
 	override def updateProduct(clProductId: String, productReferenceId: Option[String], displayName: Option[String], providers: Option[Array[String]], productType: Option[String], defaultAdjustmentFactor: Option[Double], metaData: Option[Map[String, String]]): Option[String] = {
-		val key = "CL-" + productReferenceId
+		val key = "Z-" + productReferenceId
 		productForTest.put(productReferenceId.get, displayName.get)
 		Option(key)
 	}
@@ -196,18 +196,18 @@ class CompetitionLabsApiTest extends CompetitionLabsApi {
 	override val spaceName: String = "yourspace"
 
 	/**
-	  * Get the member reference id for the member based on CompetitionLabs id
+	  * Get the member reference id for the member based on Ziqni id
 	  *
 	  * @param memberId The id used to identify this member in the sending system
-	  * @return The id used in the CompetitionLabs system or None if the user does not exist
+	  * @return The id used in the Ziqni system or None if the user does not exist
 	  */
 	override def memberRefIdFromMemberId(memberId: String): Option[String] = memberForTest.values.find(_ == memberId)
 
 	/**
-	  * Get the product id for the product based on your CompetitionLabs id
+	  * Get the product id for the product based on your Ziqni id
 	  *
 	  * @param productId The id used to identify this product in the sending system
-	  * @return The id used in the CompetitionLabs system or None if the product does not exist
+	  * @return The id used in the Ziqni system or None if the product does not exist
 	  */
 	override def productRefIdFromProductId(productId: String): Option[String] = productForTest.values.find(_ == productId)
 
@@ -237,7 +237,7 @@ class CompetitionLabsApiTest extends CompetitionLabsApi {
 	  */
 	override def httpGet(url: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[BasicAuthCredentials] = None, sendCompressed: Boolean = true): HttpResponseEntity = {
 		httpRequests.put(url, ("", headers))
-		HttpResponseEntity("Thsi is test", 200)
+		HttpResponseEntity("This is test", 200)
 	}
 
 	/**
@@ -251,7 +251,7 @@ class CompetitionLabsApiTest extends CompetitionLabsApi {
 	  */
 	override def httpPut(url: String, body: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[BasicAuthCredentials] = None, sendCompressed: Boolean = true): HttpResponseEntity = {
 		httpRequests.put(url, (body, headers))
-		HttpResponseEntity("Thsi is test", 200)
+		HttpResponseEntity("This is test", 200)
 	}
 
 	/**
@@ -265,7 +265,7 @@ class CompetitionLabsApiTest extends CompetitionLabsApi {
 	  */
 	override def httpPost(url: String, body: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[BasicAuthCredentials] = None, sendCompressed: Boolean = true): HttpResponseEntity = {
 		httpRequests.put(url, (body, headers))
-		HttpResponseEntity("Thsi is test", 200)
+		HttpResponseEntity("This is test", 200)
 	}
 
 	/**
@@ -278,26 +278,26 @@ class CompetitionLabsApiTest extends CompetitionLabsApi {
 	  */
 	override def httpDelete(url: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[BasicAuthCredentials] = None, sendCompressed: Boolean = true): HttpResponseEntity = {
 		httpRequests.put(url, ("", headers))
-		HttpResponseEntity("Thsi is test", 200)
+		HttpResponseEntity("This is test", 200)
 	}
 
 	/**
 	  *
-	  * @param achievementId CompetitionLabs Achievement Id
+	  * @param achievementId Ziqni Achievement Id
 	  * @return BasicAchievementModel returns a basic achievement object
 	  */
 	override def getAchievement(achievementId: String): Option[BasicAchievementModel] = None
 
 	/**
 	  *
-	  * @param rewardId CompetitionLabs Reward Id
+	  * @param rewardId Ziqni Reward Id
 	  * @return BasicAchievementModel returns a basic achievement object
 	  */
 	override def getReward(rewardId: String): Option[BasicRewardModel]= None
 
 	/**
 	  *
-	  * @param awardId CompetitionLabs Reward Id
+	  * @param awardId Ziqni Reward Id
 	  * @return BasicAchievementModel returns a basic achievement object
 	  */
 	override def getAward(awardId: String): Option[BasicAwardModel] = None
@@ -305,12 +305,12 @@ class CompetitionLabsApiTest extends CompetitionLabsApi {
 	/**
 	  * Get sub accounts for this master account if any exists
 	  */
-	override def subAccounts: Map[String, CompetitionLabsApi] = Map.empty
+	override def subAccounts: Map[String, ZiqniApi] = Map.empty
 
-	override def getSubAccount(spaceName: String): Option[CompetitionLabsApi] = None
+	override def getSubAccount(spaceName: String): Option[ZiqniApi] = None
 
 	/**
-	  * Insert an event into your CompetitionLabs space
+	  * Insert an event into your Ziqni space
 	  *
 	  * @param event The event to add
 	  * @param delay The time in milliseconds to delay processing of event
@@ -319,7 +319,7 @@ class CompetitionLabsApiTest extends CompetitionLabsApi {
 	override def pushEventWithDelay(event: BasicEventModel, delay: Long): Boolean = true
 
 	/**
-	  * Insert a sequence of events into your CompetitionLabs space
+	  * Insert a sequence of events into your Ziqni space
 	  *
 	  * @param events The events to add
 	  * @param delay  The time in milliseconds to delay processing of event
@@ -337,21 +337,21 @@ class CompetitionLabsApiTest extends CompetitionLabsApi {
 
 	/**
 	  *
-	  * @param contestId CompetitionLabs Contest Id
+	  * @param contestId Ziqni Contest Id
 	  * @return BasicContestModel returns a basic contest object
 	  */
 	override def getContest(contestId: String): Option[BasicContestModel] = None
 
 	/**
 	  *
-	  * @param unitOfMeasureId CompetitionLabs Unit of Measure Id
+	  * @param unitOfMeasureId Ziqni Unit of Measure Id
 	  * @return BasicUnitOfMeasureModel returns a basic unit of measure object
 	  */
 	override def getUnitOfMeasure(unitOfMeasureId: String): Option[BasicUnitOfMeasureModel] = None
 
 	/**
 	  *
-	  * @param unitOfMeasureKey CompetitionLabs UoM key
+	  * @param unitOfMeasureKey Ziqni UoM key
 	  * @return Double returns a multiplier associated with the UoM
 	  */
 	override def getUoMMultiplierFromKey(unitOfMeasureKey: String): Option[Double] = None

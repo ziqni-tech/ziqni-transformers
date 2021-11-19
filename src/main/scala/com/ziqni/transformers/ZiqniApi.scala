@@ -1,17 +1,17 @@
 /***
-  *  Copyright (C) Competition Labs Ltd - All Rights Reserved
+  *  Copyright (C) Ziqni Ltd - All Rights Reserved
   *  Unauthorized copying of this file, via any medium is strictly prohibited
   *  Proprietary and confidential
-  *  Written by Competition Labs Ltd, 2019
+  *  Written by Ziqni Ltd, 2021
   */
-package com.competitionlabs.transformers
+package com.ziqni.transformers
 
 import java.nio.charset.Charset
-import com.competitionlabs.transformers.domain._
+import com.ziqni.transformers.domain._
 import org.joda.time.DateTime
 import org.json4s.JsonAST.JValue
 
-trait CompetitionLabsApi extends CompetitionLabsApiHttp {
+trait ZiqniApi extends ZiqniApiHttp {
 
 	/** *
 	  * Generate a unique time based UUID, this can be used to set the batchId value if
@@ -35,12 +35,12 @@ trait CompetitionLabsApi extends CompetitionLabsApiHttp {
 	/**
 	  * Get sub accounts for this master account if any exists
 	  */
-	def subAccounts: Map[String, CompetitionLabsApi]
+	def subAccounts: Map[String, ZiqniApi]
 
-	def getSubAccount(spaceName: String): Option[CompetitionLabsApi]
+	def getSubAccount(spaceName: String): Option[ZiqniApi]
 
 	/**
-	  * Insert an event into your CompetitionLabs space
+	  * Insert an event into your Ziqni space
 	  *
 	  * @param event The event to add
 	  * @return True on success, false on duplicate and exception if malformed
@@ -48,7 +48,7 @@ trait CompetitionLabsApi extends CompetitionLabsApiHttp {
 	def pushEvent(event: BasicEventModel): Boolean
 
 	/**
-	  * Insert a sequence of events into your CompetitionLabs space
+	  * Insert a sequence of events into your Ziqni space
 	  *
 	  * @param events The events to add
 	  * @return True on success, false on duplicate and exception if malformed
@@ -56,7 +56,7 @@ trait CompetitionLabsApi extends CompetitionLabsApiHttp {
 	def pushEvents(events: Seq[BasicEventModel]): Boolean
 
 	/**
-	  * Insert an event into your CompetitionLabs space
+	  * Insert an event into your Ziqni space
 	  *
 	  * @param event The event to add
 	  * @param delay The time in milliseconds to delay processing of event
@@ -65,7 +65,7 @@ trait CompetitionLabsApi extends CompetitionLabsApiHttp {
 	def pushEventWithDelay(event: BasicEventModel, delay: Long): Boolean
 
 	/**
-	  * Insert a sequence of events into your CompetitionLabs space
+	  * Insert a sequence of events into your Ziqni space
 	  *
 	  * @param events The events to add
 	  * @param delay  The time in milliseconds to delay processing of event
@@ -74,28 +74,28 @@ trait CompetitionLabsApi extends CompetitionLabsApiHttp {
 	def pushEventsWithDelay(events: Seq[BasicEventModel], delay: Long): Boolean
 
 	/**
-	  * Get the CompetitionLabs id for the member based on your reference id
+	  * Get the Ziqni id for the member based on your reference id
 	  *
 	  * @param memberReferenceId The id used to identify this member in the sending system
-	  * @return The id used in the CompetitionLabs system or None if the user does not exist
+	  * @return The id used in the Ziqni system or None if the user does not exist
 	  */
 	def memberIdFromMemberRefId(memberReferenceId: String): Option[String]
 
 	/**
-	  * Get the member reference id for the member based on CompetitionLabs id
+	  * Get the member reference id for the member based on Ziqni id
 	  *
 	  * @param memberId The id used to identify this member in the sending system
-	  * @return The id used in the CompetitionLabs system or None if the user does not exist
+	  * @return The id used in the Ziqni system or None if the user does not exist
 	  */
 	def memberRefIdFromMemberId(memberId: String): Option[String]
 
 	/**
-	  * Create a member in the CompetitionLabs system
+	  * Create a member in the Ziqni system
 	  *
 	  * @param memberReferenceId The id used to identify this member in the sending system
 	  * @param displayName       Display name
 	  * @param groups            The groups to add this member to
-	  * @return The id used in the CompetitionLabs system
+	  * @return The id used in the Ziqni system
 	  */
 	def createMember(memberReferenceId: String, displayName: String, groups: Seq[String], metaData: Option[Map[String, String]] = None): Option[String]
 
@@ -104,30 +104,30 @@ trait CompetitionLabsApi extends CompetitionLabsApiHttp {
 	  * @param clMemberId     CL Member Id
 	  * @param displayName    Display name
 	  * @param groupsToUpdate The groups to add this member to
-	  * @return The id used in the CompetitionLabs system
+	  * @return The id used in the Ziqni system
 	  */
 	def updateMember(clMemberId: String, memberReferenceId: Option[String], displayName: Option[String], groupsToUpdate: Option[Array[String]], metaData: Option[Map[String, String]]): Option[String]
 
 	/**
 	  *
-	  * @param memberId CompetitionLabs Reward Id
+	  * @param memberId Ziqni Reward Id
 	  * @return BasicMemberModel returns a basic member object
 	  */
 	def getMember(memberId: String): Option[BasicMemberModel]
 
 	/**
-	  * Get the CompetitionLabs id for the product based on your reference id
+	  * Get the Ziqni id for the product based on your reference id
 	  *
 	  * @param productReferenceId The id used to identify this product in the sending system
-	  * @return The id used in the CompetitionLabs system or None if the product does not exist
+	  * @return The id used in the Ziqni system or None if the product does not exist
 	  */
 	def productIdFromProductRefId(productReferenceId: String): Option[String]
 
 	/**
-	  * Get the product id for the product based on your CompetitionLabs id
+	  * Get the product id for the product based on your Ziqni id
 	  *
 	  * @param productId The id used to identify this product in the sending system
-	  * @return The id used in the CompetitionLabs system or None if the product does not exist
+	  * @return The id used in the Ziqni system or None if the product does not exist
 	  */
 	def productRefIdFromProductId(productId: String): Option[String]
 
@@ -138,7 +138,7 @@ trait CompetitionLabsApi extends CompetitionLabsApiHttp {
 	  * @param providers               The providers of this product
 	  * @param productType             The type of product
 	  * @param defaultAdjustmentFactor The default adjustment factor to apply
-	  * @return The id used in the CompetitionLabs system
+	  * @return The id used in the Ziqni system
 	  */
 	def createProduct(productReferenceId: String, displayName: String, providers: Seq[String], productType: String, defaultAdjustmentFactor: Double, metaData: Option[Map[String, String]] = None): Option[String]
 
@@ -149,13 +149,13 @@ trait CompetitionLabsApi extends CompetitionLabsApiHttp {
 	  * @param providers               The providers of this product
 	  * @param productType             The type of product
 	  * @param defaultAdjustmentFactor The default adjustment factor to apply
-	  * @return The id used in the CompetitionLabs system
+	  * @return The id used in the Ziqni system
 	  */
 	def updateProduct(clProductId: String, productReferenceId: Option[String], displayName: Option[String], providers: Option[Array[String]], productType: Option[String], defaultAdjustmentFactor: Option[Double], metaData: Option[Map[String, String]]): Option[String]
 
 	/**
 	  *
-	  * @param productId CompetitionLabs Product Id
+	  * @param productId Ziqni Product Id
 	  * @return BasicProductModel returns a basic product object
 	  */
 	def getProduct(productId: String): Option[BasicProductModel]
@@ -196,42 +196,42 @@ trait CompetitionLabsApi extends CompetitionLabsApiHttp {
 
 	/**
 	  *
-	  * @param achievementId CompetitionLabs Achievement Id
+	  * @param achievementId Ziqni Achievement Id
 	  * @return BasicAchievementModel returns a basic achievement object
 	  */
 	def getAchievement(achievementId: String): Option[BasicAchievementModel]
 
 	/**
 	  *
-	  * @param contestId CompetitionLabs Contest Id
+	  * @param contestId Ziqni Contest Id
 	  * @return BasicContestModel returns a basic contest object
 	  */
 	def getContest(contestId: String): Option[BasicContestModel]
 
 	/**
 	  *
-	  * @param rewardId CompetitionLabs Reward Id
+	  * @param rewardId Ziqni Reward Id
 	  * @return BasicRewardModel returns a basic reward object
 	  */
 	def getReward(rewardId: String): Option[BasicRewardModel]
 
 	/**
 	  *
-	  * @param awardId CompetitionLabs Award Id
+	  * @param awardId Ziqni Award Id
 	  * @return BasicAwardModel returns a basic award object
 	  */
 	def getAward(awardId: String): Option[BasicAwardModel]
 
 	/**
 	  *
-	  * @param unitOfMeasureId CompetitionLabs Unit of Measure Id
+	  * @param unitOfMeasureId Ziqni Unit of Measure Id
 	  * @return BasicUnitOfMeasureModel returns a basic unit of measure object
 	  */
 	def getUnitOfMeasure(unitOfMeasureId: String): Option[BasicUnitOfMeasureModel]
 
 	/**
 	  *
-	  * @param unitOfMeasureKey CompetitionLabs UoM key
+	  * @param unitOfMeasureKey Ziqni UoM key
 	  * @return Double returns a multiplier associated with the UoM
 	  */
 	def getUoMMultiplierFromKey(unitOfMeasureKey: String): Option[Double]

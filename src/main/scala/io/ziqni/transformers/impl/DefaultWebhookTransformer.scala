@@ -4,10 +4,10 @@
   *  Proprietary and confidential
   *  Written by Ziqni Ltd, 2021
   */
-package com.ziqni.transformers.impl
+package io.ziqni.transformers.impl
 
-import com.ziqni.transformers.domain.WebhookSettings
-import com.ziqni.transformers.{ZiqniWebhookTransformer, ZiqniApi}
+import io.ziqni.transformers.domain.WebhookSettings
+import io.ziqni.transformers.{ZiqniWebhookTransformer, ZiqniApi}
 import org.joda.time.DateTime
 
 class DefaultWebhookTransformer extends ZiqniWebhookTransformer {

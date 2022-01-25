@@ -5,6 +5,6 @@
   *  Written by Ziqni Ltd, 2021
   */
 
-package com.ziqni.transformers.domain
+package io.ziqni.transformers.domain
 
 case class HttpResponseEntity(content: String, statusCode: Int)

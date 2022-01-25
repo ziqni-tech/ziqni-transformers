@@ -4,10 +4,10 @@
   *  Proprietary and confidential
   *  Written by Ziqni Ltd, 2021
   */
-package com.ziqni.transformers
+package io.ziqni.transformers
 
 import java.nio.charset.Charset
-import com.ziqni.transformers.domain._
+import io.ziqni.transformers.domain._
 import org.joda.time.DateTime
 import org.json4s.JsonAST.JValue
 

@@ -4,12 +4,12 @@
   *  Proprietary and confidential
   *  Written by Ziqni Ltd, 2021
   */
-package com.ziqni.transformers.factory
+package io.ziqni.transformers.factory
 
-import com.ziqni.transformers.domain._
-import com.ziqni.transformers.domain.WebhookSettings
-import com.ziqni.transformers.impl.DefaultWebhookTransformer
-import com.ziqni.transformers.{ZiqniWebhookTransformer, ZiqniApi}
+import io.ziqni.transformers.domain._
+import io.ziqni.transformers.domain.WebhookSettings
+import io.ziqni.transformers.impl.DefaultWebhookTransformer
+import io.ziqni.transformers.{ZiqniWebhookTransformer, ZiqniApi}
 
 object ZiqniWebhookTransformerFactory {
 

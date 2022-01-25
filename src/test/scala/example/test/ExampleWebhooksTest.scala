@@ -6,7 +6,7 @@
   */
 package example.test
 
-import com.ziqni.transformers.domain.WebhookSettings
+import io.ziqni.transformers.domain.WebhookSettings
 import example.transformers.ExampleWebhookTransformer
 import org.scalatest._
 import utils.ZiqniApiTest

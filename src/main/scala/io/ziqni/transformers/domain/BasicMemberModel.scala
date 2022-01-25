@@ -5,7 +5,7 @@
   *  Written by Ziqni Ltd, 2021
   */
 
-package com.ziqni.transformers.domain
+package io.ziqni.transformers.domain
 
 abstract class BasicMemberModel {
 

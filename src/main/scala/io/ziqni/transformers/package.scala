@@ -4,7 +4,7 @@
   *  Proprietary and confidential
   *  Written by Ziqni Ltd, 2021
   */
-package com.ziqni
+package io.ziqni
 
 import java.text.SimpleDateFormat
 

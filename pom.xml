@@ -5,13 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.ziqni</groupId>
     <artifactId>ziqni-transformers</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <packaging>jar</packaging>
 
     <name>Ziqni Transformers</name>
-    <description>
-        Ziqni transformers.
-    </description>
+    <description>Ziqni transformers project.</description>
     <url>https://www.ziqni.com/</url>
 
     <licenses>
@@ -24,10 +22,10 @@
 
     <developers>
         <developer>
-            <name>Rahul</name>
-            <email>rahul@ziqni.com</email>
+            <name>Ziqni Developer</name>
+            <email>developers@ziqni.com</email>
             <organization>Ziqni</organization>
-            <organizationUrl>https://www.ziqni.com.com/</organizationUrl>
+            <organizationUrl>https://www.ziqni.com</organizationUrl>
         </developer>
     </developers>
 
@@ -42,7 +40,10 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <scala.version>2.13.7</scala.version>
-        <scala.test.version>3.2.8</scala.test.version>
+        <scala.json4s.version>4.0.4</scala.json4s.version>
+        <scala.test.version>3.2.9</scala.test.version>
+
+        <apache.avro.version>1.11.0</apache.avro.version>
     </properties>
 
     <dependencies>
@@ -54,17 +55,17 @@
         <dependency>
             <groupId>org.json4s</groupId>
             <artifactId>json4s-ext_2.13</artifactId>
-            <version>4.0.3</version>
+            <version>${scala.json4s.version}</version>
         </dependency>
         <dependency>
             <groupId>org.json4s</groupId>
             <artifactId>json4s-native_2.13</artifactId>
-            <version>4.0.3</version>
+            <version>${scala.json4s.version}</version>
         </dependency>
         <dependency>
             <groupId>org.json4s</groupId>
             <artifactId>json4s-jackson_2.13</artifactId>
-            <version>4.0.3</version>
+            <version>${scala.json4s.version}</version>
         </dependency>
         <dependency>
             <groupId>org.scalatest</groupId>
@@ -81,7 +82,7 @@
         <dependency>
             <groupId>org.apache.avro</groupId>
             <artifactId>avro</artifactId>
-            <version>1.11.0</version>
+            <version>${apache.avro.version}</version>
         </dependency>
     </dependencies>
 
@@ -96,6 +97,16 @@
         </repository>
     </distributionManagement>
 
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>net.alchim31.maven</groupId>
+                <artifactId>scala-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </reporting>
+
+
     <build>
         <pluginManagement>
             <plugins>
@@ -107,7 +118,7 @@
                 <plugin>
                     <groupId>net.alchim31.maven</groupId>
                     <artifactId>scala-maven-plugin</artifactId>
-                    <version>4.5.4</version>
+                    <version>4.5.6</version>
                 </plugin>
                 <plugin>
                     <groupId>org.sonatype.plugins</groupId>
@@ -199,24 +210,6 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-site-plugin</artifactId>
-                <version>3.0</version>
-                <configuration>
-                    <reportPlugins>
-                        <plugin>
-                            <artifactId>maven-project-info-reports-plugin</artifactId>
-                            <version>2.2</version>
-                        </plugin>
-                        <plugin>
-                            <groupId>net.alchim31.maven</groupId>
-                            <artifactId>scala-maven-plugin</artifactId>
-                            <version>4.5.6</version>
-                        </plugin>
-                    </reportPlugins>
-                </configuration>
             </plugin>
         </plugins>
     </build>

@@ -36,16 +36,16 @@ To transform an incoming message from a RabbitMQ Queue:
    ```scala
    package example.transformers
 
-   import io.ziqni.transformers.{ZqMqTransformer, ZiqniApi}
+   import io.ziqni.transformers.{ZiqniMqTransformer, ZiqniApi}
 
-   class exampleMQTranformer extends ZqMqTransformer {
+   class ExampleMqTranformer extends ZiqniMqTransformer {
      /**
        * This method gets executed when a message is received on the message queue
        *
        * @param message            The message
        * @param ZiqniApi The Ziqni API
        */
-     override def apply(message: Array[Byte], ZiqniApi: ZiqniApi): Unit = {
+     override def apply(message: Array[Byte], ziqniApi: ZiqniApi): Unit = {
          // Write your code to transform the message here
      }
    }
@@ -54,7 +54,7 @@ To transform an incoming message from a RabbitMQ Queue:
 2. Test your class using Scala Test and the `ZiqniApiTest` module
 
 	```scala
-	import example.transformers.exampleMQTranformer
+	import example.transformers.ExampleMQTranformer
 	import org.scalatest._
 	import utils.ZiqniApiTest
 
@@ -172,18 +172,16 @@ To create a Ziqni WebHook transformer:
    ```scala
    package example.transformers
 
-   import io.ziqni.transformers.{ZqWebhookTransformer, ZiqniApiExt}
-   import io.ziqni.transformers.domain.WebhookSettings
-
-   class exampleWebHookTransformer extends ZqWebhookTransformer {
+   class ExampleWebHookTransformer extends ZiqniWebhookTransformer {
 
    // /**
    // * Executed when a new member is registered in your Ziqni space
    // * @param settings The user supplied settings
    // * @param memberId The Ziqni member id
-   // * @param ZiqniApi The Ziqni API
+   // * @param ziqniApi The Ziqni API
    // */
-   // override def onNewMember(settings: WebhookSettings, memberId: String, ZiqniApi: ZiqniApiExt): Unit = {
+   override def onNewMember(settings: WebhookSettings, memberId: String, ziqniApi: ZiqniApi): Unit = {
+        // do something
        }
    }
    ```
@@ -226,18 +224,19 @@ class DefaultWebhookTransformer extends ZqWebhookTransformer {
 		override def onAchievementTriggered(settings: WebhookSettings, achievementId: String, memberId: String, ZiqniApi: ZiqniApiExt): Unit = {
 
 		val body = Map[String, Any](
-			"accountId" -> ZiqniApi.accountId,
-			"achievementId" -> achievementId,
-			"memberId" -> memberId,
-			"memberIdRefId" -> ZiqniApi.memberRefIdFromMemberId(memberId),
-			"resourcePath" -> s"/api/${ZiqniApi.spaceName}/achievement/$achievementId",
-			"timestamp" -> DateTime.now().getMillis
+           "achievementId" -> achievementId,
+           "memberId" -> memberId,
+           "memberRefId" -> ziqniApi.memberRefIdFromMemberId(memberId),
+           "resourcePath" -> s"/achievement?id=$achievementId",
+           "timestamp" -> DateTime.now().getMillis,
+           "objectType" -> "AchievementTriggered",
+           "spaceName" -> ziqniApi.spaceName
 		)
 
 		val json =  ZiqniApi.toJsonFromMap(body)
 		val headers = settings.headers ++ ZiqniApi.HTTPDefaultHeader
 
-		ZiqniApi.httpPost(settings.url, json, headers)
+		ziqniApi.httpPost(settings.url, json, headers)
 	}
 }
 
@@ -261,7 +260,7 @@ JetBrains IntelliJ (Optional)
 The Ziqni Transformer API is used within your transformer classes to perform various operations like looking up members, pushing events, creating actions, etc.
 
 You can view the methods available for ZqMqTransformer and ZqWebhookTransformer classes here:
-`Ziqni-transformers/src/main/scala/com/Ziqni/transformers/ZiqniApi.scala`
+`ziqni-transformers/src/main/scala/io/ziqni/transformers/ZiqniApi.scala`
 
-You can view addition methods available for ZqWebhookTransformer classes here:
-`clabs/Ziqni-transformers/src/main/scala/com/Ziqni/transformers/ZiqniApiExt.scala`
+You can view additional methods available for ZqWebhookTransformer classes here:
+`ziqni-transformers/src/main/scala/io/ziqni/transformers/ZiqniWebhookTransformer.scala`

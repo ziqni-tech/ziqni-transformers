@@ -78,7 +78,7 @@ class ZiqniApiTest extends ZiqniApi {
 	  * @param groups            The groups to add this member to
 	  * @return The id used in the Ziqni system
 	  */
-	override def createMember(memberReferenceId: String, displayName: String, groups: Seq[String], metaData: Option[Map[String, String]] = None): Option[String] = {
+	override def createMember(memberReferenceId: String, displayName: String, tags: Seq[String], metaData: Option[Map[String, String]] = None): Option[String] = {
 		val key = "Z-" + memberReferenceId
 		memberForTest.put(
 			memberReferenceId, key
@@ -92,7 +92,7 @@ class ZiqniApiTest extends ZiqniApi {
 	  * @param groups      The groups to add this member to
 	  * @return The id used in the Ziqni system
 	  */
-	override def updateMember(clMemberId: String, memberReferenceId: Option[String], displayName: Option[String], groups: Option[Array[String]], metaData: Option[Map[String, String]]): Option[String] = {
+	override def updateMember(memberId: String, memberReferenceId: Option[String], displayName: Option[String], tags: Option[Seq[String]], metaData: Option[Map[String, String]]): Option[String] = {
 		val key = "Z-" + displayName
 		memberForTest.put(
 			memberReferenceId.get, displayName.get
@@ -146,11 +146,20 @@ class ZiqniApiTest extends ZiqniApi {
 	  * @param defaultAdjustmentFactor The default adjustment factor to apply
 	  * @return The id used in the Ziqni system
 	  */
-	override def updateProduct(clProductId: String, productReferenceId: Option[String], displayName: Option[String], providers: Option[Array[String]], productType: Option[String], defaultAdjustmentFactor: Option[Double], metaData: Option[Map[String, String]]): Option[String] = {
+	override def updateProduct(productId: String, productReferenceId: Option[String], displayName: Option[String], providers: Option[Seq[String]], productType: Option[String], defaultAdjustmentFactor: Option[Double], metaData: Option[Map[String, String]]): Option[String] = {
 		val key = "Z-" + productReferenceId
 		productForTest.put(productReferenceId.get, displayName.get)
 		Option(key)
 	}
+
+
+	/**
+	 * Delete product by id
+	 *
+	 * @param productId - Ziqni product id
+	 * @return
+	 */
+	override def deleteProduct(productId: String): Boolean = true
 
 	/**
 	  * Verify if the event action type exists in your space
@@ -170,16 +179,6 @@ class ZiqniApiTest extends ZiqniApi {
 		eventActionsForTest += action
 		true
 	}
-
-	/**
-	  * [PROTOTYPE]
-	  * Get the spot rate for a currency at a point in time from Oanda
-	  *
-	  * @param fromCurrency From currency ISO3 code
-	  * @param toCurrency   To currency ISO3 code
-	  * @return The rate
-	  */
-	override def spotExchangeRate(fromCurrency: String, toCurrency: String, pointInTime: DateTime): Double = 2
 
 	/** *
 	  * Generate a unique time based UUID, this can be used to set the batchId value if
@@ -308,24 +307,6 @@ class ZiqniApiTest extends ZiqniApi {
 	override def subAccounts: Map[String, ZiqniApi] = Map.empty
 
 	override def getSubAccount(spaceName: String): Option[ZiqniApi] = None
-
-	/**
-	  * Insert an event into your Ziqni space
-	  *
-	  * @param event The event to add
-	  * @param delay The time in milliseconds to delay processing of event
-	  * @return True on success, false on duplicate and exception if malformed
-	  */
-	override def pushEventWithDelay(event: BasicEventModel, delay: Long): Boolean = true
-
-	/**
-	  * Insert a sequence of events into your Ziqni space
-	  *
-	  * @param events The events to add
-	  * @param delay  The time in milliseconds to delay processing of event
-	  * @return True on success, false on duplicate and exception if malformed
-	  */
-	override def pushEventsWithDelay(events: Seq[BasicEventModel], delay: Long): Boolean = true
 
 	/** *
 	  * Update the action in your space

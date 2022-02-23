@@ -39,7 +39,7 @@ class ExampleMqTransformer extends ZiqniMqTransformer {
 
 		ziqniApi.memberIdFromMemberRefId(memberRefId).getOrElse{
 			// Create a new member  ->
-			ziqniApi.createMember(memberRefId, "unknown", Seq("new"))
+			ziqniApi.createMember(memberRefId, "unknown",  Seq("new", "auto-created-member"))
 		}
 
 		ziqniApi.productIdFromProductRefId(entityRefId).getOrElse{

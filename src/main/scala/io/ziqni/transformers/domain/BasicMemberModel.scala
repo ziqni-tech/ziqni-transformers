@@ -25,8 +25,7 @@ abstract class BasicMemberModel {
 	  *
 	  * @return List of groups this member belongs to
 	  */
-	def getGroups: Option[Array[String]]
-
+	def getTags: Option[Seq[String]]
 
 	/**
 	  *

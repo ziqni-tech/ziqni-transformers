@@ -23,7 +23,7 @@ abstract class BasicMemberModel {
 
 	/**
 	  *
-	  * @return List of groups this member belongs to
+	  * @return List of tags associated with the member
 	  */
 	def getTags: Option[Seq[String]]
 

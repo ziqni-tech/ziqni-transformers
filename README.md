@@ -36,7 +36,7 @@ To transform an incoming message from a RabbitMQ Queue:
    ```scala
    package example.transformers
 
-   import io.ziqni.transformers.{ZiqniMqTransformer, ZiqniApi}
+   import com.ziqni.transformers.{ZiqniMqTransformer, ZiqniApi}
 
    class ExampleMqTranformer extends ZiqniMqTransformer {
      /**
@@ -216,8 +216,8 @@ Here is an example of a WebHook transformer.
 
 ```scala
 
-import io.ziqni.transformers.domain.WebhookSettings
-import io.ziqni.transformers.{ZqWebhookTransformer, ZiqniApiExt}
+import com.ziqni.transformers.domain.WebhookSettings
+import com.ziqni.transformers.{ZqWebhookTransformer, ZiqniApiExt}
 import org.joda.time.DateTime
 
 class DefaultWebhookTransformer extends ZqWebhookTransformer {

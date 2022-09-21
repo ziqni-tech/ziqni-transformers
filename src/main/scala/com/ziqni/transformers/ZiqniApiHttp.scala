@@ -4,9 +4,9 @@
   *  Proprietary and confidential
   *  Written by Ziqni Ltd, 2021
   */
-package io.ziqni.transformers
+package com.ziqni.transformers
 
-import io.ziqni.transformers.domain.{BasicAuthCredentials, HttpResponseEntity}
+import com.ziqni.transformers.domain.{BasicAuthCredentials, HttpResponseEntity}
 
 trait ZiqniApiHttp {
 	

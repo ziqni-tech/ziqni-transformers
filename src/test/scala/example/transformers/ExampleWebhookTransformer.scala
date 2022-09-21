@@ -6,8 +6,8 @@
   */
 package example.transformers
 
-import io.ziqni.transformers.domain.WebhookSettings
-import io.ziqni.transformers.{ZiqniWebhookTransformer, ZiqniApi}
+import com.ziqni.transformers.domain.WebhookSettings
+import com.ziqni.transformers.{ZiqniWebhookTransformer, ZiqniApi}
 import org.joda.time.DateTime
 
 class ExampleWebhookTransformer extends ZiqniWebhookTransformer {

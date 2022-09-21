@@ -4,10 +4,12 @@
   *  Proprietary and confidential
   *  Written by Ziqni Ltd, 2021
   */
-package io.ziqni.transformers
+package com.ziqni.transformers
+
+import com.ziqni.transformers.domain.{BasicAchievementModel, BasicAwardModel, BasicContestModel, BasicEventModel, BasicMemberModel, BasicProductModel, BasicRewardModel, BasicUnitOfMeasureModel}
 
 import java.nio.charset.Charset
-import io.ziqni.transformers.domain._
+import com.ziqni.transformers.domain._
 import org.joda.time.DateTime
 import org.json4s.JsonAST.JValue
 

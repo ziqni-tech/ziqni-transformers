@@ -4,12 +4,12 @@
   *  Proprietary and confidential
   *  Written by Ziqni Ltd, 2021
   */
-package io.ziqni.transformers.factory
+package com.ziqni.transformers.factory
 
-import io.ziqni.transformers.domain._
-import io.ziqni.transformers.domain.WebhookSettings
-import io.ziqni.transformers.impl.DefaultWebhookTransformer
-import io.ziqni.transformers.{ZiqniWebhookTransformer, ZiqniApi}
+import com.ziqni.transformers.{ZiqniApi, ZiqniWebhookTransformer}
+import com.ziqni.transformers.domain.{WebhookSettings, WebhookTransformerTrigger, onAchievementCreatedTrigger, onAchievementRewardClaimedTrigger, onAchievementRewardCreatedTrigger, onAchievementRewardIssuedTrigger, onAchievementTriggeredTrigger, onCompetitionCancelledTrigger, onCompetitionCreatedTrigger, onCompetitionFinishedTrigger, onCompetitionRewardIssuedTrigger, onCompetitionStartedTrigger, onContestCancelledTrigger, onContestCreatedTrigger, onContestFinalisedTrigger, onContestFinishedTrigger, onContestRewardClaimedTrigger, onContestRewardCreatedTrigger, onContestRewardIssuedTrigger, onContestStartedTrigger, onNewMemberTrigger, onNewProductTrigger}
+import com.ziqni.transformers.impl.DefaultWebhookTransformer
+import com.ziqni.transformers.domain._
 
 object ZiqniWebhookTransformerFactory {
 

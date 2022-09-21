@@ -4,6 +4,6 @@
   *  Proprietary and confidential
   *  Written by Ziqni Ltd, 2021
   */
-package io.ziqni.transformers.domain
+package com.ziqni.transformers.domain
 
 case class BasicAuthCredentials(username: String, password: String)

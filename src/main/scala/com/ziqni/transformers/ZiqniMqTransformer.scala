@@ -4,7 +4,7 @@
   *  Proprietary and confidential
   *  Written by Ziqni Ltd, 2021
   */
-package io.ziqni.transformers
+package com.ziqni.transformers
 
 trait ZiqniMqTransformer {
 

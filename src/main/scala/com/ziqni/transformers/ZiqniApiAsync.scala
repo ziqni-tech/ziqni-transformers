@@ -10,42 +10,12 @@ import com.ziqni.transformers.domain._
 
 import java.nio.charset.Charset
 import scala.concurrent.Future
+import com.ziqni.transformers.domain._
+import org.joda.time.DateTime
+import org.json4s.JsonAST.JValue
 
 trait ZiqniApiAsync extends ZiqniApiHttp {
 
-	/** *
-	  * Generate a unique time based UUID, this can be used to set the batchId value if
-	  * a single event is transformed into multiple distinct events (facts) and a correlation
-	  * needs to be maintained
-	  *
-	  * @return A time based UUID as a string
-	  */
-	def nextId: String
-
-	/**
-	  * Your account identifier
-	  */
-	def accountId: String
-
-	/**
-	  * Get the space name associated with this account
-	  */
-	def spaceName: String
-
-	/**
-	  * Get sub accounts for this master account if any exists
-	  */
-	def subAccounts: Map[String, ZiqniApiAsync]
-
-	def getSubAccount(spaceName: String): Option[ZiqniApiAsync]
-
-	/**
-	  * Insert an event into your Ziqni space
-	  *
-	  * @param event The event to add
-	  * @return True on success, false on duplicate and exception if malformed
-	  */
-	def pushEventAsync(event: BasicEventModel): Future[Boolean]
 
 	/**
 	  * Insert a sequence of events into your Ziqni space
@@ -54,24 +24,6 @@ trait ZiqniApiAsync extends ZiqniApiHttp {
 	  * @return True on success, false on duplicate and exception if malformed
 	  */
 	def pushEventsAsync(events: Seq[BasicEventModel]): Future[Boolean]
-
-	/**
-	  * Insert an event into your Ziqni space
-	  *
-	  * @param event The event to add
-	  * @param delay The time in milliseconds to delay processing of event
-	  * @return True on success, false on duplicate and exception if malformed
-	  */
-	def pushEventWithDelayAsync(event: BasicEventModel, delay: Long): Future[Boolean]
-
-	/**
-	  * Insert a sequence of events into your Ziqni space
-	  *
-	  * @param events The events to add
-	  * @param delay  The time in milliseconds to delay processing of event
-	  * @return True on success, false on duplicate and exception if malformed
-	  */
-	def pushEventsWithDelayAsync(events: Seq[BasicEventModel], delay: Long): Future[Boolean]
 
 	/**
 	  * Get the Ziqni id for the member based on your reference id
@@ -97,7 +49,7 @@ trait ZiqniApiAsync extends ZiqniApiHttp {
 	  * @param groups            The groups to add this member to
 	  * @return The id used in the Ziqni system
 	  */
-	def createMemberAsync(memberReferenceId: String, displayName: String, groups: Seq[String], metaData: Option[Map[String, String]] = None): Future[Option[String]]
+	def createMemberAsync(memberReferenceId: String, displayName: String, tags: Seq[String], metaData: Option[Map[String, String]] = None): Future[Option[String]]
 
 	/**
 	  *
@@ -106,7 +58,7 @@ trait ZiqniApiAsync extends ZiqniApiHttp {
 	  * @param groupsToUpdate The groups to add this member to
 	  * @return The id used in the Ziqni system
 	  */
-	def updateMemberAsync(clMemberId: String, memberReferenceId: Option[String], displayName: Option[String], groupsToUpdate: Option[Array[String]], metaData: Option[Map[String, String]]): Future[Option[String]]
+	def updateMemberAsync(memberId: String, memberReferenceId: Option[String], displayName: Option[String], tagsToUpdate: Option[Seq[String]], metaData: Option[Map[String, String]]): Future[Option[String]]
 
 	/**
 	  *
@@ -151,7 +103,16 @@ trait ZiqniApiAsync extends ZiqniApiHttp {
 	  * @param defaultAdjustmentFactor The default adjustment factor to apply
 	  * @return The id used in the Ziqni system
 	  */
-	def updateProductAsync(clProductId: String, productReferenceId: Option[String], displayName: Option[String], providers: Option[Array[String]], productType: Option[String], defaultAdjustmentFactor: Option[Double], metaData: Option[Map[String, String]]): Future[Option[String]]
+	def updateProductAsync(productId: String, productReferenceId: Option[String], displayName: Option[String], providers: Option[Seq[String]], productType: Option[String], defaultAdjustmentFactor: Option[Double], metaData: Option[Map[String, String]]): Future[Option[String]]
+
+
+	/**
+		* Delete product by id
+		*
+		* @param productId - Ziqni product id
+		* @return
+		*/
+	def deleteProductAsync(productId: String): Future[Boolean]
 
 	/**
 	  *
@@ -225,30 +186,5 @@ trait ZiqniApiAsync extends ZiqniApiHttp {
 	  * @return Double returns a multiplier associated with the UoM
 	  */
 	def getUoMMultiplierFromKeyAsync(unitOfMeasureKey: String): Future[Option[Double]]
-
-	/**
-	  * Converts a json string to a JValue
-	  *
-	  * @param body The string to deserialise
-	  * @return JValue or throws exception
-	  */
-	def fromJsonString(body: String): JValue
-
-	/**
-	  * Converts a map to a json string
-	  *
-	  * @param obj The object to serialise
-	  * @return json string or throws exception
-	  */
-	def toJsonFromMap(obj: Map[String, Any]): String
-
-	/**
-	  * Converts byte array to String using UTF-8
-	  *
-	  * @param body    The string encoded as bytes
-	  * @param charset Optional, character set to decode byte array, default is UTF-8
-	  * @return Decoded string or throws exception
-	  */
-	def convertByteArrayToString(body: Array[Byte], charset: String = "UTF-8"): String = new String(body, Charset.forName(charset))
 
 }

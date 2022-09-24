@@ -160,13 +160,17 @@ trait ZiqniApi extends ZiqniApiAsync {
 	  * @param defaultAdjustmentFactor The default adjustment factor to apply
 	  * @return The id used in the Ziqni system
 	  */
+	@Deprecated(since = "v1.0.6")
 	def updateProduct(productId: String, productReferenceId: Option[String], displayName: Option[String], providers: Option[Seq[String]], productType: Option[String], defaultAdjustmentFactor: Option[Double], metaData: Option[Map[String, String]]): Option[String]
 
 	/**
-	 * Delete product by id
-	 * @param productId - Ziqni product id
+		* DEPRECATED, use the async methods!
+		* Delete product by id
+		*
+		* @param productId - Ziqni product id
 	 * @return
 	 */
+	@Deprecated(since = "v1.0.6")
 	def deleteProduct(productId: String): Boolean
 
 	/**

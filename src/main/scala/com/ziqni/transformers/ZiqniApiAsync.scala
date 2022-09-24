@@ -32,6 +32,10 @@ trait ZiqniApiAsync {
 	  */
 	def pushEvents(events: Seq[BasicEventModel]): Future[Boolean]
 
+	def pushEventTransaction(event: BasicEventModel): Future[Boolean]
+
+	def findByBatchId(batchId: String): Future[Seq[BasicEventModel]]
+
 	/**
 	  * Get the Ziqni id for the member based on your reference id
 	  *

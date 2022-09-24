@@ -13,6 +13,8 @@ import com.ziqni.transformers.domain._
 import org.joda.time.DateTime
 import org.json4s.JsonAST.JValue
 
+import scala.collection.immutable.Seq
+
 trait ZiqniApi extends ZiqniApiHttp {
 
 	def async: ZiqniApiAsync

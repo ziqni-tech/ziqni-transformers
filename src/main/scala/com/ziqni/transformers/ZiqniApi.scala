@@ -13,7 +13,9 @@ import com.ziqni.transformers.domain._
 import org.joda.time.DateTime
 import org.json4s.JsonAST.JValue
 
-trait ZiqniApi extends ZiqniApiAsync {
+trait ZiqniApi extends ZiqniApiHttp {
+
+	def async: ZiqniApiAsync
 
 	/** *
 	  * Generate a unique time based UUID, this can be used to set the batchId value if
@@ -22,7 +24,6 @@ trait ZiqniApi extends ZiqniApiAsync {
 	  *
 	  * @return A time based UUID as a string
 	  */
-
 	def nextId: String
 
 	/**
@@ -96,6 +97,7 @@ trait ZiqniApi extends ZiqniApiAsync {
 	  * @param tags            Tags to assign to the member
 	  * @return The id used in the Ziqni system
 	  */
+	@Deprecated(since = "v1.0.6")
 	def createMember(memberReferenceId: String, displayName: String, tags: Seq[String], metaData: Option[Map[String, String]] = None): Option[String]
 
 	/**
@@ -106,6 +108,7 @@ trait ZiqniApi extends ZiqniApiAsync {
 	  * @param tagsToUpdate 	Tags to assign to the member
 	  * @return The id used in the Ziqni system
 	  */
+	@Deprecated(since = "v1.0.6")
 	def updateMember(memberId: String, memberReferenceId: Option[String], displayName: Option[String], tagsToUpdate: Option[Seq[String]], metaData: Option[Map[String, String]]): Option[String]
 
 	/**

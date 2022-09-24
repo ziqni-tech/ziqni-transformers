@@ -9,12 +9,14 @@ package com.ziqni.transformers
 import com.ziqni.transformers.domain._
 
 import java.nio.charset.Charset
-import scala.concurrent.Future
+import scala.concurrent.{ExecutionContextExecutor, Future}
 import com.ziqni.transformers.domain._
 import org.joda.time.DateTime
 import org.json4s.JsonAST.JValue
 
 trait ZiqniApiAsync {
+
+	def transformerExecutionContext: ExecutionContextExecutor
 
 	/**
 		* Insert an event into your Ziqni space

@@ -40,6 +40,11 @@ trait ZiqniApi extends ZiqniApiAsync {
 	  */
 	def subAccounts: Map[String, ZiqniApi]
 
+	/**
+	 * Get sub account api by space name
+	 * @param spaceName
+	 * @return
+	 */
 	def getSubAccount(spaceName: String): Option[ZiqniApi]
 
 	/**
@@ -61,28 +66,6 @@ trait ZiqniApi extends ZiqniApiAsync {
 	  */
 	@Deprecated(since = "v1.0.6")
 	def pushEvents(events: Seq[BasicEventModel]): Boolean
-
-	/**
-		* DEPRECATED, use the async methods!
-	  * Insert an event into your Ziqni space
-	  *
-	  * @param event The event to add
-	  * @param delay The time in milliseconds to delay processing of event
-	  * @return True on success, false on duplicate and exception if malformed
-	  */
-	@Deprecated(since = "v1.0.6")
-	def pushEventWithDelay(event: BasicEventModel, delay: Long): Boolean
-
-	/**
-		* DEPRECATED, use the async methods!
-	  * Insert a sequence of events into your Ziqni space
-	  *
-	  * @param events The events to add
-	  * @param delay  The time in milliseconds to delay processing of event
-	  * @return True on success, false on duplicate and exception if malformed
-	  */
-	@Deprecated(since = "v1.0.6")
-	def pushEventsWithDelay(events: Seq[BasicEventModel], delay: Long): Boolean
 
 	/**
 		* DEPRECATED, use the async methods!
@@ -110,27 +93,25 @@ trait ZiqniApi extends ZiqniApiAsync {
 	  *
 	  * @param memberReferenceId The id used to identify this member in the sending system
 	  * @param displayName       Display name
-	  * @param groups            The groups to add this member to
+	  * @param tags            Tags to assign to the member
 	  * @return The id used in the Ziqni system
 	  */
-	@Deprecated(since = "v1.0.6")
-	def createMember(memberReferenceId: String, displayName: String, groups: Seq[String], metaData: Option[Map[String, String]] = None): Option[String]
+	def createMember(memberReferenceId: String, displayName: String, tags: Seq[String], metaData: Option[Map[String, String]] = None): Option[String]
 
 	/**
 		* DEPRECATED, use the async methods!
 	  *
-	  * @param clMemberId     CL Member Id
-	  * @param displayName    Display name
-	  * @param groupsToUpdate The groups to add this member to
+	  * @param memberId     	Ziqni Member Id
+	  * @param displayName    	Display name
+	  * @param tagsToUpdate 	Tags to assign to the member
 	  * @return The id used in the Ziqni system
 	  */
-	@Deprecated(since = "v1.0.6")
-	def updateMember(clMemberId: String, memberReferenceId: Option[String], displayName: Option[String], groupsToUpdate: Option[Array[String]], metaData: Option[Map[String, String]]): Option[String]
+	def updateMember(memberId: String, memberReferenceId: Option[String], displayName: Option[String], tagsToUpdate: Option[Seq[String]], metaData: Option[Map[String, String]]): Option[String]
 
 	/**
 		* DEPRECATED, use the async methods!
 	  *
-	  * @param memberId Ziqni Reward Id
+	  * @param memberId Ziqni member Id
 	  * @return BasicMemberModel returns a basic member object
 	  */
 	@Deprecated(since = "v1.0.6")
@@ -159,8 +140,8 @@ trait ZiqniApi extends ZiqniApiAsync {
 	/**
 		* DEPRECATED, use the async methods!
 	  *
-	  * @param productReferenceId      The id used to identify this product in the sending system
-	  * @param displayName             Display name
+	  * @param productReferenceId      	The id used to identify this product in the sending system
+	  * @param displayName             	Display name
 	  * @param providers               The providers of this product
 	  * @param productType             The type of product
 	  * @param defaultAdjustmentFactor The default adjustment factor to apply
@@ -172,15 +153,21 @@ trait ZiqniApi extends ZiqniApiAsync {
 	/**
 		* DEPRECATED, use the async methods!
 	  *
-	  * @param clProductId             CL Product Id
+	  * @param productId             Ziqni Product Id
 	  * @param displayName             Display name
 	  * @param providers               The providers of this product
 	  * @param productType             The type of product
 	  * @param defaultAdjustmentFactor The default adjustment factor to apply
 	  * @return The id used in the Ziqni system
 	  */
-	@Deprecated(since = "v1.0.6")
-	def updateProduct(clProductId: String, productReferenceId: Option[String], displayName: Option[String], providers: Option[Array[String]], productType: Option[String], defaultAdjustmentFactor: Option[Double], metaData: Option[Map[String, String]]): Option[String]
+	def updateProduct(productId: String, productReferenceId: Option[String], displayName: Option[String], providers: Option[Seq[String]], productType: Option[String], defaultAdjustmentFactor: Option[Double], metaData: Option[Map[String, String]]): Option[String]
+
+	/**
+	 * Delete product by id
+	 * @param productId - Ziqni product id
+	 * @return
+	 */
+	def deleteProduct(productId: String): Boolean
 
 	/**
 		* DEPRECATED, use the async methods!

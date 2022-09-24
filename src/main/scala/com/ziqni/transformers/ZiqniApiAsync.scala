@@ -195,13 +195,14 @@ trait ZiqniApiAsync {
 
 	/**
 		*
+		* @param key The key used to identify this UoM
 		* @param name The name to give this unit of measure
 		* @param isoCode The ISO code
 		* @param multiplier The points multiplier
 		* @param unitOfMeasureType The type [OTHER, CURRENCY, MASS, TIME, TEMPERATURE, ELECTRICCURRENT, AMOUNTOFSUBSTANCE, LUMINOUSINTENSITY, DISTANCE]
 		* @return
 		*/
-	def createUnitOfMeasure(name: String, isoCode: Option[String], multiplier: Double, unitOfMeasureType: Option[String]): Future[Option[String]]
+	def createUnitOfMeasure(key: String, name: String, isoCode: Option[String], multiplier: Double, unitOfMeasureType: Option[String]): Future[Option[String]]
 
 	/**
 	  *

@@ -62,7 +62,7 @@ trait ZiqniApiAsync {
 	  * @param tags            The groups to add this member to
 	  * @return The id used in the Ziqni system
 	  */
-	def createMember(memberReferenceId: String, displayName: String, tags: Seq[String], metaData: Option[Map[String, String]] = None): Future[Option[String]]
+	def createMember(memberReferenceId: String, displayName: String, tags: Seq[String], metaData: Option[Map[String, String]]): Future[Option[String]]
 
 	/**
 	  *
@@ -105,7 +105,7 @@ trait ZiqniApiAsync {
 	  * @param defaultAdjustmentFactor The default adjustment factor to apply
 	  * @return The id used in the Ziqni system
 	  */
-	def createProduct(productReferenceId: String, displayName: String, providers: Seq[String], productType: String, defaultAdjustmentFactor: Double, metaData: Option[Map[String, String]] = None): Future[Option[String]]
+	def createProduct(productReferenceId: String, displayName: String, providers: Seq[String], productType: String, defaultAdjustmentFactor: Double, metaData: Option[Map[String, String]]): Future[Option[String]]
 
 	/**
 	  *
@@ -148,7 +148,7 @@ trait ZiqniApiAsync {
 	  * @param action True on success false on failure
 	  * @return
 	  */
-	def createEventAction(action: String, name: Option[String] = None, metaData: Option[Map[String, String]] = None): Future[Boolean]
+	def createEventAction(action: String, name: Option[String], metaData: Option[Map[String, String]], unitOfMeasure: BasicUnitOfMeasureModel): Future[Boolean]
 
 	/** *
 	  * Update the action in your space
@@ -156,7 +156,7 @@ trait ZiqniApiAsync {
 	  * @param action True on success false on failure
 	  * @return
 	  */
-	def updateEventAction(action: String, name: Option[String] = None, metaData: Option[Map[String, String]] = None, unitOfMeasureType: Option[String] = None): Future[Boolean]
+	def updateEventAction(action: String, name: Option[String], metaData: Option[Map[String, String]], unitOfMeasureType: Option[String]): Future[Boolean]
 
 	/**
 	  *
@@ -192,6 +192,16 @@ trait ZiqniApiAsync {
 	  * @return BasicUnitOfMeasureModel returns a basic unit of measure object
 	  */
 	def getUnitOfMeasure(unitOfMeasureId: String): Future[Option[BasicUnitOfMeasureModel]]
+
+	/**
+		*
+		* @param name The name to give this unit of measure
+		* @param isoCode The ISO code
+		* @param multiplier The points multiplier
+		* @param unitOfMeasureType The type [OTHER, CURRENCY, MASS, TIME, TEMPERATURE, ELECTRICCURRENT, AMOUNTOFSUBSTANCE, LUMINOUSINTENSITY, DISTANCE]
+		* @return
+		*/
+	def createUnitOfMeasure(name: String, isoCode: Option[String], multiplier: Double, unitOfMeasureType: Option[String]): Future[Option[String]]
 
 	/**
 	  *

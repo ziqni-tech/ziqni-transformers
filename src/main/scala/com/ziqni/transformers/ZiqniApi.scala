@@ -100,7 +100,7 @@ trait ZiqniApi extends ZiqniApiHttp {
 	  * @return The id used in the Ziqni system
 	  */
 	@Deprecated(since = "v1.0.6")
-	def createMember(memberReferenceId: String, displayName: String, tags: Seq[String], metaData: Option[Map[String, String]] = None): Option[String]
+	def createMember(memberReferenceId: String, displayName: String, tags: Seq[String], metaData: Option[Map[String, String]]): Option[String]
 
 	/**
 		* DEPRECATED, use the async methods!
@@ -153,7 +153,7 @@ trait ZiqniApi extends ZiqniApiHttp {
 	  * @return The id used in the Ziqni system
 	  */
 	@Deprecated(since = "v1.0.6")
-	def createProduct(productReferenceId: String, displayName: String, providers: Seq[String], productType: String, defaultAdjustmentFactor: Double, metaData: Option[Map[String, String]] = None): Option[String]
+	def createProduct(productReferenceId: String, displayName: String, providers: Seq[String], productType: String, defaultAdjustmentFactor: Double, metaData: Option[Map[String, String]]): Option[String]
 
 	/**
 		* DEPRECATED, use the async methods!
@@ -205,7 +205,7 @@ trait ZiqniApi extends ZiqniApiHttp {
 	  * @return
 	  */
 	@Deprecated(since = "v1.0.6")
-	def createEventAction(action: String, name: Option[String] = None, metaData: Option[Map[String, String]] = None): Boolean
+	def createEventAction(action: String, name: Option[String], metaData: Option[Map[String, String]], unitOfMeasure: BasicUnitOfMeasureModel): Boolean
 
 	/** *
 		* DEPRECATED, use the async methods!
@@ -215,7 +215,7 @@ trait ZiqniApi extends ZiqniApiHttp {
 	  * @return
 	  */
 	@Deprecated(since = "v1.0.6")
-	def updateEventAction(action: String, name: Option[String] = None, metaData: Option[Map[String, String]] = None, unitOfMeasureType: Option[String] = None): Boolean
+	def updateEventAction(action: String, name: Option[String], metaData: Option[Map[String, String]], unitOfMeasureType: Option[String]): Boolean
 
 	/**
 		* DEPRECATED, use the async methods!

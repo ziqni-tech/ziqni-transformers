@@ -134,7 +134,7 @@ trait ZiqniApiAsync extends ZiqniApiHttp {
 	  * @param action The action
 	  * @return True of the action was created
 	  */
-	def eventActionExistsAsync(action: String): Future[Future[Boolean]]
+	def eventActionExistsAsync(action: String): Future[Boolean]
 
 	/** *
 	  * Create the action in your space

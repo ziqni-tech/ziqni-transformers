@@ -16,6 +16,13 @@ import org.json4s.JsonAST.JValue
 
 trait ZiqniApiAsync extends ZiqniApiHttp {
 
+	/**
+		* Insert an event into your Ziqni space
+		*
+		* @param event The event to add
+		* @return True on success, false on duplicate and exception if malformed
+		*/
+	def pushEventAsync(event: BasicEventModel): Future[Boolean]
 
 	/**
 	  * Insert a sequence of events into your Ziqni space
@@ -46,7 +53,7 @@ trait ZiqniApiAsync extends ZiqniApiHttp {
 	  *
 	  * @param memberReferenceId The id used to identify this member in the sending system
 	  * @param displayName       Display name
-	  * @param groups            The groups to add this member to
+	  * @param tags            The groups to add this member to
 	  * @return The id used in the Ziqni system
 	  */
 	def createMemberAsync(memberReferenceId: String, displayName: String, tags: Seq[String], metaData: Option[Map[String, String]] = None): Future[Option[String]]

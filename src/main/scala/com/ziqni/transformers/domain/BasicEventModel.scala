@@ -30,5 +30,6 @@ case class BasicEventModel(
 													sourceValue: Double,
 													transactionTimestamp: DateTime,
 													tags: Seq[String] = Seq.empty,
-													metadata: Map[String, Seq[Any]] = Map.empty
+													metadata: Map[String, Seq[Any]] = Map.empty,
+													customFields: Map[String, CustomFieldEntry[Any]] = Map.empty
 													)

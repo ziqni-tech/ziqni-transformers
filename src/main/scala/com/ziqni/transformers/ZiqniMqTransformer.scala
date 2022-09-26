@@ -60,4 +60,6 @@ trait ZiqniMqTransformer {
 		apply(
 			message, ziqniApi, ziqniTransformerEventBus, headers + ("messageId" -> messageId)
 		)
+
+	def getZiqniTransformerEventBus: ZiqniTransformerEventBus
 }

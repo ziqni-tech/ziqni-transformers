@@ -60,4 +60,11 @@ trait ZiqniMqTransformer {
 		apply(
 			message, ziqniApi, headers + ("messageId" -> messageId)
 		)
+
+	/**
+		* The transformer event-bus is a light-weight messaging system which allows different parts of your transformers to communicate with each in a loosely coupled way.
+		* An event-bus supports publish-subscribe messaging, point-to-point messaging and request-response messaging.
+		* Message delivery is best-effort and messages can be lost if failure of all or part of the event bus occurs.
+		*/
+	def getZiqniTransformerEventBus: ZiqniTransformerEventBus
 }

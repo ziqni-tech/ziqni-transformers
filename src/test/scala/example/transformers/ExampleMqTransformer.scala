@@ -7,8 +7,8 @@
 package example.transformers
 
 // Do not add additional imports from non-standard libraries
-import io.ziqni.transformers._
-import io.ziqni.transformers.domain.BasicEventModel
+import com.ziqni.transformers._
+import com.ziqni.transformers.domain.BasicEventModel
 import org.joda.time.DateTime
 
 class ExampleMqTransformer extends ZiqniMqTransformer {
@@ -70,6 +70,7 @@ class ExampleMqTransformer extends ZiqniMqTransformer {
 		////////////////////////////////////////////////////
 
 		val event = BasicEventModel(
+			memberId = None,
 			action = action,
 			tags = Seq.empty,
 			eventRefId = eventRefId,

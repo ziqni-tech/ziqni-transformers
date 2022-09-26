@@ -8,6 +8,10 @@ package com.ziqni.transformers
 
 import com.ziqni.transformers.domain.WebhookSettings
 
+/**
+  * Deprecated. Use the system notify mechanism for receiving system changes
+  */
+@Deprecated(since ="On deprecation path")
 trait ZiqniWebhookTransformer {
 
   /**
@@ -187,17 +191,4 @@ trait ZiqniWebhookTransformer {
     * @param ziqniApi The Ziqni API
     */
   def onAchievementRewardClaimed(settings: WebhookSettings, achievementId: String, memberId: String, awardId: String, rewardTypeKey: String, ziqniApi: ZiqniApi): Unit = {}
-
-
-  def registerOnEventBus(address:String, group: String): Boolean
-
-  def sendEventBusMessage()
-
-  /**
-   * The transformer event-bus is a light-weight distributed messaging system which allows different parts of your transformers
-   * to communicate with each in a loosely coupled way.
-   * An event-bus supports publish-subscribe messaging, point-to-point messaging and request-response messaging.
-   * Message delivery is best-effort and messages can be lost if failure of all or part of the event bus occurs.
-   */
-  def handleEventBusMessage(from: String, message: Map[String, Any]): Unit
 }

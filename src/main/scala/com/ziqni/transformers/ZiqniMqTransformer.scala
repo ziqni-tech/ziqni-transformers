@@ -11,71 +11,42 @@ trait ZiqniMqTransformer {
 	/**
 	  * This method gets executed when a message is received on the message queue
 	  * @param message The message
-	  * @param ziqniApi The Ziqni API
+	  * @param ziqniContext The Ziqni Context
 	  */
-	def apply(message: Array[Byte], ziqniApi: ZiqniApi, transformerEventBus:Option[ZiqniTransformerEventBus], args: Map[String,Any]): Unit = {
-		apply(message,ziqniApi,args)
-	}
-
-	def apply(message: Array[Byte], ziqniApi: ZiqniApi, args: Map[String,Any]): Unit
+	def apply(message: Array[Byte], ziqniContext: ZiqniContext, args: Map[String,Any]): Unit
 
 	/**
 	  * This method gets executed when a message is received on the message queue
 	  * @param message The message
 	  * @param routingKey The routing key for the incoming message from the Envelope of AMQP client
 	  * @param exchangeName The exchange name for the incoming message from the Envelope of AMQP client
-	  * @param ziqniApi The Ziqni API
+	  * @param ziqniContext The Ziqni Context
 	  */
-	def rabbit(message: Array[Byte], routingKey: String, exchangeName: String, ziqniApi: ZiqniApi): Unit = rabbit(message,routingKey,exchangeName,ziqniApi,None)
-
-	/**
-	  * This method gets executed when a message is received on the message queue
-	  * @param message The message
-	  * @param routingKey The routing key for the incoming message from the Envelope of AMQP client
-	  * @param exchangeName The exchange name for the incoming message from the Envelope of AMQP client
-	  * @param ziqniApi The Ziqni API
-	  */
-	def rabbit(message: Array[Byte], routingKey: String, exchangeName: String, ziqniApi: ZiqniApi, transformerEventBus:Option[ZiqniTransformerEventBus]): Unit =
+	def rabbit(message: Array[Byte], routingKey: String, exchangeName: String, ziqniContext: ZiqniContext): Unit =
 		apply(
-			message, ziqniApi, transformerEventBus , Map( "routingKey" -> routingKey, "exchangeName" -> exchangeName)
+			message, ziqniContext, Map( "routingKey" -> routingKey, "exchangeName" -> exchangeName)
 		)
 
 	/**
 	  * This method gets executed when a message is received on the message queue
 	  * @param message The value for the incoming message from the Kafka broker
 	  * @param key The key for the incoming message from the Kafka broker
-	  * @param ziqniApi The Ziqni API
+	  * @param ziqniContext The Ziqni Context
 	  */
-	def kafka(key: Array[Byte], message: Array[Byte], ziqniApi: ZiqniApi): Unit = kafka(key,message,ziqniApi,None)
-
-	/**
-	  * This method gets executed when a message is received on the message queue
-	  * @param message The value for the incoming message from the Kafka broker
-	  * @param key The key for the incoming message from the Kafka broker
-	  * @param ziqniApi The Ziqni API
-	  */
-	def kafka(key: Array[Byte], message: Array[Byte], ziqniApi: ZiqniApi, transformerEventBus:Option[ZiqniTransformerEventBus]): Unit =
+	def kafka(key: Array[Byte], message: Array[Byte], ziqniContext: ZiqniContext): Unit =
 		apply(
-			message, ziqniApi, transformerEventBus, Map( "key" -> key )
+			message, ziqniContext, Map( "key" -> key )
 		)
 
 	/**
 	  * This method gets executed when a message is received as a POST on API
 	  * @param message The value for the incoming message from the http
 	  * @param headers Header values for the incoming message
-	  * @param ziqniApi The Ziqni API
+	  * @param ziqniContext The Ziqni Context
 	  */
-	def http(headers: Map[String, Seq[String]], message: Array[Byte], ziqniApi: ZiqniApi): Unit = http(headers,message,ziqniApi,None)
-
-	/**
-	  * This method gets executed when a message is received as a POST on API
-	  * @param message The value for the incoming message from the http
-	  * @param headers Header values for the incoming message
-	  * @param ziqniApi The Ziqni API
-	  */
-	def http(headers: Map[String, Seq[String]], message: Array[Byte], ziqniApi: ZiqniApi, transformerEventBus:Option[ZiqniTransformerEventBus]): Unit =
+	def http(headers: Map[String, Seq[String]], message: Array[Byte], ziqniContext: ZiqniContext): Unit =
 		apply(
-			message, ziqniApi, transformerEventBus, headers
+			message, ziqniContext, headers
 		)
 
 	/**
@@ -83,24 +54,15 @@ trait ZiqniMqTransformer {
 	  * @param headers Message headers
 	  * @param message The message
 	  * @param messageId Message id
-	  * @param ziqniApi - The Ziqni API
+	  * @param ziqniContext - The Ziqni Context
 	  */
-	def sqs(headers: Map[String, String], message: Array[Byte], messageId: String, ziqniApi: ZiqniApi): Unit = sqs(headers,message,messageId,ziqniApi,None)
-
-	/**
-	  * This method gets executed when a message is received from an SQS endpoint
-	  * @param headers Message headers
-	  * @param message The message
-	  * @param messageId Message id
-	  * @param ziqniApi - The Ziqni API
-	  */
-	def sqs(headers: Map[String, String], message: Array[Byte], messageId: String, ziqniApi: ZiqniApi, transformerEventBus:Option[ZiqniTransformerEventBus]): Unit =
+	def sqs(headers: Map[String, String], message: Array[Byte], messageId: String, ziqniContext: ZiqniContext): Unit =
 		apply(
-			message, ziqniApi, transformerEventBus, headers + ("messageId" -> messageId)
+			message, ziqniContext, headers + ("messageId" -> messageId)
 		)
 
 	/**
 		* Happens when the class is initialized
 		*/
-	def init(ziqniApi: ZiqniApi, ziqniTransformerInfo:ZiqniTransformerInfo, initEventBus: (EventbusAddress, EventbusGroup, List[EventbusConsumer]) => ZiqniTransformerEventBus): Option[ZiqniTransformerEventBus] = None
+	def init(ziqniTransformerInfo:ZiqniTransformerInfo, initEventBus: (EventbusAddress, EventbusGroup, List[EventbusConsumer]) => ZiqniTransformerEventBus): Option[ZiqniTransformerEventBus] = None
 }

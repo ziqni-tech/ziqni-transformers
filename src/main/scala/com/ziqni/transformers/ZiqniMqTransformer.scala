@@ -64,5 +64,5 @@ trait ZiqniMqTransformer {
 	/**
 		* Happens when the class is initialized
 		*/
-	def init(ziqniTransformerInfo:ZiqniTransformerInfo, initEventBus: (EventbusAddress, EventbusGroup, List[EventbusConsumer]) => ZiqniTransformerEventBus): Option[ZiqniTransformerEventBus] = None
+	def initTransformerEventbus(ziqniTransformerInfo:ZiqniTransformerInfo): ZiqniTransformerEventbusConfig = ZiqniTransformerEventbusConfig(ziqniTransformerInfo.connectionId,"all",List.empty)
 }

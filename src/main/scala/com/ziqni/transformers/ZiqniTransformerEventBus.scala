@@ -8,14 +8,16 @@ package com.ziqni.transformers
   */
 trait ZiqniTransformerEventBus {
 
-  type Address = String
-  type Message = Map[String, Any]
-  type Args = Map[String,String]
-  type Consumer = (Option[Address], Message, Args) => Unit
 
-  def registerConsumer(address: Address, onMessage: Consumer): Unit
+  def getTransformerInfo: ZiqniTransformerInfo
 
-  def sendToAddress(address: Address, message: Message, args: Option[Args]): Unit
+  def getAddress: EventbusAddress
 
-  def sendToAll(message: Message, args: Option[Args]): Unit
+  def getGroup: String
+
+  def registerConsumer(onMessage: Consumer): Unit
+
+  def sendToAddress(toAddress: EventbusAddress, message: EventbusMessage, args: Option[EventbusArgs]): Unit
+
+  def sendToAll(message: EventbusMessage, args: Option[EventbusArgs]): Unit
 }

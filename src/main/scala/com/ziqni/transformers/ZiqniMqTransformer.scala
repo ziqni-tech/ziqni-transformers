@@ -13,8 +13,12 @@ trait ZiqniMqTransformer {
 	  * @param message The message
 	  * @param ziqniApi The Ziqni API
 	  */
-	def apply(message: Array[Byte], ziqniApi: ZiqniApi, transformerEventBus:Option[ZiqniTransformerEventBus], args: Map[String,Any]): Unit
-	
+	def apply(message: Array[Byte], ziqniApi: ZiqniApi, transformerEventBus:Option[ZiqniTransformerEventBus], args: Map[String,Any]): Unit = {
+		apply(message,ziqniApi,args)
+	}
+
+	def apply(message: Array[Byte], ziqniApi: ZiqniApi, args: Map[String,Any]): Unit
+
 	/**
 	  * This method gets executed when a message is received on the message queue
 	  * @param message The message

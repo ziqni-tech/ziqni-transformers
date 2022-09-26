@@ -6,10 +6,9 @@
   */
 package com.ziqni.transformers.factory
 
-import com.ziqni.transformers.{ZiqniApi, ZiqniContext, ZiqniWebhookTransformer}
+import com.ziqni.transformers.{ZiqniContext, ZiqniWebhookTransformer}
 import com.ziqni.transformers.domain.{WebhookSettings, WebhookTransformerTrigger, onAchievementCreatedTrigger, onAchievementRewardClaimedTrigger, onAchievementRewardCreatedTrigger, onAchievementRewardIssuedTrigger, onAchievementTriggeredTrigger, onCompetitionCancelledTrigger, onCompetitionCreatedTrigger, onCompetitionFinishedTrigger, onCompetitionRewardIssuedTrigger, onCompetitionStartedTrigger, onContestCancelledTrigger, onContestCreatedTrigger, onContestFinalisedTrigger, onContestFinishedTrigger, onContestRewardClaimedTrigger, onContestRewardCreatedTrigger, onContestRewardIssuedTrigger, onContestStartedTrigger, onNewMemberTrigger, onNewProductTrigger}
 import com.ziqni.transformers.impl.DefaultWebhookTransformer
-import com.ziqni.transformers.domain._
 
 object ZiqniWebhookTransformerFactory {
 

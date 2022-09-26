@@ -9,13 +9,13 @@ package com.ziqni.transformers
 trait ZiqniTransformerEventBus {
 
   type Address = String
-  type Group = String
   type Message = Map[String, Any]
   type Args = Map[String,String]
+  type Consumer = (Option[Address], Message, Args) => Unit
 
-  def registerConsumer(address: Address, group: Group, onMessage: (Option[Address], Group, Message, Args) => Unit): Unit
+  def registerConsumer(address: Address, onMessage: Consumer): Unit
 
   def sendToAddress(address: Address, message: Message, args: Option[Args]): Unit
 
-  def sendToGroup(group: Address, message: Message, args: Option[Args]): Unit
+  def sendToAll(message: Message, args: Option[Args]): Unit
 }

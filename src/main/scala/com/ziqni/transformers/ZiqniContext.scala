@@ -6,8 +6,10 @@ object ZiqniContext {
   case class ZiqniContextHolder[T](ziqniContext: ZiqniContext, value:T)
 }
 
-case class ZiqniContext(ziqniTransformerInfo: ZiqniTransformerInfo,
+case class ZiqniContext(accountId: String,
+                        spaceName: String,
+                        ziqniTransformerInfo: ZiqniTransformerInfo,
                         ziqniApi: ZiqniApi,
                         ziqniApiAsync: ZiqniApiAsync,
                         ziqniTransformerEventBus:Option[ZiqniTransformerEventBus],
-                        transformerExecutionContext: ExecutionContextExecutor)
+                        ziqniExecutionContext: ExecutionContextExecutor)

@@ -29,16 +29,6 @@ trait ZiqniApi extends ZiqniApiHttp {
 	def nextId: String
 
 	/**
-	  * Your account identifier
-	  */
-	def accountId: String
-
-	/**
-	  * Get the space name associated with this account
-	  */
-	def spaceName: String
-
-	/**
 	  * Get sub accounts for this master account if any exists
 	  */
 	def subAccounts: Map[String, ZiqniApi]

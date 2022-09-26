@@ -20,7 +20,7 @@ trait ZiqniWebhookTransformer {
     * @param productId The Ziqni product id
     * @param ziqniApi The Ziqni API
     */
-  def onNewProduct(settings: WebhookSettings, productId: String, ziqniApi: ZiqniApi): Unit = {}
+  def onNewProduct(settings: WebhookSettings, productId: String, ziqniContext: ZiqniContext): Unit = {}
 
   /**
     * Executed when a new member is registered in your Ziqni space
@@ -28,7 +28,7 @@ trait ZiqniWebhookTransformer {
     * @param memberId The Ziqni member id
     * @param ziqniApi The Ziqni API
     */
-  def onNewMember(settings: WebhookSettings, memberId: String, ziqniApi: ZiqniApi): Unit = {}
+  def onNewMember(settings: WebhookSettings, memberId: String, ziqniContext: ZiqniContext): Unit = {}
 
   /**
     * Executed when a new competition is created in your Ziqni space
@@ -36,7 +36,7 @@ trait ZiqniWebhookTransformer {
     * @param competitionId The Ziqni competition id
     * @param ziqniApi The Ziqni API
     */
-  def onCompetitionCreated(settings: WebhookSettings, competitionId: String, ziqniApi: ZiqniApi): Unit = {}
+  def onCompetitionCreated(settings: WebhookSettings, competitionId: String, ziqniContext: ZiqniContext): Unit = {}
 
   /**
     * Executed when a competition is started
@@ -44,7 +44,7 @@ trait ZiqniWebhookTransformer {
     * @param competitionId The Ziqni competition id
     * @param ziqniApi The Ziqni API
     */
-  def onCompetitionStarted(settings: WebhookSettings, competitionId: String, ziqniApi: ZiqniApi): Unit = {}
+  def onCompetitionStarted(settings: WebhookSettings, competitionId: String, ziqniContext: ZiqniContext): Unit = {}
 
   /**
     * Executed when a competition finished
@@ -52,7 +52,7 @@ trait ZiqniWebhookTransformer {
     * @param competitionId The Ziqni competition id
     * @param ziqniApi The Ziqni API
     */
-  def onCompetitionFinished(settings: WebhookSettings, competitionId: String, ziqniApi: ZiqniApi): Unit = {}
+  def onCompetitionFinished(settings: WebhookSettings, competitionId: String, ziqniContext: ZiqniContext): Unit = {}
 
   /**
     * Executed when a competition is cancelled
@@ -60,7 +60,7 @@ trait ZiqniWebhookTransformer {
     * @param competitionId The Ziqni competition id
     * @param ziqniApi The Ziqni API
     */
-  def onCompetitionCancelled(settings: WebhookSettings, competitionId: String, ziqniApi: ZiqniApi): Unit = {}
+  def onCompetitionCancelled(settings: WebhookSettings, competitionId: String, ziqniContext: ZiqniContext): Unit = {}
 
   /**
     * Executed when a competition is cancelled
@@ -71,7 +71,7 @@ trait ZiqniWebhookTransformer {
     * @param rewardTypeKey The user defined reward type key
     * @param ziqniApi The Ziqni API
     */
-  def onCompetitionRewardIssued(settings: WebhookSettings, competitionId: String, memberId: String, awardId: String, rewardTypeKey: String, ziqniApi: ZiqniApi): Unit = {}
+  def onCompetitionRewardIssued(settings: WebhookSettings, competitionId: String, memberId: String, awardId: String, rewardTypeKey: String, ziqniContext: ZiqniContext): Unit = {}
 
   /**
     * Executed when a new contest is created in your Ziqni space
@@ -79,7 +79,7 @@ trait ZiqniWebhookTransformer {
     * @param contestId The Ziqni contest id
     * @param ziqniApi The Ziqni API
     */
-  def onContestCreated(settings: WebhookSettings, contestId: String, ziqniApi: ZiqniApi): Unit = {}
+  def onContestCreated(settings: WebhookSettings, contestId: String, ziqniContext: ZiqniContext): Unit = {}
 
   /**
     * Executed when a contest is started
@@ -87,7 +87,7 @@ trait ZiqniWebhookTransformer {
     * @param contestId The Ziqni contest id
     * @param ziqniApi The Ziqni API
     */
-  def onContestStarted(settings: WebhookSettings, contestId: String, ziqniApi: ZiqniApi): Unit = {}
+  def onContestStarted(settings: WebhookSettings, contestId: String, ziqniContext: ZiqniContext): Unit = {}
 
   /**
     * Executed when a contest finished
@@ -95,7 +95,7 @@ trait ZiqniWebhookTransformer {
     * @param contestId The Ziqni contest id
     * @param ziqniApi The Ziqni API
     */
-  def onContestFinished(settings: WebhookSettings, contestId: String, ziqniApi: ZiqniApi): Unit = {}
+  def onContestFinished(settings: WebhookSettings, contestId: String, ziqniContext: ZiqniContext): Unit = {}
 
   /**
     * Executed when a contest is finalised
@@ -103,7 +103,7 @@ trait ZiqniWebhookTransformer {
     * @param contestId The Ziqni contest id
     * @param ziqniApi The Ziqni API
     */
-  def onContestFinalised(settings: WebhookSettings, contestId: String, ziqniApi: ZiqniApi): Unit = {}
+  def onContestFinalised(settings: WebhookSettings, contestId: String, ziqniContext: ZiqniContext): Unit = {}
 
   /**
     * Executed when a contest is cancelled
@@ -111,7 +111,7 @@ trait ZiqniWebhookTransformer {
     * @param contestId The Ziqni contest id
     * @param ziqniApi The Ziqni API
     */
-  def onContestCancelled(settings: WebhookSettings, contestId: String, ziqniApi: ZiqniApi): Unit = {}
+  def onContestCancelled(settings: WebhookSettings, contestId: String, ziqniContext: ZiqniContext): Unit = {}
 
   /**
     * Executed when a new reward is created in your Ziqni space
@@ -119,7 +119,7 @@ trait ZiqniWebhookTransformer {
     * @param rewardId The Ziqni reward id
     * @param ziqniApi The Ziqni API
     */
-  def onContestRewardCreated(settings: WebhookSettings, rewardId: String, ziqniApi: ZiqniApi): Unit = {}
+  def onContestRewardCreated(settings: WebhookSettings, rewardId: String, ziqniContext: ZiqniContext): Unit = {}
 
   /**
     * Executed when a contest finished
@@ -130,7 +130,7 @@ trait ZiqniWebhookTransformer {
     * @param rewardTypeKey The user defined reward type key
     * @param ziqniApi The Ziqni API
     */
-  def onContestRewardIssued(settings: WebhookSettings, contestId: String, memberId: String, awardId: String, rewardTypeKey: String, ziqniApi: ZiqniApi): Unit = {}
+  def onContestRewardIssued(settings: WebhookSettings, contestId: String, memberId: String, awardId: String, rewardTypeKey: String, ziqniContext: ZiqniContext): Unit = {}
 
 
   /**
@@ -142,7 +142,7 @@ trait ZiqniWebhookTransformer {
     * @param rewardTypeKey The user defined reward type key
     * @param ziqniApi The Ziqni API
     */
-  def onContestRewardClaimed(settings: WebhookSettings, contestId: String, memberId: String, awardId: String, rewardTypeKey: String, ziqniApi: ZiqniApi): Unit = {}
+  def onContestRewardClaimed(settings: WebhookSettings, contestId: String, memberId: String, awardId: String, rewardTypeKey: String, ziqniContext: ZiqniContext): Unit = {}
 
   /**
     * Executed when a new contest is created in your Ziqni space
@@ -150,7 +150,7 @@ trait ZiqniWebhookTransformer {
     * @param achievementId The Ziqni achievement id
     * @param ziqniApi The Ziqni API
     */
-  def onAchievementCreated(settings: WebhookSettings, achievementId: String, ziqniApi: ZiqniApi): Unit = {}
+  def onAchievementCreated(settings: WebhookSettings, achievementId: String, ziqniContext: ZiqniContext): Unit = {}
 
   /**
     * Executed when an achievement is triggered
@@ -159,7 +159,7 @@ trait ZiqniWebhookTransformer {
     * @param memberId The Ziqni member id
     * @param ziqniApi The Ziqni API
     */
-  def onAchievementTriggered(settings: WebhookSettings, achievementId: String, memberId: String, ziqniApi: ZiqniApi): Unit = {}
+  def onAchievementTriggered(settings: WebhookSettings, achievementId: String, memberId: String, ziqniContext: ZiqniContext): Unit = {}
 
   /**
     * Executed when a new reward is created in your Ziqni space
@@ -167,7 +167,7 @@ trait ZiqniWebhookTransformer {
     * @param rewardId The Ziqni reward id
     * @param ziqniApi The Ziqni API
     */
-  def onAchievementRewardCreated(settings: WebhookSettings, rewardId: String, ziqniApi: ZiqniApi): Unit = {}
+  def onAchievementRewardCreated(settings: WebhookSettings, rewardId: String, ziqniContext: ZiqniContext): Unit = {}
 
   /**
     * Executed when a reward was awarded to a member
@@ -178,7 +178,7 @@ trait ZiqniWebhookTransformer {
     * @param rewardTypeKey The user defined reward type key
     * @param ziqniApi The Ziqni API
     */
-  def onAchievementRewardIssued(settings: WebhookSettings, achievementId: String, memberId: String, awardId: String, rewardTypeKey: String, ziqniApi: ZiqniApi): Unit = {}
+  def onAchievementRewardIssued(settings: WebhookSettings, achievementId: String, memberId: String, awardId: String, rewardTypeKey: String, ziqniContext: ZiqniContext): Unit = {}
 
 
   /**
@@ -190,5 +190,5 @@ trait ZiqniWebhookTransformer {
     * @param rewardTypeKey The user defined reward type key
     * @param ziqniApi The Ziqni API
     */
-  def onAchievementRewardClaimed(settings: WebhookSettings, achievementId: String, memberId: String, awardId: String, rewardTypeKey: String, ziqniApi: ZiqniApi): Unit = {}
+  def onAchievementRewardClaimed(settings: WebhookSettings, achievementId: String, memberId: String, awardId: String, rewardTypeKey: String, ziqniContext: ZiqniContext): Unit = {}
 }

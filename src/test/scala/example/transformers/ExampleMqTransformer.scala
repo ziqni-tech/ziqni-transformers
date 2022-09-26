@@ -70,6 +70,7 @@ class ExampleMqTransformer extends ZiqniMqTransformer {
 		////////////////////////////////////////////////////
 
 		val event = BasicEventModel(
+			memberId = None,
 			action = action,
 			tags = Seq.empty,
 			eventRefId = eventRefId,

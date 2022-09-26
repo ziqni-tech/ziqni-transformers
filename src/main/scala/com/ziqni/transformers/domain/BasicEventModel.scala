@@ -21,13 +21,15 @@ import org.joda.time.DateTime
   * @param metadata Additional meta data in key value format describing this event
   */
 case class BasicEventModel(
-							  memberRefId: String,
-							  entityRefId: String,
-							  eventRefId: String,
-							  batchId: Option[String],
-							  action: String,
-							  sourceValue: Double,
-							  transactionTimestamp: DateTime,
-							  tags: Seq[String] = Seq.empty,
-							  metadata: Map[String, Seq[Any]] = Map.empty
-						  )
+													memberId: Option[String],
+													memberRefId: String,
+													entityRefId: String,
+													eventRefId: String,
+													batchId: Option[String],
+													action: String,
+													sourceValue: Double,
+													transactionTimestamp: DateTime,
+													tags: Seq[String] = Seq.empty,
+													metadata: Map[String, Seq[Any]] = Map.empty,
+													customFields: Map[String, CustomFieldEntry[Any]] = Map.empty
+													)

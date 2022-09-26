@@ -9,6 +9,8 @@ package com.ziqni.transformers.domain
 
 abstract class BasicUnitOfMeasureModel {
 
+	def getUnitOfMeasureKey: String
+
 	/**
 	  *
 	  * @return Name of this UoM

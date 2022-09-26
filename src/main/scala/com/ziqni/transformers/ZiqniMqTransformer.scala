@@ -13,7 +13,7 @@ trait ZiqniMqTransformer {
 	  * @param message The message
 	  * @param ziqniApi The Ziqni API
 	  */
-	def apply(message: Array[Byte], ziqniApi: ZiqniApi, args: Map[String,Any]): Unit
+	def apply(message: Array[Byte], ziqniApi: ZiqniApi, ziqniTransformerEventBus: ZiqniTransformerEventBus, args: Map[String,Any]): Unit
 	
 	/**
 	  * This method gets executed when a message is received on the message queue
@@ -22,9 +22,9 @@ trait ZiqniMqTransformer {
 	  * @param exchangeName The exchange name for the incoming message from the Envelope of AMQP client
 	  * @param ziqniApi The Ziqni API
 	  */
-	def rabbit(message: Array[Byte], routingKey: String, exchangeName: String, ziqniApi: ZiqniApi): Unit =
+	def rabbit(message: Array[Byte], routingKey: String, exchangeName: String, ziqniApi: ZiqniApi, ziqniTransformerEventBus: ZiqniTransformerEventBus): Unit =
 		apply(
-			message, ziqniApi, Map( "routingKey" -> routingKey, "exchangeName" -> exchangeName)
+			message, ziqniApi, ziqniTransformerEventBus, Map( "routingKey" -> routingKey, "exchangeName" -> exchangeName)
 		)
 
 	/**
@@ -33,9 +33,9 @@ trait ZiqniMqTransformer {
 	  * @param key The key for the incoming message from the Kafka broker
 	  * @param ziqniApi The Ziqni API
 	  */
-	def kafka(key: Array[Byte], message: Array[Byte], ziqniApi: ZiqniApi): Unit =
+	def kafka(key: Array[Byte], message: Array[Byte], ziqniApi: ZiqniApi, ziqniTransformerEventBus: ZiqniTransformerEventBus): Unit =
 		apply(
-			message, ziqniApi, Map( "key" -> key )
+			message, ziqniApi, ziqniTransformerEventBus, Map( "key" -> key )
 		)
 
 	/**
@@ -44,9 +44,9 @@ trait ZiqniMqTransformer {
 	  * @param headers Header values for the incoming message
 	  * @param ziqniApi The Ziqni API
 	  */
-	def http(headers: Map[String, Seq[String]], message: Array[Byte], ziqniApi: ZiqniApi): Unit =
+	def http(headers: Map[String, Seq[String]], message: Array[Byte], ziqniApi: ZiqniApi, ziqniTransformerEventBus: ZiqniTransformerEventBus): Unit =
 		apply(
-			message, ziqniApi, headers
+			message, ziqniApi, ziqniTransformerEventBus, headers
 		)
 
 	/**
@@ -56,15 +56,8 @@ trait ZiqniMqTransformer {
 	  * @param messageId Message id
 	  * @param ziqniApi - The Ziqni API
 	  */
-	def sqs(headers: Map[String, String], message: Array[Byte], messageId: String, ziqniApi: ZiqniApi): Unit =
+	def sqs(headers: Map[String, String], message: Array[Byte], messageId: String, ziqniApi: ZiqniApi, ziqniTransformerEventBus: ZiqniTransformerEventBus): Unit =
 		apply(
-			message, ziqniApi, headers + ("messageId" -> messageId)
+			message, ziqniApi, ziqniTransformerEventBus, headers + ("messageId" -> messageId)
 		)
-
-	/**
-		* The transformer event-bus is a light-weight messaging system which allows different parts of your transformers to communicate with each in a loosely coupled way.
-		* An event-bus supports publish-subscribe messaging, point-to-point messaging and request-response messaging.
-		* Message delivery is best-effort and messages can be lost if failure of all or part of the event bus occurs.
-		*/
-	def getZiqniTransformerEventBus: ZiqniTransformerEventBus
 }

@@ -191,4 +191,10 @@ trait ZiqniWebhookTransformer {
     * @param ziqniApi The Ziqni API
     */
   def onAchievementRewardClaimed(settings: WebhookSettings, achievementId: String, memberId: String, awardId: String, rewardTypeKey: String, ziqniContext: ZiqniContext): Unit = {}
+
+
+  /**
+    * Happens when the class is initialized
+    */
+  def initTransformerEventbus(ziqniTransformerInfo: ZiqniTransformerInfo): ZiqniTransformerEventbusConfig = ZiqniTransformerEventbusConfig(ziqniTransformerInfo.connectionId, "all", List.empty)
 }

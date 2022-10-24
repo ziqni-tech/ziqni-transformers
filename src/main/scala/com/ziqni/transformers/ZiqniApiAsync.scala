@@ -141,7 +141,7 @@ trait ZiqniApiAsync {
 	  * @param action True on success false on failure
 	  * @return
 	  */
-	def createEventAction(action: String, name: Option[String], metaData: Option[Map[String, String]], unitOfMeasureType: Option[String]): Future[Boolean]
+	def createEventAction(action: String, name: Option[String], metaData: Option[Map[String, String]], unitOfMeasureKey: Option[String]): Future[Boolean]
 
 	/** *
 	  * Update the action in your space

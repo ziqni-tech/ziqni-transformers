@@ -187,7 +187,7 @@ trait ZiqniApi {
 	  * @return
 	  */
 	@Deprecated(since = "v1.0.6")
-	def createEventAction(action: String, name: Option[String], metaData: Option[Map[String, String]], unitOfMeasureType: Option[String]): Boolean
+	def createEventAction(action: String, name: Option[String], metaData: Option[Map[String, String]], unitOfMeasureKey: Option[String]): Boolean
 
 	/** *
 		* DEPRECATED, use the async methods!

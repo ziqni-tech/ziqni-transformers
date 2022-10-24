@@ -7,17 +7,9 @@
 package com.ziqni.transformers
 
 import com.ziqni.transformers.domain.{BasicAchievementModel, BasicAwardModel, BasicContestModel, BasicEventModel, BasicMemberModel, BasicProductModel, BasicRewardModel, BasicUnitOfMeasureModel}
-
-import java.nio.charset.Charset
-import com.ziqni.transformers.domain._
 import org.joda.time.DateTime
-import org.json4s.JsonAST.JValue
 
-import scala.collection.immutable.Seq
-
-trait ZiqniApi extends ZiqniApiHttp {
-
-	def async: ZiqniApiAsync
+trait ZiqniApi {
 
 	/** *
 	  * Generate a unique time based UUID, this can be used to set the batchId value if
@@ -195,7 +187,7 @@ trait ZiqniApi extends ZiqniApiHttp {
 	  * @return
 	  */
 	@Deprecated(since = "v1.0.6")
-	def createEventAction(action: String, name: Option[String], metaData: Option[Map[String, String]], unitOfMeasure: BasicUnitOfMeasureModel): Boolean
+	def createEventAction(action: String, name: Option[String], metaData: Option[Map[String, String]], unitOfMeasureKey: Option[String]): Boolean
 
 	/** *
 		* DEPRECATED, use the async methods!
@@ -272,30 +264,4 @@ trait ZiqniApi extends ZiqniApiHttp {
 	  */
 	@Deprecated(since = "v1.0.6")
 	def getUoMMultiplierFromKey(unitOfMeasureKey: String): Option[Double]
-
-	/**
-	  * Converts a json string to a JValue
-	  *
-	  * @param body The string to deserialise
-	  * @return JValue or throws exception
-	  */
-	def fromJsonString(body: String): JValue
-
-	/**
-	  * Converts a map to a json string
-	  *
-	  * @param obj The object to serialise
-	  * @return json string or throws exception
-	  */
-	def toJsonFromMap(obj: Map[String, Any]): String
-
-	/**
-	  * Converts byte array to String using UTF-8
-	  *
-	  * @param body    The string encoded as bytes
-	  * @param charset Optional, character set to decode byte array, default is UTF-8
-	  * @return Decoded string or throws exception
-	  */
-	def convertByteArrayToString(body: Array[Byte], charset: String = "UTF-8"): String = new String(body, Charset.forName(charset))
-
 }

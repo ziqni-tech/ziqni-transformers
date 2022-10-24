@@ -7,12 +7,7 @@
 package com.ziqni.transformers
 
 import com.ziqni.transformers.domain._
-
-import java.nio.charset.Charset
-import scala.concurrent.{ExecutionContextExecutor, Future}
-import com.ziqni.transformers.domain._
-import org.joda.time.DateTime
-import org.json4s.JsonAST.JValue
+import scala.concurrent.Future
 
 trait ZiqniApiAsync {
 
@@ -146,7 +141,7 @@ trait ZiqniApiAsync {
 	  * @param action True on success false on failure
 	  * @return
 	  */
-	def createEventAction(action: String, name: Option[String], metaData: Option[Map[String, String]], unitOfMeasure: BasicUnitOfMeasureModel): Future[Boolean]
+	def createEventAction(action: String, name: Option[String], metaData: Option[Map[String, String]], unitOfMeasureType: Option[String]): Future[Boolean]
 
 	/** *
 	  * Update the action in your space

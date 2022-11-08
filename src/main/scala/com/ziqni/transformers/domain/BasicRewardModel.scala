@@ -58,6 +58,12 @@ abstract class BasicRewardModel {
 	def getRewardTypeName: String
 
 	/**
+		*
+		* @return Entity type this Reward is linked to
+		*/
+	def getEntityType: String
+
+	/**
 	  *
 	  * @return Reward type key
 	  */

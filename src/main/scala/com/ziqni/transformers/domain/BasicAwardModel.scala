@@ -17,7 +17,7 @@ abstract class BasicAwardModel {
 
 	/**
 	  *
-	  * @return Entity type this Reward is linked to
+	  * @return Entity type this Award is linked to
 	  */
 	def getEntityType: String
 

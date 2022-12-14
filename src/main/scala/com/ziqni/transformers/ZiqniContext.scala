@@ -1,5 +1,8 @@
 package com.ziqni.transformers
 
+import com.ziqni.transformers.ZiqniContext.SpaceName
+import com.ziqni.transformers.domain.BasicAccount
+
 import scala.concurrent.ExecutionContextExecutor
 import org.json4s.jackson.JsonMethods.parse
 import org.json4s.jackson.Serialization
@@ -8,6 +11,8 @@ import org.json4s.{DefaultFormats, JValue}
 import java.nio.charset.Charset
 
 object ZiqniContext {
+
+  type SpaceName = String;
 
   /**
     * Converts byte array to String using UTF-8
@@ -35,11 +40,24 @@ object ZiqniContext {
   def toJsonFromMap(obj: Map[String, Any]): String = Serialization.write(obj)(DefaultFormats)
 }
 
-case class ZiqniContext(accountId: String,
-                        spaceName: String,
-                        ziqniTransformerInfo: ZiqniTransformerInfo,
-                        ziqniApi: ZiqniApi,
-                        ziqniApiAsync: ZiqniApiAsync,
-                        ziqniApiHttp: ZiqniApiHttp,
-                        ziqniTransformerEventBus:Option[ZiqniTransformerEventBus],
-                        ziqniExecutionContext: ExecutionContextExecutor)
+trait ZiqniContext {
+  def accountId: String
+
+  def spaceName: String
+
+  def ziqniTransformerInfo: ZiqniTransformerInfo
+
+  def ziqniApi: ZiqniApi
+
+  def ziqniApiAsync: ZiqniApiAsync
+
+  def ziqniApiHttp: ZiqniApiHttp
+
+  def ziqniTransformerEventBus: Option[ZiqniTransformerEventBus]
+
+  def ziqniExecutionContext: ExecutionContextExecutor
+
+  def ziqniSubAccounts: Seq[BasicAccount]
+
+  def ziqniSubAccountApiAsync(spaceName: SpaceName): ZiqniApiAsync
+}

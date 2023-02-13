@@ -31,13 +31,14 @@ trait ZiqniMqTransformer {
 
 	/**
 	  * This method gets executed when a message is received on the message queue
+	  * @param topic The message topic
 	  * @param message The value for the incoming message from the Kafka broker
 	  * @param key The key for the incoming message from the Kafka broker
 	  * @param ziqniContext The Ziqni Context
 	  */
-	def kafka(key: Array[Byte], message: Array[Byte], ziqniContext: ZiqniContext): Unit =
+	def kafka(topic: String, key: Array[Byte], message: Array[Byte], ziqniContext: ZiqniContext): Unit =
 		apply(
-			message, ziqniContext, Map( "key" -> key )
+			message, ziqniContext, Map( "key" -> key, "topic" -> topic )
 		)
 
 	/**

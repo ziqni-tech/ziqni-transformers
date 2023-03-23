@@ -8,9 +8,9 @@ package com.ziqni.transformers.impl
 
 import com.ziqni.transformers.{ZiqniApi, ZiqniWebhookTransformer}
 import com.ziqni.transformers.domain.WebhookSettings
-import com.ziqni.transformers.{ZiqniApi, ZiqniWebhookTransformer}
 import org.joda.time.DateTime
 
+@Deprecated("Do not use")
 class DefaultWebhookTransformer extends ZiqniWebhookTransformer {
 
 	override def onNewProduct(settings: WebhookSettings, productId: String, ziqniApi: ZiqniApi): Unit = {

@@ -6,9 +6,8 @@
   */
 package utils
 
-import io.ziqni.transformers.domain._
-import io.ziqni.transformers.ZiqniApi
-import org.joda.time.DateTime
+import com.ziqni.transformers.domain._
+import com.ziqni.transformers.ZiqniApi
 import org.json4s.{DefaultFormats, JsonAST}
 
 import scala.collection.mutable

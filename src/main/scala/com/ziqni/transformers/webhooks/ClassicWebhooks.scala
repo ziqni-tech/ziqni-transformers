@@ -12,21 +12,18 @@ import com.ziqni.transformers.ZiqniContext
 import com.ziqni.transformers.domain.{BasicEntityChanged, BasicEntityStateChanged}
 import com.ziqni.transformers.webhooks.ClassicWebhookSettings._
 
-import scala.util.Try
+import scala.concurrent.ExecutionContextExecutor
 
 /**
  * This is an implementation of the classic webhooks for backwards compatibility.
  */
 trait ClassicWebhooks {
 
-  ////////////////////////////////////////////////////////
-  ///>>          WEBHOOK REPLACEMENT                 <<///
-  ///>>Replace old webhooks with system notifications<<///
-  ////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////
+  /// >>             CUSTOM WEBHOOK REPLACEMENT         << ///
+  /// >> Replace old webhooks with system notifications << ///
+  ////////////////////////////////////////////////////////////
 
-  val TYPE_OF_CHANGE_CREATED = 1;
-  val TYPE_OF_CHANGE_UPDATED = 2;
-  val TYPE_OF_CHANGE_DELETED = 3;
 
   /**
    * If the transformer is subscribed to entity changes then this method is invoked
@@ -116,38 +113,51 @@ trait ClassicWebhooks {
 
   def onNewProduct()(implicit settings: ClassicWebhookSettings, basicEntityChanged: BasicEntityChanged, ziqniContext: ZiqniContext): Unit =
     if(settings.onNewProductEnabled){
-      val body = Map[String, Any](
-        "productId" -> basicEntityChanged.entityId,
-        "productRefId" -> basicEntityChanged.metadata.get("productRefId"),
-        "resourcePath" -> s"/products?id=${basicEntityChanged.entityId}",
-        "timestamp" -> DateTime.now().getMillis,
-        "objectType" -> "NewProduct",
-        "spaceName" -> ziqniContext.spaceName
-      )
+      implicit val e: ExecutionContextExecutor = ziqniContext.ziqniExecutionContext
 
-      val json = ZiqniContext.toJsonFromMap(body)
-      val headers = settings.headers ++ ziqniContext.ziqniApiHttp.HTTPDefaultHeader(ziqniContext.accountId, "onNewProduct")
+      for {
+        productRefId <- ziqniContext.ziqniApiAsync.productRefIdFromProductId(basicEntityChanged.entityId)
+      } yield
+      {
+        val body = Map[String, Any](
+          "productId" -> basicEntityChanged.entityId,
+          "productRefId" -> productRefId,
+          "resourcePath" -> s"/products?id=${basicEntityChanged.entityId}",
+          "timestamp" -> DateTime.now().getMillis,
+          "objectType" -> "NewProduct",
+          "spaceName" -> ziqniContext.spaceName
+        )
 
-      ziqniContext.ziqniApiHttp.httpPost(settings.url, json, headers)
+        val json = ZiqniContext.toJsonFromMap(body)
+        val headers = settings.headers ++ ziqniContext.ziqniApiHttp.HTTPDefaultHeader(ziqniContext.accountId, "onNewProduct")
+
+        ziqniContext.ziqniApiHttp.httpPost(settings.url, json, headers)
+      }
     }
 
   def onNewMember()(implicit settings:ClassicWebhookSettings, basicEntityChanged: BasicEntityChanged, ziqniContext: ZiqniContext): Unit =
     if(settings.onNewMemberEnabled) {
-      val body = Map[String, Any](
-        "memberId" -> basicEntityChanged.entityId,
-        "memberRefId" -> ziqniContext.ziqniApi.memberRefIdFromMemberId(basicEntityChanged.entityId),
-        "resourcePath" -> s"/members?id=${basicEntityChanged.entityId}",
-        "timestamp" -> DateTime.now().getMillis,
-        "objectType" -> "NewMember",
-        "spaceName" -> ziqniContext.spaceName
-      )
+      implicit val e: ExecutionContextExecutor = ziqniContext.ziqniExecutionContext
+      val memberId = basicEntityChanged.metadata.getOrElse("memberId", "")
 
-      val json = ZiqniContext.toJsonFromMap(body)
-      val headers = settings.headers ++ ziqniContext.ziqniApiHttp.HTTPDefaultHeader(ziqniContext.accountId, "onNewMember")
+      for {
+        memberRefId <- ziqniContext.ziqniApiAsync.memberRefIdFromMemberId(memberId)
+      } yield {
+        val body = Map[String, Any](
+          "memberId" -> basicEntityChanged.entityId,
+          "memberRefId" -> memberRefId,
+          "resourcePath" -> s"/members?id=${basicEntityChanged.entityId}",
+          "timestamp" -> DateTime.now().getMillis,
+          "objectType" -> "NewMember",
+          "spaceName" -> ziqniContext.spaceName
+        )
 
-      ziqniContext.ziqniApiHttp.httpPost(settings.url, json, headers)
+        val json = ZiqniContext.toJsonFromMap(body)
+        val headers = settings.headers ++ ziqniContext.ziqniApiHttp.HTTPDefaultHeader(ziqniContext.accountId, "onNewMember")
+
+        ziqniContext.ziqniApiHttp.httpPost(settings.url, json, headers)
+      }
     }
-
 
   def onCompetitionCreated()(implicit settings:ClassicWebhookSettings, basicEntityChanged: BasicEntityChanged, ziqniContext: ZiqniContext): Unit =
     if(settings.onCompetitionCreatedEnabled) {
@@ -217,27 +227,32 @@ trait ClassicWebhooks {
       ziqniContext.ziqniApiHttp.httpPost(settings.url, json, headers)
     }
 
-  def onCompetitionRewardIssued()(implicit settings:ClassicWebhookSettings, basicEntityChanged: BasicEntityChanged, ziqniContext: ZiqniContext): Unit =
+  def onCompetitionRewardIssued()(implicit settings:ClassicWebhookSettings, basicEntityChanged: BasicEntityChanged, ziqniContext: ZiqniContext): Unit = {
     if(settings.onCompetitionRewardIssuedEnabled) {
-      val claimed = Try(basicEntityChanged.metadata.getOrElse("claimed", "false").toBoolean).getOrElse(false)
+      implicit val e: ExecutionContextExecutor = ziqniContext.ziqniExecutionContext
+      val memberId = basicEntityChanged.metadata.getOrElse("memberId","")
 
-      val body = Map[String, Any](
-        "competitionId" -> basicEntityChanged.metadata.get("competitionId"),
-        "memberId" -> basicEntityChanged.metadata.get("memberId"),
-        "memberRefId" -> basicEntityChanged.metadata.get("memberRefId"),
-        "awardId" -> basicEntityChanged.entityId,
-        "resourcePath" -> s"/awards?id=${basicEntityChanged.entityId}",
-        "timestamp" -> DateTime.now().getMillis,
-        "objectType" -> "CompetitionRewardIssued",
-        "spaceName" -> ziqniContext.spaceName
-      )
+      for {
+        memberRefId <- ziqniContext.ziqniApiAsync.memberRefIdFromMemberId(memberId)
+      } yield {
+        val body = Map[String, Any](
+          "competitionId" -> basicEntityChanged.metadata.get("competitionId"),
+          "memberId" -> memberId,
+          "memberRefId" -> memberRefId,
+          "awardId" -> basicEntityChanged.entityId,
+          "resourcePath" -> s"/awards?id=${basicEntityChanged.entityId}",
+          "timestamp" -> DateTime.now().getMillis,
+          "objectType" -> "CompetitionRewardIssued",
+          "spaceName" -> ziqniContext.spaceName
+        )
 
-      val json = ZiqniContext.toJsonFromMap(body)
-      val headers = settings.headers ++ ziqniContext.ziqniApiHttp.HTTPDefaultHeader(ziqniContext.accountId, "onCompetitionRewardIssued")
+        val json = ZiqniContext.toJsonFromMap(body)
+        val headers = settings.headers ++ ziqniContext.ziqniApiHttp.HTTPDefaultHeader(ziqniContext.accountId, "onCompetitionRewardIssued")
 
-      ziqniContext.ziqniApiHttp.httpPost(settings.url, json, headers)
+        ziqniContext.ziqniApiHttp.httpPost(settings.url, json, headers)
+      }
     }
-
+  }
 
   def onContestCreated()(implicit settings:ClassicWebhookSettings, basicEntityChanged: BasicEntityChanged, ziqniContext: ZiqniContext): Unit =
     if(settings.onContestCreatedEnabled) {
@@ -362,21 +377,28 @@ trait ClassicWebhooks {
 
   def onContestRewardClaimed()(implicit settings:ClassicWebhookSettings, basicEntityStateChanged: BasicEntityStateChanged, ziqniContext: ZiqniContext): Unit =
     if(settings.onContestRewardClaimedEnabled) {
-      val body = Map[String, Any](
-        "contestId" -> basicEntityStateChanged.metadata.get("contestId"),
-        "memberId" -> basicEntityStateChanged.metadata.get("memberId"),
-        "memberRefId" -> basicEntityStateChanged.metadata.get("memberRefId"),
-        "awardId" -> basicEntityStateChanged.entityId,
-        "resourcePath" -> s"/awards?id=${basicEntityStateChanged.entityId}",
-        "timestamp" -> DateTime.now().getMillis,
-        "objectType" -> "ContestRewardClaimed",
-        "spaceName" -> ziqniContext.spaceName
-      )
+      implicit val e: ExecutionContextExecutor = ziqniContext.ziqniExecutionContext
+      val memberId = basicEntityStateChanged.metadata.getOrElse("memberId", "")
 
-      val json = ZiqniContext.toJsonFromMap(body)
-      val headers = settings.headers ++ ziqniContext.ziqniApiHttp.HTTPDefaultHeader(ziqniContext.accountId, "onContestRewardClaimed")
+      for {
+        memberRefId <- ziqniContext.ziqniApiAsync.memberRefIdFromMemberId(memberId)
+      } yield {
+        val body = Map[String, Any](
+          "contestId" -> basicEntityStateChanged.metadata.get("contestId"),
+          "memberId" -> basicEntityStateChanged.metadata.get("memberId"),
+          "memberRefId" -> memberRefId,
+          "awardId" -> basicEntityStateChanged.entityId,
+          "resourcePath" -> s"/awards?id=${basicEntityStateChanged.entityId}",
+          "timestamp" -> DateTime.now().getMillis,
+          "objectType" -> "ContestRewardClaimed",
+          "spaceName" -> ziqniContext.spaceName
+        )
 
-      ziqniContext.ziqniApiHttp.httpPost(settings.url, json, headers)
+        val json = ZiqniContext.toJsonFromMap(body)
+        val headers = settings.headers ++ ziqniContext.ziqniApiHttp.HTTPDefaultHeader(ziqniContext.accountId, "onContestRewardClaimed")
+
+        ziqniContext.ziqniApiHttp.httpPost(settings.url, json, headers)
+      }
     }
 
 
@@ -415,62 +437,55 @@ trait ClassicWebhooks {
 
   def onAchievementRewardIssued()(implicit settings:ClassicWebhookSettings, basicEntityChanged: BasicEntityChanged, ziqniContext: ZiqniContext): Unit =
     if(settings.onAchievementRewardIssuedEnabled) {
+      implicit val e: ExecutionContextExecutor = ziqniContext.ziqniExecutionContext
+      val memberId = basicEntityChanged.metadata.getOrElse("memberId", "")
 
-      val body = Map[String, Any](
-        "achievementId" -> basicEntityChanged.metadata.get("achievementId"),
-        "memberId" -> basicEntityChanged.metadata.get("memberId"),
-        "memberRefId" -> basicEntityChanged.metadata.get("memberRefId"),
-        "awardId" -> basicEntityChanged.entityId,
-        "resourcePath" -> s"/awards?id=${basicEntityChanged.entityId}",
-        "timestamp" -> DateTime.now().getMillis,
-        "objectType" -> "AchievementRewardIssued",
-        "spaceName" -> ziqniContext.spaceName
-      )
+      for {
+        memberRefId <- ziqniContext.ziqniApiAsync.memberRefIdFromMemberId(memberId)
+      } yield {
+        val body = Map[String, Any](
+          "achievementId" -> basicEntityChanged.metadata.get("achievementId"),
+          "memberId" -> basicEntityChanged.metadata.get("memberId"),
+          "memberRefId" -> memberRefId,
+          "awardId" -> basicEntityChanged.entityId,
+          "resourcePath" -> s"/awards?id=${basicEntityChanged.entityId}",
+          "timestamp" -> DateTime.now().getMillis,
+          "objectType" -> "AchievementRewardIssued",
+          "spaceName" -> ziqniContext.spaceName
+        )
 
-      val json = ZiqniContext.toJsonFromMap(body)
-      val headers = settings.headers ++ ziqniContext.ziqniApiHttp.HTTPDefaultHeader(ziqniContext.accountId, "onAchievementRewardIssued")
+        val json = ZiqniContext.toJsonFromMap(body)
+        val headers = settings.headers ++ ziqniContext.ziqniApiHttp.HTTPDefaultHeader(ziqniContext.accountId, "onAchievementRewardIssued")
 
-      ziqniContext.ziqniApiHttp.httpPost(settings.url, json, headers)
+        ziqniContext.ziqniApiHttp.httpPost(settings.url, json, headers)
+      }
     }
 
   def onAchievementRewardClaimed()(implicit settings:ClassicWebhookSettings, basicEntityStateChanged: BasicEntityStateChanged, ziqniContext: ZiqniContext): Unit =
     if(settings.onAchievementRewardClaimedEnabled) {
-      val body = Map[String, Any](
-        "achievementId" -> basicEntityStateChanged.metadata.get("achievementId"),
-        "memberId" -> basicEntityStateChanged.metadata.get("memberId"),
-        "memberRefId" -> basicEntityStateChanged.metadata.get("memberRefId"),
-        "awardId" -> basicEntityStateChanged.entityId,
-        "resourcePath" -> s"/awards?id=${basicEntityStateChanged.entityId}",
-        "timestamp" -> DateTime.now().getMillis,
-        "objectType" -> "AchievementRewardClaimed",
-        "spaceName" -> ziqniContext.spaceName
-      )
+      implicit val e: ExecutionContextExecutor = ziqniContext.ziqniExecutionContext
+      val memberId = basicEntityStateChanged.metadata.getOrElse("memberId", "")
 
-      val json = ZiqniContext.toJsonFromMap(body)
-      val headers = settings.headers ++ ziqniContext.ziqniApiHttp.HTTPDefaultHeader(ziqniContext.accountId, "onAchievementRewardClaimed")
+      for {
+        memberRefId <- ziqniContext.ziqniApiAsync.memberRefIdFromMemberId(memberId)
+      } yield {
+        val body = Map[String, Any](
+          "achievementId" -> basicEntityStateChanged.metadata.get("achievementId"),
+          "memberId" -> basicEntityStateChanged.metadata.get("memberId"),
+          "memberRefId" -> memberRefId,
+          "awardId" -> basicEntityStateChanged.entityId,
+          "resourcePath" -> s"/awards?id=${basicEntityStateChanged.entityId}",
+          "timestamp" -> DateTime.now().getMillis,
+          "objectType" -> "AchievementRewardClaimed",
+          "spaceName" -> ziqniContext.spaceName
+        )
 
-      ziqniContext.ziqniApiHttp.httpPost(settings.url, json, headers)
+        val json = ZiqniContext.toJsonFromMap(body)
+        val headers = settings.headers ++ ziqniContext.ziqniApiHttp.HTTPDefaultHeader(ziqniContext.accountId, "onAchievementRewardClaimed")
+
+        ziqniContext.ziqniApiHttp.httpPost(settings.url, json, headers)
+      }
     }
-
-
-  //  @Deprecated("This created too much noise in the platform and negatively effected partner systems")
-  //  def onAchievementTriggered()(implicit settings:ClassicWebhookSettings, basicEntityStateChanged: BasicEntityStateChanged, basicEntityChanged: BasicEntityChanged, ziqniContext: ZiqniContext): Unit = {
-  //
-  //    val body = Map[String, Any](
-  //      "achievementId" -> basicEntityChanged.entityId,
-  //      "memberId" -> basicEntityChanged.metadata.get("memberId"),
-  //      "memberRefId" -> basicEntityChanged.metadata.get("memberRefId"),
-  //      "resourcePath" -> s"/achievement?id=${basicEntityChanged.entityId}",
-  //      "timestamp" -> DateTime.now().getMillis,
-  //      "objectType" -> "AchievementTriggered",
-  //      "spaceName" -> ziqniContext.spaceName
-  //    )
-  //
-  //    val json = ZiqniContext.toJsonFromMap(body)
-  //    val headers = settings.headers ++ ziqniContext.ziqniApiHttp.HTTPDefaultHeader(ziqniContext.accountId, "onAchievementTriggered")
-  //
-  //    ziqniContext.ziqniApiHttp.httpPost(settings.url, json, headers)
-  //  }
 }
 
 

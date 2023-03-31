@@ -14,6 +14,9 @@ import scala.collection.mutable.ListBuffer
 object ClassicWebhookSettings {
 	private val EntityChanged = "EntityChanged"
 	private val EntityStateChanged = "EntityStateChanged"
+	val TYPE_OF_CHANGE_CREATED = 1;
+	val TYPE_OF_CHANGE_UPDATED = 2;
+	val TYPE_OF_CHANGE_DELETED = 3;
 	val Competition = "Competition"
 	val Contest = "Contest"
 	val Product = "Product"

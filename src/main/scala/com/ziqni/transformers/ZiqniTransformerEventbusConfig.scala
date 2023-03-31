@@ -1,7 +1,5 @@
 package com.ziqni.transformers
 
-import scala.collection.immutable.List
-
 /**
   *
   * @param address The address for this transformer

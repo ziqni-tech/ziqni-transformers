@@ -79,10 +79,6 @@ trait ClassicWebhooks {
         onAchievementRewardIssued()
       }
     }
-
-    else {
-      throw new Exception(s"Unsupported entity type, typeOffChange:${change.entityType} - ${change.toString}")
-    }
   }
 
   private def onClassicEntityChanged(onCreate: () => Unit, onUpdate: () => Unit = () => {})(implicit change: BasicEntityChanged): Unit = {
@@ -90,8 +86,6 @@ trait ClassicWebhooks {
       onCreate.apply()
     else if (TYPE_OF_CHANGE_UPDATED == change.typeOffChange)
       onUpdate.apply()
-    else
-      throw new Exception(s"Unsupported entity change, typeOffChange:${change.typeOffChange} - ${change.toString}")
   }
 
   def onClassicEntityStateChanged(settings: ClassicWebhookSettings, change: BasicEntityStateChanged, ziqniContext: ZiqniContext): Unit = {

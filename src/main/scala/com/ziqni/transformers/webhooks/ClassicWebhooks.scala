@@ -53,7 +53,7 @@ trait ClassicWebhooks {
       onClassicEntityChanged(onCreate = onAchievementCreated )
 
     else if (Reward.equalsIgnoreCase(change.entityType)){
-      val entityType = change.metadata.getOrElse("parentType", "Unknown")
+      val entityType = change.metadata.getOrElse(ParentType, Unknown)
 
       if (entityType.equalsIgnoreCase(Contest)) {
         onContestRewardCreated()
@@ -64,7 +64,7 @@ trait ClassicWebhooks {
     }
 
     else if (Award.equalsIgnoreCase(change.entityType)){
-      val entityType = change.metadata.getOrElse("parentType", "Unknown")
+      val entityType = change.metadata.getOrElse(ParentType, Unknown)
 
       if (entityType.equalsIgnoreCase(Competition)) {
         onCompetitionRewardIssued()
@@ -108,6 +108,14 @@ trait ClassicWebhooks {
         onContestFinalised()
       else if(change.currentState==115)
         onContestCancelled()
+    }
+
+    else if (Award.equalsIgnoreCase(change.entityType)) {
+      val entityType = change.metadata.getOrElse(ParentType, Unknown)
+      if(change.currentState > 0 && entityType.equalsIgnoreCase(Contest))
+        onContestRewardClaimed()
+      else if(change.currentState > 0 && entityType.equalsIgnoreCase(Achievement))
+        onAchievementRewardClaimed()
     }
   }
 
@@ -400,7 +408,6 @@ trait ClassicWebhooks {
         ziqniContext.ziqniApiHttp.httpPost(settings.url, json, headers)
       }
     }
-
 
   def onAchievementCreated()(implicit settings:ClassicWebhookSettings, basicEntityChanged: BasicEntityChanged, ziqniContext: ZiqniContext): Unit =
     if(settings.onAchievementCreatedEnabled) {

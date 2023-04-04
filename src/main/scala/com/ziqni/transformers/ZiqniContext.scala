@@ -29,7 +29,7 @@ object ZiqniContext {
     * @param body The string to deserialise
     * @return JValue or throws exception
     */
-  def fromJsonString(body: String): JValue = parse(body)
+  def fromJsonString(body: String): JValue = parse(body,false,true)
 
   /**
     * Converts a map to a json string

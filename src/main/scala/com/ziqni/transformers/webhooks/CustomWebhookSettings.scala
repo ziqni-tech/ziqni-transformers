@@ -31,10 +31,12 @@ object CustomWebhookSettings {
 }
 
 /**
- * Settings for classic webhooks
+ * Settings for custom webhooks
  * The onAchievementTriggered has been deprecated and no proxy exists for it
  * @param url The endpoint to post the message to
  * @param headers The headers to add to the post message
+ * @param basicAuth Basic authentication
+ * @param sendCompressed Should we gzip the body
  * @param onNewProductEnabled Executed when a new product is registered in your ZIQNI space.
  * @param onNewMemberEnabled Executed when a new member is created in your ZIQNI space.
  * @param onCompetitionCreatedEnabled Executed when a new competition is created in your ZIQNI space

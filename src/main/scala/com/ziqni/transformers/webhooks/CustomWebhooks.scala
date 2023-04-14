@@ -16,7 +16,7 @@ import scala.concurrent.ExecutionContextExecutor
 import scala.language.implicitConversions
 
 /**
- * This is an implementation of the classic webhooks for backwards compatibility.
+ * This is an implementation of the classic webhooks for backwards compatibility and ease of customisation.
  */
 trait CustomWebhooks {
 

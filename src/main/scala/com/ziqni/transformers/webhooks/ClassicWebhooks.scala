@@ -35,7 +35,7 @@ trait ClassicWebhooks {
     implicit val z: ZiqniContext = ziqniContext
     implicit val c: BasicEntityChanged = change
     implicit val s: ClassicWebhookSettings = settings
-    implicit val a: Map[String, Any] = Map("bob"->123)
+    implicit val a: Map[String, Any] = Map.empty
 
     if (Product.equalsIgnoreCase(change.entityType))
       onClassicEntityChanged(onCreate = onNewProduct )

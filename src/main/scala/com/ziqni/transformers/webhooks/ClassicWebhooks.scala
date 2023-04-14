@@ -65,7 +65,7 @@ trait ClassicWebhooks {
 
     else if (Award.equalsIgnoreCase(change.entityType)){
       val entityType = change.metadata.getOrElse(ParentType, Unknown)
-      val claimed = change.metadata.getOrElse("claimed", "false").toBoolean
+      val claimed = change.metadata.getOrElse(Claimed, "false").toBoolean
 
       if (claimed && entityType.equalsIgnoreCase(Competition)) {
         onCompetitionRewardIssued()
@@ -113,7 +113,7 @@ trait ClassicWebhooks {
 
     else if (Award.equalsIgnoreCase(change.entityType)) {
       val entityType = change.metadata.getOrElse(ParentType, Unknown)
-      val claimed = change.metadata.getOrElse("claimed", "false").toBoolean
+      val claimed = change.metadata.getOrElse(Claimed, "false").toBoolean
 
       if(claimed && change.currentState > 0 && entityType.equalsIgnoreCase(Contest))
         onContestRewardClaimed()

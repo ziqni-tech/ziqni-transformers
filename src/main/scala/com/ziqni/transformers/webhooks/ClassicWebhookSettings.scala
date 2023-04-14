@@ -18,6 +18,7 @@ object ClassicWebhookSettings {
 	val TYPE_OF_CHANGE_UPDATED = 2;
 	val TYPE_OF_CHANGE_DELETED = 3;
 	val ParentType = "parentType"
+	val Claimed = "claimed"
 	val Unknown = "Unknown"
 	val Competition = "Competition"
 	val Contest = "Contest"

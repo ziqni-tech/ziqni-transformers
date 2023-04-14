@@ -7,11 +7,12 @@
 
 package com.ziqni.transformers.webhooks
 
-import com.ziqni.transformers.domain.BasicEntityChangeSubscriptionRequest
-import com.ziqni.transformers.webhooks.ClassicWebhookSettings._
+import com.ziqni.transformers.domain.{BasicAuthCredentials, BasicEntityChangeSubscriptionRequest}
+import com.ziqni.transformers.webhooks.CustomWebhookSettings._
+
 import scala.collection.mutable.ListBuffer
 
-object ClassicWebhookSettings {
+object CustomWebhookSettings {
 	private val EntityChanged = "EntityChanged"
 	private val EntityStateChanged = "EntityStateChanged"
 	val TYPE_OF_CHANGE_CREATED = 1;
@@ -54,9 +55,10 @@ object ClassicWebhookSettings {
  * @param onAchievementRewardIssuedEnabled Executed when a reward was awarded to a member.
  * @param onAchievementRewardClaimedEnabled Executed when a reward was claimed by a member
  */
-case class ClassicWebhookSettings(
+case class CustomWebhookSettings(
 																	 url: String,
 																	 headers: Map[String, Seq[String]] = Map.empty,
+																	 basicAuth: Option[BasicAuthCredentials] = None,
 																	 sendCompressed: Boolean = true,
 																	 onNewProductEnabled: Boolean = false,
 																	 onNewMemberEnabled: Boolean = false,

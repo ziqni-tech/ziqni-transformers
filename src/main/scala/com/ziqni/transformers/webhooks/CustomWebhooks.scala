@@ -31,28 +31,28 @@ trait CustomWebhooks {
    *
    * @param change The change events
    */
-  def onClassicEntityChanged(settings: CustomWebhookSettings, change: BasicEntityChanged, ziqniContext: ZiqniContext): Unit = {
+  def onCustomEntityChanged(settings: CustomWebhookSettings, change: BasicEntityChanged, ziqniContext: ZiqniContext): Unit = {
     implicit val z: ZiqniContext = ziqniContext
     implicit val c: BasicEntityChanged = change
     implicit val s: CustomWebhookSettings = settings
     implicit val a: Map[String, Any] = Map.empty
 
     if (Product.equalsIgnoreCase(change.entityType))
-      onClassicEntityChanged(onCreate = onNewProduct )
+      onCustomEntityChanged(onCreate = onNewProduct )
 
     else if (Member.equalsIgnoreCase(change.entityType))
-      onClassicEntityChanged(onCreate = onNewMember )
+      onCustomEntityChanged(onCreate = onNewMember )
 
     else if (Competition.equalsIgnoreCase(change.entityType))
-      onClassicEntityChanged(onCreate = onCompetitionCreated )
+      onCustomEntityChanged(onCreate = onCompetitionCreated )
 
     else if (Contest.equalsIgnoreCase(change.entityType))
-      onClassicEntityChanged(onCreate = onContestCreated )
+      onCustomEntityChanged(onCreate = onContestCreated )
 
 
 
     else if (Achievement.equalsIgnoreCase(change.entityType))
-      onClassicEntityChanged(onCreate = onAchievementCreated )
+      onCustomEntityChanged(onCreate = onAchievementCreated )
 
     else if (Reward.equalsIgnoreCase(change.entityType)){
       val entityType = change.metadata.getOrElse(ParentType, Unknown)
@@ -81,14 +81,14 @@ trait CustomWebhooks {
     }
   }
 
-  private def onClassicEntityChanged(onCreate: () => Unit, onUpdate: () => Unit = () => {})(implicit change: BasicEntityChanged): Unit = {
+  private def onCustomEntityChanged(onCreate: () => Unit, onUpdate: () => Unit = () => {})(implicit change: BasicEntityChanged): Unit = {
     if (TYPE_OF_CHANGE_CREATED == change.typeOffChange)
       onCreate.apply()
     else if (TYPE_OF_CHANGE_UPDATED == change.typeOffChange)
       onUpdate.apply()
   }
 
-  def onClassicEntityStateChanged(settings: CustomWebhookSettings, change: BasicEntityStateChanged, ziqniContext: ZiqniContext): Unit = {
+  def onCustomEntityStateChanged(settings: CustomWebhookSettings, change: BasicEntityStateChanged, ziqniContext: ZiqniContext): Unit = {
     implicit val z: ZiqniContext = ziqniContext
     implicit val c: BasicEntityStateChanged = change
     implicit val s: CustomWebhookSettings = settings

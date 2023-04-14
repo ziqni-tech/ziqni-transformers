@@ -57,6 +57,7 @@ object ClassicWebhookSettings {
 case class ClassicWebhookSettings(
 																	 url: String,
 																	 headers: Map[String, Seq[String]] = Map.empty,
+																	 sendCompressed: Boolean = true,
 																	 onNewProductEnabled: Boolean = false,
 																	 onNewMemberEnabled: Boolean = false,
 																	 onCompetitionCreatedEnabled: Boolean = false,

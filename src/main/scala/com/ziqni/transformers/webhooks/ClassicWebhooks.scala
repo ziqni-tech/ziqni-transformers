@@ -13,6 +13,7 @@ import com.ziqni.transformers.domain.{BasicEntityChanged, BasicEntityStateChange
 import com.ziqni.transformers.webhooks.ClassicWebhookSettings._
 
 import scala.concurrent.ExecutionContextExecutor
+import scala.language.implicitConversions
 
 /**
  * This is an implementation of the classic webhooks for backwards compatibility.
@@ -142,7 +143,7 @@ trait ClassicWebhooks {
         val json = ZiqniContext.toJsonFromMap(body)
         val headers = settings.headers ++ ziqniContext.ziqniApiHttp.HTTPDefaultHeader(ziqniContext.accountId, "onNewProduct")
 
-        ziqniContext.ziqniApiHttp.httpPost(settings.url, json, headers)
+        ziqniContext.ziqniApiHttp.httpPostWithLogMessage(settings.url, json, headers, None, settings.sendCompressed, "onNewProduct", ziqniContext)
       }
     }
 
@@ -165,7 +166,7 @@ trait ClassicWebhooks {
         val json = ZiqniContext.toJsonFromMap(body)
         val headers = settings.headers ++ ziqniContext.ziqniApiHttp.HTTPDefaultHeader(ziqniContext.accountId, "onNewMember")
 
-        ziqniContext.ziqniApiHttp.httpPost(settings.url, json, headers)
+        ziqniContext.ziqniApiHttp.httpPostWithLogMessage(settings.url, json, headers, None, settings.sendCompressed, "onNewMember", ziqniContext)
       }
     }
 
@@ -183,7 +184,7 @@ trait ClassicWebhooks {
       val json = ZiqniContext.toJsonFromMap(body)
       val headers = settings.headers ++ ziqniContext.ziqniApiHttp.HTTPDefaultHeader(ziqniContext.accountId, "onCompetitionCreated")
 
-      ziqniContext.ziqniApiHttp.httpPost(settings.url, json, headers)
+      ziqniContext.ziqniApiHttp.httpPostWithLogMessage(settings.url, json, headers, None, settings.sendCompressed, "onCompetitionCreated", ziqniContext)
     }
 
   def onCompetitionStarted()(implicit settings:ClassicWebhookSettings, basicEntityStateChanged: BasicEntityStateChanged, ziqniContext: ZiqniContext): Unit =
@@ -200,7 +201,7 @@ trait ClassicWebhooks {
       val json = ZiqniContext.toJsonFromMap(body)
       val headers = settings.headers ++ ziqniContext.ziqniApiHttp.HTTPDefaultHeader(ziqniContext.accountId, "onCompetitionStarted")
 
-      ziqniContext.ziqniApiHttp.httpPost(settings.url, json, headers)
+      ziqniContext.ziqniApiHttp.httpPostWithLogMessage(settings.url, json, headers, None, settings.sendCompressed, "onCompetitionStarted", ziqniContext)
     }
 
   def onCompetitionFinished()(implicit settings:ClassicWebhookSettings, basicEntityStateChanged: BasicEntityStateChanged, ziqniContext: ZiqniContext): Unit =
@@ -217,7 +218,7 @@ trait ClassicWebhooks {
       val json = ZiqniContext.toJsonFromMap(body)
       val headers = settings.headers ++ ziqniContext.ziqniApiHttp.HTTPDefaultHeader(ziqniContext.accountId, "onCompetitionFinished")
 
-      ziqniContext.ziqniApiHttp.httpPost(settings.url, json, headers)
+      ziqniContext.ziqniApiHttp.httpPostWithLogMessage(settings.url, json, headers, None, settings.sendCompressed, "onCompetitionFinished", ziqniContext)
     }
 
   def onCompetitionCancelled()(implicit settings:ClassicWebhookSettings, basicEntityStateChanged: BasicEntityStateChanged, ziqniContext: ZiqniContext): Unit =
@@ -234,7 +235,7 @@ trait ClassicWebhooks {
       val json = ZiqniContext.toJsonFromMap(body)
       val headers = settings.headers ++ ziqniContext.ziqniApiHttp.HTTPDefaultHeader(ziqniContext.accountId, "onCompetitionCancelled")
 
-      ziqniContext.ziqniApiHttp.httpPost(settings.url, json, headers)
+      ziqniContext.ziqniApiHttp.httpPostWithLogMessage(settings.url, json, headers, None, settings.sendCompressed, "onCompetitionCancelled", ziqniContext)
     }
 
   def onCompetitionRewardIssued()(implicit settings:ClassicWebhookSettings, basicEntityChanged: BasicEntityChanged, ziqniContext: ZiqniContext): Unit = {
@@ -259,7 +260,7 @@ trait ClassicWebhooks {
         val json = ZiqniContext.toJsonFromMap(body)
         val headers = settings.headers ++ ziqniContext.ziqniApiHttp.HTTPDefaultHeader(ziqniContext.accountId, "onCompetitionRewardIssued")
 
-        ziqniContext.ziqniApiHttp.httpPost(settings.url, json, headers)
+        ziqniContext.ziqniApiHttp.httpPostWithLogMessage(settings.url, json, headers, None, settings.sendCompressed, "onCompetitionRewardIssued", ziqniContext)
       }
     }
   }
@@ -278,7 +279,7 @@ trait ClassicWebhooks {
       val json = ZiqniContext.toJsonFromMap(body)
       val headers = settings.headers ++ ziqniContext.ziqniApiHttp.HTTPDefaultHeader(ziqniContext.accountId, "onContestCreated")
 
-      ziqniContext.ziqniApiHttp.httpPost(settings.url, json, headers)
+      ziqniContext.ziqniApiHttp.httpPostWithLogMessage(settings.url, json, headers, None, settings.sendCompressed, "onContestCreated", ziqniContext)
     }
 
   def onContestStarted()(implicit settings:ClassicWebhookSettings, basicEntityStateChanged: BasicEntityStateChanged, ziqniContext: ZiqniContext): Unit =
@@ -295,7 +296,7 @@ trait ClassicWebhooks {
       val json = ZiqniContext.toJsonFromMap(body)
       val headers = settings.headers ++ ziqniContext.ziqniApiHttp.HTTPDefaultHeader(ziqniContext.accountId, "onContestStarted")
 
-      ziqniContext.ziqniApiHttp.httpPost(settings.url, json, headers)
+      ziqniContext.ziqniApiHttp.httpPostWithLogMessage(settings.url, json, headers, None, settings.sendCompressed, "onContestStarted", ziqniContext)
     }
 
   def onContestFinished()(implicit settings:ClassicWebhookSettings, basicEntityStateChanged: BasicEntityStateChanged, ziqniContext: ZiqniContext): Unit =
@@ -312,7 +313,7 @@ trait ClassicWebhooks {
       val json = ZiqniContext.toJsonFromMap(body)
       val headers = settings.headers ++ ziqniContext.ziqniApiHttp.HTTPDefaultHeader(ziqniContext.accountId, "onContestFinished")
 
-      ziqniContext.ziqniApiHttp.httpPost(settings.url, json, headers)
+      ziqniContext.ziqniApiHttp.httpPostWithLogMessage(settings.url, json, headers, None, settings.sendCompressed, "onContestFinished", ziqniContext)
     }
 
   def onContestFinalised()(implicit settings:ClassicWebhookSettings, basicEntityStateChanged: BasicEntityStateChanged, ziqniContext: ZiqniContext): Unit =
@@ -329,7 +330,7 @@ trait ClassicWebhooks {
       val json = ZiqniContext.toJsonFromMap(body)
       val headers = settings.headers ++ ziqniContext.ziqniApiHttp.HTTPDefaultHeader(ziqniContext.accountId, "onContestFinalised")
 
-      ziqniContext.ziqniApiHttp.httpPost(settings.url, json, headers)
+      ziqniContext.ziqniApiHttp.httpPostWithLogMessage(settings.url, json, headers, None, settings.sendCompressed, "onContestFinalised", ziqniContext)
     }
 
   def onContestCancelled()(implicit settings:ClassicWebhookSettings, basicEntityStateChanged: BasicEntityStateChanged, ziqniContext: ZiqniContext): Unit =
@@ -346,7 +347,7 @@ trait ClassicWebhooks {
       val json = ZiqniContext.toJsonFromMap(body)
       val headers = settings.headers ++ ziqniContext.ziqniApiHttp.HTTPDefaultHeader(ziqniContext.accountId, "onContestCancelled")
 
-      ziqniContext.ziqniApiHttp.httpPost(settings.url, json, headers)
+      ziqniContext.ziqniApiHttp.httpPostWithLogMessage(settings.url, json, headers, None, settings.sendCompressed, "onContestCancelled", ziqniContext)
     }
 
   def onContestRewardCreated()(implicit settings:ClassicWebhookSettings, basicEntityChanged: BasicEntityChanged, ziqniContext: ZiqniContext): Unit =
@@ -362,7 +363,7 @@ trait ClassicWebhooks {
       val json = ZiqniContext.toJsonFromMap(body)
       val headers = settings.headers ++ ziqniContext.ziqniApiHttp.HTTPDefaultHeader(ziqniContext.accountId, "onContestRewardCreated")
 
-      ziqniContext.ziqniApiHttp.httpPost(settings.url, json, headers)
+      ziqniContext.ziqniApiHttp.httpPostWithLogMessage(settings.url, json, headers, None, settings.sendCompressed, "onContestRewardCreated", ziqniContext)
     }
 
   def onContestRewardIssued()(implicit settings:ClassicWebhookSettings, basicEntityChanged: BasicEntityChanged, ziqniContext: ZiqniContext): Unit =
@@ -382,7 +383,7 @@ trait ClassicWebhooks {
       val json = ZiqniContext.toJsonFromMap(body)
       val headers = settings.headers ++ ziqniContext.ziqniApiHttp.HTTPDefaultHeader(ziqniContext.accountId, "onContestRewardIssued")
 
-      ziqniContext.ziqniApiHttp.httpPost(settings.url, json, headers)
+      ziqniContext.ziqniApiHttp.httpPostWithLogMessage(settings.url, json, headers, None, settings.sendCompressed, "onContestRewardIssued", ziqniContext)
     }
 
   def onContestRewardClaimed()(implicit settings:ClassicWebhookSettings, basicEntityStateChanged: BasicEntityStateChanged, ziqniContext: ZiqniContext): Unit =
@@ -407,7 +408,7 @@ trait ClassicWebhooks {
         val json = ZiqniContext.toJsonFromMap(body)
         val headers = settings.headers ++ ziqniContext.ziqniApiHttp.HTTPDefaultHeader(ziqniContext.accountId, "onContestRewardClaimed")
 
-        ziqniContext.ziqniApiHttp.httpPost(settings.url, json, headers)
+        ziqniContext.ziqniApiHttp.httpPostWithLogMessage(settings.url, json, headers, None, settings.sendCompressed, "onContestRewardClaimed", ziqniContext)
       }
     }
 
@@ -425,7 +426,7 @@ trait ClassicWebhooks {
       val json = ZiqniContext.toJsonFromMap(body)
       val headers = settings.headers ++ ziqniContext.ziqniApiHttp.HTTPDefaultHeader(ziqniContext.accountId, "onAchievementCreated")
 
-      ziqniContext.ziqniApiHttp.httpPost(settings.url, json, headers)
+      ziqniContext.ziqniApiHttp.httpPostWithLogMessage(settings.url, json, headers, None, settings.sendCompressed, "onAchievementCreated", ziqniContext)
     }
 
   def onAchievementRewardCreated()(implicit settings:ClassicWebhookSettings, basicEntityChanged: BasicEntityChanged, ziqniContext: ZiqniContext): Unit =
@@ -441,7 +442,7 @@ trait ClassicWebhooks {
       val json = ZiqniContext.toJsonFromMap(body)
       val headers = settings.headers ++ ziqniContext.ziqniApiHttp.HTTPDefaultHeader(ziqniContext.accountId, "onAchievementRewardCreated")
 
-      ziqniContext.ziqniApiHttp.httpPost(settings.url, json, headers)
+      ziqniContext.ziqniApiHttp.httpPostWithLogMessage(settings.url, json, headers, None, settings.sendCompressed, "onAchievementRewardCreated", ziqniContext)
     }
 
   def onAchievementRewardIssued()(implicit settings:ClassicWebhookSettings, basicEntityChanged: BasicEntityChanged, ziqniContext: ZiqniContext): Unit =
@@ -466,7 +467,7 @@ trait ClassicWebhooks {
         val json = ZiqniContext.toJsonFromMap(body)
         val headers = settings.headers ++ ziqniContext.ziqniApiHttp.HTTPDefaultHeader(ziqniContext.accountId, "onAchievementRewardIssued")
 
-        ziqniContext.ziqniApiHttp.httpPost(settings.url, json, headers)
+        ziqniContext.ziqniApiHttp.httpPostWithLogMessage(settings.url, json, headers, None, settings.sendCompressed, "onAchievementRewardIssued", ziqniContext)
       }
     }
 
@@ -492,9 +493,11 @@ trait ClassicWebhooks {
         val json = ZiqniContext.toJsonFromMap(body)
         val headers = settings.headers ++ ziqniContext.ziqniApiHttp.HTTPDefaultHeader(ziqniContext.accountId, "onAchievementRewardClaimed")
 
-        ziqniContext.ziqniApiHttp.httpPost(settings.url, json, headers)
+        ziqniContext.ziqniApiHttp.httpPostWithLogMessage(settings.url, json, headers, None, settings.sendCompressed, "onAchievementRewardClaimed", ziqniContext)
       }
     }
+
+  private implicit def stringToOpt(s:String): Option[String] = Option(s)
 }
 
 

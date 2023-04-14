@@ -10,7 +10,7 @@ import com.ziqni.transformers.domain.{BasicAuthCredentials, HttpResponseEntity}
 
 trait ZiqniApiHttp {
 	
-	def HTTPDefaultHeader(accountId: String = "", onEvent: String = "") = Map(
+	def HTTPDefaultHeader(accountId: String = "", onEvent: String = ""): Map[EventbusAddress, Seq[EventbusAddress]] = Map(
 		"Content-Type" -> Seq("application/json"),
 		"Content-Encoding" -> Seq("gzip"),
 		"User_Agent" -> Seq("Ziqni/1.0"),
@@ -25,7 +25,9 @@ trait ZiqniApiHttp {
 	  * @param basicAuthCredentials Basic authentication
 	  * @return HttpResponseEntity
 	  */
-	def httpGet(url: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[BasicAuthCredentials] = None, sendCompressed: Boolean = true): HttpResponseEntity
+	def httpGet(url: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[BasicAuthCredentials] = None, sendCompressed: Boolean = true, ziqniContext: ZiqniContext): HttpResponseEntity = httpGetWithLogMessage(url, headers, basicAuthCredentials, sendCompressed, None, ziqniContext)
+
+	def httpGetWithLogMessage(url: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[BasicAuthCredentials] = None, sendCompressed: Boolean = true, logMessage: Option[String], ziqniContext: ZiqniContext): HttpResponseEntity
 
 	/**
 	  * Send a http put request
@@ -35,7 +37,9 @@ trait ZiqniApiHttp {
 	  * @param basicAuthCredentials Basic authentication
 	  * @return HttpResponseEntity
 	  */
-	def httpPut(url: String, body: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[BasicAuthCredentials] = None, sendCompressed: Boolean = true): HttpResponseEntity
+	def httpPut(url: String, body: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[BasicAuthCredentials] = None, sendCompressed: Boolean = true, ziqniContext: ZiqniContext): HttpResponseEntity = httpPutWithLogMessage(url, body, headers, basicAuthCredentials, sendCompressed, None, ziqniContext)
+
+	def httpPutWithLogMessage(url: String, body: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[BasicAuthCredentials] = None, sendCompressed: Boolean = true, logMessage: Option[String], ziqniContext: ZiqniContext): HttpResponseEntity
 
 	/**
 	  * Send a http post request
@@ -45,7 +49,9 @@ trait ZiqniApiHttp {
 	  * @param basicAuthCredentials Basic authentication
 	  * @return HttpResponseEntity
 	  */
-	def httpPost(url: String, body: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[BasicAuthCredentials] = None, sendCompressed: Boolean = true): HttpResponseEntity
+	def httpPost(url: String, body: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[BasicAuthCredentials] = None, sendCompressed: Boolean = true, ziqniContext: ZiqniContext): HttpResponseEntity = httpPostWithLogMessage(url, body, headers, basicAuthCredentials, sendCompressed, None, ziqniContext)
+
+	def httpPostWithLogMessage(url: String, body: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[BasicAuthCredentials] = None, sendCompressed: Boolean = true, logMessage: Option[String], ziqniContext: ZiqniContext): HttpResponseEntity
 
 	/**
 	  * Send a http delete request
@@ -54,5 +60,7 @@ trait ZiqniApiHttp {
 	  * @param basicAuthCredentials Basic authentication
 	  * @return HttpResponseEntity
 	  */
-	def httpDelete(url: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[BasicAuthCredentials] = None, sendCompressed: Boolean = true): HttpResponseEntity
+	def httpDelete(url: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[BasicAuthCredentials] = None, sendCompressed: Boolean = true, ziqniContext: ZiqniContext): HttpResponseEntity = httpDeleteWithLogMessage(url, headers, basicAuthCredentials, sendCompressed, None, ziqniContext)
+
+	def httpDeleteWithLogMessage(url: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[BasicAuthCredentials] = None, sendCompressed: Boolean = true, logMessage: Option[String], ziqniContext: ZiqniContext): HttpResponseEntity
 }

@@ -65,14 +65,15 @@ trait ClassicWebhooks {
 
     else if (Award.equalsIgnoreCase(change.entityType)){
       val entityType = change.metadata.getOrElse(ParentType, Unknown)
+      val claimed = change.metadata.getOrElse("claimed", "false").toBoolean
 
-      if (entityType.equalsIgnoreCase(Competition)) {
+      if (claimed && entityType.equalsIgnoreCase(Competition)) {
         onCompetitionRewardIssued()
       }
-      else if (entityType.equalsIgnoreCase(Contest)) {
+      else if (claimed && entityType.equalsIgnoreCase(Contest)) {
         onContestRewardIssued()
       }
-      else if (entityType.equalsIgnoreCase(Achievement)) {
+      else if (claimed && entityType.equalsIgnoreCase(Achievement)) {
         onAchievementRewardIssued()
       }
     }
@@ -112,9 +113,11 @@ trait ClassicWebhooks {
 
     else if (Award.equalsIgnoreCase(change.entityType)) {
       val entityType = change.metadata.getOrElse(ParentType, Unknown)
-      if(change.currentState > 0 && entityType.equalsIgnoreCase(Contest))
+      val claimed = change.metadata.getOrElse("claimed", "false").toBoolean
+
+      if(claimed && change.currentState > 0 && entityType.equalsIgnoreCase(Contest))
         onContestRewardClaimed()
-      else if(change.currentState > 0 && entityType.equalsIgnoreCase(Achievement))
+      else if(claimed && change.currentState > 0 && entityType.equalsIgnoreCase(Achievement))
         onAchievementRewardClaimed()
     }
   }
@@ -146,10 +149,9 @@ trait ClassicWebhooks {
   def onNewMember()(implicit settings:ClassicWebhookSettings, basicEntityChanged: BasicEntityChanged, ziqniContext: ZiqniContext): Unit =
     if(settings.onNewMemberEnabled) {
       implicit val e: ExecutionContextExecutor = ziqniContext.ziqniExecutionContext
-      val memberId = basicEntityChanged.metadata.getOrElse("memberId", "")
 
       for {
-        memberRefId <- ziqniContext.ziqniApiAsync.memberRefIdFromMemberId(memberId)
+        memberRefId <- ziqniContext.ziqniApiAsync.memberRefIdFromMemberId(basicEntityChanged.entityId)
       } yield {
         val body = Map[String, Any](
           "memberId" -> basicEntityChanged.entityId,
@@ -393,7 +395,7 @@ trait ClassicWebhooks {
       } yield {
         val body = Map[String, Any](
           "contestId" -> basicEntityStateChanged.metadata.get("contestId"),
-          "memberId" -> basicEntityStateChanged.metadata.get("memberId"),
+          "memberId" -> memberId,
           "memberRefId" -> memberRefId,
           "awardId" -> basicEntityStateChanged.entityId,
           "resourcePath" -> s"/awards?id=${basicEntityStateChanged.entityId}",
@@ -478,7 +480,7 @@ trait ClassicWebhooks {
       } yield {
         val body = Map[String, Any](
           "achievementId" -> basicEntityStateChanged.metadata.get("achievementId"),
-          "memberId" -> basicEntityStateChanged.metadata.get("memberId"),
+          "memberId" -> memberId,
           "memberRefId" -> memberRefId,
           "awardId" -> basicEntityStateChanged.entityId,
           "resourcePath" -> s"/awards?id=${basicEntityStateChanged.entityId}",

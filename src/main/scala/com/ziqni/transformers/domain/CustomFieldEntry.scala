@@ -8,7 +8,7 @@ final case class CustomFieldEntryTextArray(texts: Seq[String]) extends CustomFie
 final case class CustomFieldEntryNumber(number: Double) extends CustomFieldEntry[Double](fieldType = "Number", value = number)
 final case class CustomFieldEntryNumberArray(numbers: Seq[Double]) extends CustomFieldEntry[Seq[Double]](fieldType = "NumberArray", value = numbers)
 
-object CustomFieldEntry {
+object CustomFieldEntryImplicits {
 
   implicit def toText(v: String): CustomFieldEntry[_ <: Any] = CustomFieldEntryText(v)
   implicit def toTextArr(v: Seq[String]): CustomFieldEntry[_ <: Any] = CustomFieldEntryTextArray(v)

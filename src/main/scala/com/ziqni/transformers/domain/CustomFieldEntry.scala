@@ -10,6 +10,12 @@ final case class CustomFieldEntryNumberArray(numbers: Seq[Double]) extends Custo
 
 trait CustomFieldEntryImplicits {
 
+  type CustomFieldEntryMap = Map[String, CustomFieldEntry[_<:Any]]
+
+  implicit def toTextBoolean(v: Option[Boolean]): CustomFieldEntry[_ <: Any] = CustomFieldEntryText(v.map(_.toString.toLowerCase()).orNull)
+  implicit def toTextBoolean(v: Boolean): CustomFieldEntry[_ <: Any] = CustomFieldEntryText(v.toString.toLowerCase())
+
+  implicit def toTextOpt(v: Option[String]): CustomFieldEntry[_ <: Any] = CustomFieldEntryText(v.orNull)
   implicit def toText(v: String): CustomFieldEntry[_ <: Any] = CustomFieldEntryText(v)
   implicit def toTextArr(v: Seq[String]): CustomFieldEntry[_ <: Any] = CustomFieldEntryTextArray(v)
 

@@ -6,6 +6,15 @@ import org.joda.time.DateTime
 import org.json4s.DefaultFormats
 import org.json4s.jackson.parseJson
 
+object Event {
+
+  def fromByteArray(message: Array[Byte]): Event = {
+    implicit val formats: DefaultFormats.type = DefaultFormats
+    val messageAsString = ZiqniContext.convertByteArrayToString(message)
+    parseJson(messageAsString).extract[Event]
+  }
+}
+
 case class Event(
                          memberRefId: String,
                          action: String,
@@ -18,12 +27,6 @@ case class Event(
                          memberId: Option[String],
                          customFields: Map[String,Any]
                        ) extends CustomFieldEntryImplicits {
-
-  def fromByteArray(message: Array[Byte]): Event = {
-    implicit val formats: DefaultFormats.type = DefaultFormats
-    val messageAsString = ZiqniContext.convertByteArrayToString(message)
-    parseJson(messageAsString).extract[Event]
-  }
 
   def asBasicEventModel: BasicEventModel = {
 

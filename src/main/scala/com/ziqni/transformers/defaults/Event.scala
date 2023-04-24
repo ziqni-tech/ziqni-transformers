@@ -77,8 +77,8 @@ case class Event(
         handleSeq(customFields._1,list)
       case list:Seq[_] =>
         handleSeq(customFields._1,list)
-      case _ =>
-        ( customFields._1, CustomFieldEntryText(""))
+      case in:Any =>
+        ( customFields._1, CustomFieldEntryText(in.toString))
     })
 
     BasicEventModel(

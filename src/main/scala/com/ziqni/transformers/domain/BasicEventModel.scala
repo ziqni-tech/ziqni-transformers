@@ -33,3 +33,4 @@ case class BasicEventModel(
 													@deprecated metadata: Map[String, Seq[Any]] = Map.empty,
 													customFields: Map[String, CustomFieldEntry[_<:Any]] = Map.empty
 													)
+

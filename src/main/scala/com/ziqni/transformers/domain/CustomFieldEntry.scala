@@ -21,6 +21,7 @@ trait CustomFieldEntryImplicits {
 
   implicit def toNumInt(v: Int): CustomFieldEntry[_ <: Any] = CustomFieldEntryNumber(v)
   implicit def toNumIntArr(v: Seq[Int]): CustomFieldEntry[_ <: Any] = CustomFieldEntryNumberArray(v.map(i=>i.doubleValue()))
+  implicit def toNumIntArrList(v: List[Int]): CustomFieldEntry[_ <: Any] = CustomFieldEntryNumberArray(v.map(i=>i.doubleValue()))
 
   implicit def toNumDouble(v: Double): CustomFieldEntry[_ <: Any] = CustomFieldEntryNumber(v)
   implicit def toNumDoubleArr(v: Seq[Double]): CustomFieldEntry[_ <: Any] = CustomFieldEntryNumberArray(v)

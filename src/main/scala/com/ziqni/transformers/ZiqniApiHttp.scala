@@ -5,9 +5,7 @@
   *  Written by Ziqni Ltd, 2021
   */
 package com.ziqni.transformers
-
-import com.ziqni.transformers.domain.{BasicAuthCredentials, HttpResponseEntity}
-
+import com.ziqni.transformers.domain._
 trait ZiqniApiHttp {
 	
 	def HTTPDefaultHeader(accountId: String = "", onEvent: String = ""): Map[EventbusAddress, Seq[EventbusAddress]] = Map(

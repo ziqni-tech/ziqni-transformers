@@ -7,6 +7,7 @@
 package com.ziqni.transformers
 
 import com.ziqni.transformers.domain._
+
 import scala.concurrent.Future
 
 trait ZiqniApiAsync {

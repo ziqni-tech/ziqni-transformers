@@ -9,10 +9,8 @@ package com.ziqni.transformers.webhooks;
 
 import org.joda.time.DateTime
 import com.ziqni.transformers.ZiqniContext
-import com.ziqni.transformers.domain.{BasicAuthCredentials, BasicEntityChanged, BasicEntityStateChanged, HttpResponseEntity}
 import com.ziqni.transformers.webhooks.CustomWebhookSettings._
-
-import java.security.Timestamp
+import com.ziqni.transformers.domain._
 import scala.concurrent.ExecutionContextExecutor
 import scala.language.implicitConversions
 

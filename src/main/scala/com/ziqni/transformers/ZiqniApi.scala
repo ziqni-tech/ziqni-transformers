@@ -6,7 +6,7 @@
   */
 package com.ziqni.transformers
 
-import com.ziqni.transformers.domain.{BasicAchievementModel, BasicAwardModel, BasicContestModel, BasicEventModel, BasicMemberModel, BasicProductModel, BasicRewardModel, BasicUnitOfMeasureModel}
+import com.ziqni.transformers.domain._
 import org.joda.time.DateTime
 
 trait ZiqniApi {

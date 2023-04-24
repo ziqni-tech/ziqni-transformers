@@ -1,13 +1,12 @@
 package com.ziqni.transformers
 
 import com.ziqni.transformers.ZiqniContext.SpaceName
-import com.ziqni.transformers.domain.BasicAccount
 
 import scala.concurrent.ExecutionContextExecutor
 import org.json4s.jackson.JsonMethods.parse
 import org.json4s.jackson.Serialization
 import org.json4s.{DefaultFormats, JValue}
-
+import com.ziqni.transformers.domain._
 import java.nio.charset.Charset
 
 object ZiqniContext {

@@ -216,28 +216,27 @@ Here is an example of a WebHook transformer.
 
 ```scala
 
-import com.ziqni.transformers.domain.WebhookSettings
 import com.ziqni.transformers.{ZqWebhookTransformer, ZiqniApiExt}
 import org.joda.time.DateTime
 
 class DefaultWebhookTransformer extends ZqWebhookTransformer {
-		override def onAchievementTriggered(settings: WebhookSettings, achievementId: String, memberId: String, ZiqniApi: ZiqniApiExt): Unit = {
+  override def onAchievementTriggered(settings: WebhookSettings, achievementId: String, memberId: String, ZiqniApi: ZiqniApiExt): Unit = {
 
-		val body = Map[String, Any](
-           "achievementId" -> achievementId,
-           "memberId" -> memberId,
-           "memberRefId" -> ziqniApi.memberRefIdFromMemberId(memberId),
-           "resourcePath" -> s"/achievement?id=$achievementId",
-           "timestamp" -> DateTime.now().getMillis,
-           "objectType" -> "AchievementTriggered",
-           "spaceName" -> ziqniApi.spaceName
-		)
+    val body = Map[String, Any](
+      "achievementId" -> achievementId,
+      "memberId" -> memberId,
+      "memberRefId" -> ziqniApi.memberRefIdFromMemberId(memberId),
+      "resourcePath" -> s"/achievement?id=$achievementId",
+      "timestamp" -> DateTime.now().getMillis,
+      "objectType" -> "AchievementTriggered",
+      "spaceName" -> ziqniApi.spaceName
+    )
 
-		val json =  ZiqniApi.toJsonFromMap(body)
-		val headers = settings.headers ++ ZiqniApi.HTTPDefaultHeader
+    val json = ZiqniApi.toJsonFromMap(body)
+    val headers = settings.headers ++ ZiqniApi.HTTPDefaultHeader
 
-		ziqniApi.httpPost(settings.url, json, headers)
-	}
+    ziqniApi.httpPost(settings.url, json, headers)
+  }
 }
 
 ```

@@ -7,9 +7,8 @@
 
 package com.ziqni.transformers.webhooks
 
-import com.ziqni.transformers.domain.{BasicAuthCredentials, BasicEntityChangeSubscriptionRequest}
 import com.ziqni.transformers.webhooks.CustomWebhookSettings._
-
+import com.ziqni.transformers.domain._
 import scala.collection.mutable.ListBuffer
 
 object CustomWebhookSettings {

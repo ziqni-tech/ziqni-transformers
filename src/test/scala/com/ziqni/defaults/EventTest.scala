@@ -1,5 +1,7 @@
-package com.ziqni.transformers.domain
+package com.ziqni.defaults
 
+import com.ziqni.transformers.defaults.Event
+import com.ziqni.transformers.domain.CustomFieldEntryImplicits
 import org.joda.time.DateTime
 import org.json4s.DefaultFormats
 import org.json4s.jackson.Serialization
@@ -30,7 +32,7 @@ class EventTest extends AnyFunSuiteLike with CustomFieldEntryImplicits {
         "text-1" -> "1",
         "text-2" -> "2.2",
         "text-3" -> Seq("1", "2"),
-        "text-4" -> Seq(1.1, "2"),
+        "text-4" -> Seq("1.1", 2),
       )
     )
 

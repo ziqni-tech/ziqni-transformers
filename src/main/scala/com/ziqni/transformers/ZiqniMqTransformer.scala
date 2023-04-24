@@ -5,9 +5,7 @@
   *  Written by Ziqni Ltd, 2021
   */
 package com.ziqni.transformers
-
-import com.ziqni.transformers.domain.{BasicEntityChangeSubscriptionRequest, BasicEntityChanged, BasicEntityStateChanged}
-
+import com.ziqni.transformers.domain._
 trait ZiqniMqTransformer {
 
 	/**

@@ -36,7 +36,7 @@ trait ZiqniMqTransformer {
 	  */
 	def kafka(topic: String, key: Array[Byte], message: Array[Byte], ziqniContext: ZiqniContext, headers: Map[String, Array[Byte]]): Unit =
 		apply(
-			message, ziqniContext, Map( "key" -> key, "topic" -> topic )
+			message, ziqniContext, Map( "key" -> key, "topic" -> topic )++headers
 		)
 
 	/**

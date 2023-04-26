@@ -34,7 +34,7 @@ trait ZiqniMqTransformer {
 	  * @param key The key for the incoming message from the Kafka broker
 	  * @param ziqniContext The Ziqni Context
 	  */
-	def kafka(topic: String, key: Array[Byte], message: Array[Byte], ziqniContext: ZiqniContext): Unit =
+	def kafka(topic: String, key: Array[Byte], message: Array[Byte], ziqniContext: ZiqniContext, headers: Map[String, Array[Byte]]): Unit =
 		apply(
 			message, ziqniContext, Map( "key" -> key, "topic" -> topic )
 		)

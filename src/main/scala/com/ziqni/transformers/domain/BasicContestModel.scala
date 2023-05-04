@@ -81,4 +81,11 @@ abstract class BasicContestModel {
 	  * System will update the status
 	  */
 	def setStatus(): Unit
+
+	/**
+		* Get the custom fields
+		*
+		* @return key value pair map of custom field entries
+		*/
+	def getCustomFields(): Map[String, CustomFieldEntry[_ <: Any]]
 }

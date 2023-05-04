@@ -51,4 +51,11 @@ abstract class BasicProductModel {
 	  */
 	def getClProductId: String
 
+	/**
+		* Get the custom fields
+		*
+		* @return key value pair map of custom field entries
+		*/
+	def getCustomFields(): Map[String, CustomFieldEntry[_ <: Any]]
+
 }

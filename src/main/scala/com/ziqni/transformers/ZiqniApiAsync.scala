@@ -7,6 +7,7 @@
 package com.ziqni.transformers
 
 import com.ziqni.transformers.domain._
+import jdk.jfr.internal.LogLevel
 
 import scala.concurrent.Future
 
@@ -59,6 +60,16 @@ trait ZiqniApiAsync {
 	def createMember(memberReferenceId: String, displayName: String, tags: Seq[String], metaData: Option[Map[String, String]]): Future[Option[String]]
 
 	/**
+	  * Get or create a member in the Ziqni system
+	  *
+	  * @param memberReferenceId The id used to identify this member in the sending system
+	  * @param displayName       Display name
+	  * @param tags            The groups to add this member to
+	  * @return The id used in the Ziqni system
+	  */
+	def getOrCreateMember(memberReferenceId: String, displayName: String, tags: Seq[String], metaData: Option[Map[String, String]]): Future[Option[BasicMemberModel]]
+
+	/**
 	  *
 	  * @param clMemberId     CL Member Id
 	  * @param displayName    Display name
@@ -102,6 +113,17 @@ trait ZiqniApiAsync {
 	def createProduct(productReferenceId: String, displayName: String, providers: Seq[String], productType: String, defaultAdjustmentFactor: Double, metaData: Option[Map[String, String]]): Future[Option[String]]
 
 	/**
+	  * Get or create a product
+	  * @param productReferenceId      The id used to identify this product in the sending system
+	  * @param displayName             Display name
+	  * @param providers               The providers of this product
+	  * @param productType             The type of product
+	  * @param defaultAdjustmentFactor The default adjustment factor to apply
+	  * @return The id used in the Ziqni system
+	  */
+	def getOrCreateProduct(productReferenceId: String, displayName: String, providers: Seq[String], productType: String, defaultAdjustmentFactor: Double, metaData: Option[Map[String, String]]): Future[Option[BasicProductModel]]
+
+	/**
 	  *
 	  * @param clProductId             CL Product Id
 	  * @param displayName             Display name
@@ -143,6 +165,14 @@ trait ZiqniApiAsync {
 	  * @return
 	  */
 	def createEventAction(action: String, name: Option[String], metaData: Option[Map[String, String]], unitOfMeasureKey: Option[String]): Future[Boolean]
+
+	/** *
+	  * Get or create the action in your space
+	  *
+	  * @param action True on success false on failure
+	  * @return
+	  */
+	def getOrCreateEventAction(action: String, name: Option[String], metaData: Option[Map[String, String]], unitOfMeasureKey: Option[String]): Future[String]
 
 	/** *
 	  * Update the action in your space
@@ -199,9 +229,22 @@ trait ZiqniApiAsync {
 	def createUnitOfMeasure(key: String, name: String, isoCode: Option[String], multiplier: Double, unitOfMeasureType: Option[String]): Future[Option[String]]
 
 	/**
+		* Get or create unit of measure
+		* @param key The key used to identify this UoM
+		* @param name The name to give this unit of measure
+		* @param isoCode The ISO code
+		* @param multiplier The points multiplier
+		* @param unitOfMeasureType The type [OTHER, CURRENCY, MASS, TIME, TEMPERATURE, ELECTRICCURRENT, AMOUNTOFSUBSTANCE, LUMINOUSINTENSITY, DISTANCE]
+		* @return
+		*/
+	def getOrCreateUnitOfMeasure(key: String, name: String, isoCode: Option[String], multiplier: Double, unitOfMeasureType: Option[String]): Future[Option[BasicUnitOfMeasureModel]]
+
+	/**
 	  *
 	  * @param unitOfMeasureKey Ziqni UoM key
 	  * @return Double returns a multiplier associated with the UoM
 	  */
 	def getUoMMultiplierFromKey(unitOfMeasureKey: String): Future[Option[Double]]
+
+	def writeToSystemLog(throwable: Throwable, logLevel: LogLevel): Unit
 }

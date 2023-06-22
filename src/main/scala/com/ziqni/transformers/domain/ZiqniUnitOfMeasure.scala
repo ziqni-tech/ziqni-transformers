@@ -7,7 +7,7 @@
 
 package com.ziqni.transformers.domain
 
-abstract class BasicUnitOfMeasureModel {
+abstract class ZiqniUnitOfMeasure {
 
 	def getUnitOfMeasureKey: String
 

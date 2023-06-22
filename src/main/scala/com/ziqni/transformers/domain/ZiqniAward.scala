@@ -7,7 +7,7 @@
 
 package com.ziqni.transformers.domain
 
-abstract class BasicAwardModel {
+abstract class ZiqniAward {
 
 	/**
 	  *
@@ -37,7 +37,7 @@ abstract class BasicAwardModel {
 	  *
 	  * @return CL Award id
 	  */
-	def getClAwardId: String
+	def getAwardId: String
 
 	/**
 	  *

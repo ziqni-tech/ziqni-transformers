@@ -66,19 +66,19 @@ trait ZiqniMqTransformer {
 		* Get the subscription to use for this transformer to be notified of changes in the system
 		* @return
 		*/
-	def getEntityChangeSubscriptionRequest(ziqniContext: ZiqniContext): Seq[BasicEntityChangeSubscriptionRequest] = Seq.empty
+	def getEntityChangeSubscriptionRequest(ziqniContext: ZiqniContext): Seq[ZiqniEntityChangeSubscriptionRequest] = Seq.empty
 
 	/**
 		* If the transformer is subscribed to entity changes then this method is invoked
 		* @param change The change events
 		*/
-	def onEntityChanged(change: BasicEntityChanged, ziqniContext: ZiqniContext): Unit = {}
+	def onEntityChanged(change: ZiqniEntityChanged, ziqniContext: ZiqniContext): Unit = {}
 
 	/**
 		* If the transformer is subscribed to entity state changes then this method is invoked
 		* @param change
 		*/
-	def onEntityStateChanged(change: BasicEntityStateChanged, ziqniContext: ZiqniContext): Unit = {}
+	def onEntityStateChanged(change: ZiqniEntityStateChanged, ziqniContext: ZiqniContext): Unit = {}
 
 	/**
 		* Happens when the class is initialized

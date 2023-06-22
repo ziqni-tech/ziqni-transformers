@@ -57,67 +57,67 @@ object CustomWebhookSettings {
  * @param onAchievementRewardClaimedEnabled Executed when a reward was claimed by a member
  */
 case class CustomWebhookSettings(
-																	 url: String,
-																	 headers: Map[String, Seq[String]] = Map.empty,
-																	 basicAuth: Option[BasicAuthCredentials] = None,
-																	 sendCompressed: Boolean = true,
-																	 onNewProductEnabled: Boolean = false,
-																	 onNewMemberEnabled: Boolean = false,
-																	 onCompetitionCreatedEnabled: Boolean = false,
-																	 onCompetitionStartedEnabled: Boolean = false,
-																	 onCompetitionFinishedEnabled: Boolean = false,
-																	 onCompetitionCancelledEnabled: Boolean = false,
-																	 onCompetitionRewardIssuedEnabled: Boolean = false,
-																	 onContestCreatedEnabled: Boolean = false,
-																	 onContestStartedEnabled: Boolean = false,
-																	 onContestFinishedEnabled: Boolean = false,
-																	 onContestFinalisedEnabled: Boolean = false,
-																	 onContestCancelledEnabled: Boolean = false,
-																	 onContestRewardCreatedEnabled: Boolean = false,
-																	 onContestRewardIssuedEnabled: Boolean = false,
-																	 onContestRewardClaimedEnabled: Boolean = false,
-																	 onAchievementCreatedEnabled: Boolean = false,
-																	 onAchievementRewardCreatedEnabled: Boolean = false,
-																	 onAchievementRewardIssuedEnabled: Boolean = false,
-																	 onAchievementRewardClaimedEnabled: Boolean = false
+                                  url: String,
+                                  headers: Map[String, Seq[String]] = Map.empty,
+                                  basicAuth: Option[ZiqniAuthCredentials] = None,
+                                  sendCompressed: Boolean = true,
+                                  onNewProductEnabled: Boolean = false,
+                                  onNewMemberEnabled: Boolean = false,
+                                  onCompetitionCreatedEnabled: Boolean = false,
+                                  onCompetitionStartedEnabled: Boolean = false,
+                                  onCompetitionFinishedEnabled: Boolean = false,
+                                  onCompetitionCancelledEnabled: Boolean = false,
+                                  onCompetitionRewardIssuedEnabled: Boolean = false,
+                                  onContestCreatedEnabled: Boolean = false,
+                                  onContestStartedEnabled: Boolean = false,
+                                  onContestFinishedEnabled: Boolean = false,
+                                  onContestFinalisedEnabled: Boolean = false,
+                                  onContestCancelledEnabled: Boolean = false,
+                                  onContestRewardCreatedEnabled: Boolean = false,
+                                  onContestRewardIssuedEnabled: Boolean = false,
+                                  onContestRewardClaimedEnabled: Boolean = false,
+                                  onAchievementCreatedEnabled: Boolean = false,
+                                  onAchievementRewardCreatedEnabled: Boolean = false,
+                                  onAchievementRewardIssuedEnabled: Boolean = false,
+                                  onAchievementRewardClaimedEnabled: Boolean = false
 																 ){
 
 	/**
 	 * The required entity change and state change subscriptions based on the selected settings
 	 */
-	val classicEntityChangeSubscriptionRequest: Seq[BasicEntityChangeSubscriptionRequest] = {
+	val classicEntityChangeSubscriptionRequest: Seq[ZiqniEntityChangeSubscriptionRequest] = {
 
-		val list = new ListBuffer[BasicEntityChangeSubscriptionRequest]()
+		val list = new ListBuffer[ZiqniEntityChangeSubscriptionRequest]()
 
 		if(onNewProductEnabled)
-			list += BasicEntityChangeSubscriptionRequest(EntityChanged, Product)
+			list += ZiqniEntityChangeSubscriptionRequest(EntityChanged, Product)
 
 		if(onNewMemberEnabled)
-			list += BasicEntityChangeSubscriptionRequest(EntityChanged, Member)
+			list += ZiqniEntityChangeSubscriptionRequest(EntityChanged, Member)
 
 		if(onCompetitionCreatedEnabled)
-			list += BasicEntityChangeSubscriptionRequest(EntityChanged, Competition)
+			list += ZiqniEntityChangeSubscriptionRequest(EntityChanged, Competition)
 
 		if(onCompetitionStartedEnabled || onCompetitionFinishedEnabled || onCompetitionCancelledEnabled || onCompetitionCancelledEnabled)
-			list += BasicEntityChangeSubscriptionRequest(EntityStateChanged, Competition)
+			list += ZiqniEntityChangeSubscriptionRequest(EntityStateChanged, Competition)
 
 		if (onContestCreatedEnabled)
-			list += BasicEntityChangeSubscriptionRequest(EntityChanged, Contest)
+			list += ZiqniEntityChangeSubscriptionRequest(EntityChanged, Contest)
 
 		if(onContestStartedEnabled || onContestFinishedEnabled || onContestFinalisedEnabled || onContestCancelledEnabled)
-			list += BasicEntityChangeSubscriptionRequest(EntityStateChanged, Contest)
+			list += ZiqniEntityChangeSubscriptionRequest(EntityStateChanged, Contest)
 
 		if (onCompetitionRewardIssuedEnabled || onContestRewardIssuedEnabled || onAchievementRewardIssuedEnabled)
-			list += BasicEntityChangeSubscriptionRequest(EntityChanged, Award)
+			list += ZiqniEntityChangeSubscriptionRequest(EntityChanged, Award)
 
 		if(onContestRewardCreatedEnabled || onAchievementRewardCreatedEnabled)
-			list += BasicEntityChangeSubscriptionRequest(EntityChanged, Reward)
+			list += ZiqniEntityChangeSubscriptionRequest(EntityChanged, Reward)
 
 		if(onContestRewardClaimedEnabled || onAchievementRewardClaimedEnabled)
-			list += BasicEntityChangeSubscriptionRequest(EntityStateChanged, Award)
+			list += ZiqniEntityChangeSubscriptionRequest(EntityStateChanged, Award)
 
 		if(onAchievementCreatedEnabled)
-			list += BasicEntityChangeSubscriptionRequest(EntityChanged, Achievement)
+			list += ZiqniEntityChangeSubscriptionRequest(EntityChanged, Achievement)
 
 		list.toSeq
 	}

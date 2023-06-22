@@ -6,4 +6,4 @@
   */
 package com.ziqni.transformers.domain
 
-case class BasicAuthCredentials(username: String, password: String)
+case class ZiqniAuthCredentials(username: String, password: String)

@@ -56,7 +56,11 @@ trait ZiqniContext {
 
   def ziqniExecutionContext: ExecutionContextExecutor
 
-  def ziqniSubAccounts: Seq[BasicAccount]
+  def ziqniSubAccounts: Seq[ZiqniAccount]
 
   def ziqniSubAccountApiAsync(spaceName: SpaceName): ZiqniApiAsync
+
+  def connectionParameterKeys(): Seq[String]
+
+  def getConnectionParameter[T<:Any](connectionParameterKey:String): Option[T]
 }

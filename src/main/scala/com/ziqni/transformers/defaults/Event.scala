@@ -1,7 +1,7 @@
 package com.ziqni.transformers.defaults
 
 import com.ziqni.transformers.ZiqniContext
-import com.ziqni.transformers.domain.{BasicEventModel, CustomFieldEntry, CustomFieldEntryImplicits, CustomFieldEntryNumber, CustomFieldEntryNumberArray, CustomFieldEntryText, CustomFieldEntryTextArray}
+import com.ziqni.transformers.domain.{ZiqniEvent, CustomFieldEntry, CustomFieldEntryImplicits, CustomFieldEntryNumber, CustomFieldEntryNumberArray, CustomFieldEntryText, CustomFieldEntryTextArray}
 import org.joda.time.DateTime
 import org.json4s.DefaultFormats
 import org.json4s.jackson.parseJson
@@ -28,7 +28,7 @@ case class Event(
                          customFields: Map[String,Any]
                        ) extends CustomFieldEntryImplicits {
 
-  def asBasicEventModel: BasicEventModel = {
+  def asBasicEventModel: ZiqniEvent = {
 
     def handleSeq(key:String, list:Seq[_]): (String, CustomFieldEntry[_<:Any]) = {
       list.headOption.map {
@@ -84,7 +84,7 @@ case class Event(
         ( customFields._1, CustomFieldEntryText(in.toString))
     })
 
-    BasicEventModel(
+    ZiqniEvent(
       memberId = memberId,
       memberRefId = memberRefId,
       entityRefId = entityRefId,

@@ -7,49 +7,37 @@
 
 package com.ziqni.transformers.domain
 
-abstract class BasicProductModel {
+abstract class ZiqniMember {
 
 	/**
 	  *
-	  * @return Product Ref Id of remote system
+	  * @return Member Ref Id of remote system
 	  */
-	def getProductReferenceId: String
+	def getMemberRefId: String
 
 	/**
 	  *
-	  * @return Name of the Product
+	  * @return Display name as in remote system or default to ref id
 	  */
-	def getName: String
+	def getDisplayName: Option[String]
 
 	/**
 	  *
-	  * @return List of providers this product belongs to
+	  * @return List of tags associated with the member
 	  */
-	def getProviders: Array[String]
+	def getTags: Option[Seq[String]]
 
 	/**
 	  *
-	  * @return Type of product
-	  */
-	def getProductType: String
-
-	/**
-	  *
-	  * @return Default adjustment factor
-	  */
-	def getDefaultAdjustmentFactor: Option[Double]
-
-	/**
-	  *
-	  * @return Any metadata associated with product
+	  * @return Any metadata associated with member
 	  */
 	def getMetaData: Option[Map[String, String]]
 
 	/**
 	  *
-	  * @return CL Product id
+	  * @return CL Member id
 	  */
-	def getClProductId: String
+	def getMemberId: String
 
 	/**
 		* Get the custom fields

@@ -7,7 +7,7 @@
 
 package com.ziqni.transformers.domain
 
-abstract class BasicRewardModel {
+abstract class ZiqniReward {
 
 	/**
 	  *
@@ -85,7 +85,7 @@ abstract class BasicRewardModel {
 	  *
 	  * @return CL Reward id
 	  */
-	def getClRewardId: String
+	def getRewardId: String
 
 	/**
 		* Get the custom fields

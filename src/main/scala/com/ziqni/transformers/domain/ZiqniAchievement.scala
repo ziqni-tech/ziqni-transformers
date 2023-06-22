@@ -9,7 +9,7 @@ package com.ziqni.transformers.domain
 
 import org.joda.time.DateTime
 
-abstract class BasicAchievementModel {
+abstract class ZiqniAchievement {
 
     /**
       *
@@ -57,7 +57,7 @@ abstract class BasicAchievementModel {
       *
       * @return CL id for achievement
       */
-    def getClAchievementId: String
+    def getAchievementId: String
 
     /**
       *

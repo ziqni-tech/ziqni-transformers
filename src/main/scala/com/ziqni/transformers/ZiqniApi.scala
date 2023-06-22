@@ -40,7 +40,7 @@ trait ZiqniApi {
 	  * @return True on success, false on duplicate and exception if malformed
 	  */
 	@Deprecated(since = "v1.0.6")
-	def pushEvent(event: BasicEventModel): Boolean
+	def pushEvent(event: ZiqniEvent): Boolean
 
 	/**
 		* DEPRECATED, use the async methods!
@@ -50,7 +50,7 @@ trait ZiqniApi {
 	  * @return True on success, false on duplicate and exception if malformed
 	  */
 	@Deprecated(since = "v1.0.6")
-	def pushEvents(events: Seq[BasicEventModel]): Boolean
+	def pushEvents(events: Seq[ZiqniEvent]): Boolean
 
 	/**
 		* DEPRECATED, use the async methods!
@@ -60,7 +60,7 @@ trait ZiqniApi {
 	  * @return The id used in the Ziqni system or None if the user does not exist
 	  */
 	@Deprecated(since = "v1.0.6")
-	def memberIdFromMemberRefId(memberReferenceId: String): Option[String]
+	def memberIdFromMemberRefId(memberReferenceId: String): Option[ZiqniMember]
 
 	/**
 		* DEPRECATED, use the async methods!
@@ -82,7 +82,7 @@ trait ZiqniApi {
 	  * @return The id used in the Ziqni system
 	  */
 	@Deprecated(since = "v1.0.6")
-	def createMember(memberReferenceId: String, displayName: String, tags: Seq[String], metaData: Option[Map[String, String]]): Option[String]
+	def createMember(toCreate: CreateMember): Option[String]
 
 	/**
 		* DEPRECATED, use the async methods!
@@ -102,7 +102,7 @@ trait ZiqniApi {
 	  * @return BasicMemberModel returns a basic member object
 	  */
 	@Deprecated(since = "v1.0.6")
-	def getMember(memberId: String): Option[BasicMemberModel]
+	def getMember(memberId: String): Option[ZiqniMember]
 
 	/**
 		* DEPRECATED, use the async methods!
@@ -112,7 +112,7 @@ trait ZiqniApi {
 	  * @return The id used in the Ziqni system or None if the product does not exist
 	  */
 	@Deprecated(since = "v1.0.6")
-	def productIdFromProductRefId(productReferenceId: String): Option[String]
+	def productFromProductRefId(productReferenceId: String): Option[ZiqniProduct]
 
 	/**
 		* DEPRECATED, use the async methods!
@@ -135,7 +135,7 @@ trait ZiqniApi {
 	  * @return The id used in the Ziqni system
 	  */
 	@Deprecated(since = "v1.0.6")
-	def createProduct(productReferenceId: String, displayName: String, providers: Seq[String], productType: String, defaultAdjustmentFactor: Double, metaData: Option[Map[String, String]]): Option[String]
+	def createProduct(toCreate: CreateProduct): Option[String]
 
 	/**
 		* DEPRECATED, use the async methods!
@@ -167,7 +167,7 @@ trait ZiqniApi {
 	  * @return BasicProductModel returns a basic product object
 	  */
 	@Deprecated(since = "v1.0.6")
-	def getProduct(productId: String): Option[BasicProductModel]
+	def getProduct(productId: String): Option[ZiqniProduct]
 
 	/**
 		* DEPRECATED, use the async methods!
@@ -218,7 +218,7 @@ trait ZiqniApi {
 	  * @return BasicAchievementModel returns a basic achievement object
 	  */
 	@Deprecated(since = "v1.0.6")
-	def getAchievement(achievementId: String): Option[BasicAchievementModel]
+	def getAchievement(achievementId: String): Option[ZiqniAchievement]
 
 	/**
 		* DEPRECATED, use the async methods!
@@ -227,7 +227,7 @@ trait ZiqniApi {
 	  * @return BasicContestModel returns a basic contest object
 	  */
 	@Deprecated(since = "v1.0.6")
-	def getContest(contestId: String): Option[BasicContestModel]
+	def getContest(contestId: String): Option[ZiqniContest]
 
 	/**
 		* DEPRECATED, use the async methods!
@@ -236,7 +236,7 @@ trait ZiqniApi {
 	  * @return BasicRewardModel returns a basic reward object
 	  */
 	@Deprecated(since = "v1.0.6")
-	def getReward(rewardId: String): Option[BasicRewardModel]
+	def getReward(rewardId: String): Option[ZiqniReward]
 
 	/**
 		* DEPRECATED, use the async methods!
@@ -245,7 +245,7 @@ trait ZiqniApi {
 	  * @return BasicAwardModel returns a basic award object
 	  */
 	@Deprecated(since = "v1.0.6")
-	def getAward(awardId: String): Option[BasicAwardModel]
+	def getAward(awardId: String): Option[ZiqniAward]
 
 	/**
 		* DEPRECATED, use the async methods!
@@ -254,7 +254,7 @@ trait ZiqniApi {
 	  * @return BasicUnitOfMeasureModel returns a basic unit of measure object
 	  */
 	@Deprecated(since = "v1.0.6")
-	def getUnitOfMeasure(unitOfMeasureId: String): Option[BasicUnitOfMeasureModel]
+	def getUnitOfMeasure(unitOfMeasureId: String): Option[ZiqniUnitOfMeasure]
 
 	/**
 		* DEPRECATED, use the async methods!

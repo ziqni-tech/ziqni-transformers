@@ -20,7 +20,7 @@ import org.joda.time.DateTime
   * @param tags Additional meta data describing this event
   * @param metadata Additional meta data in key value format describing this event
   */
-case class BasicEventModel(
+case class ZiqniEvent(
 													memberId: Option[String],
 													memberRefId: String,
 													entityRefId: String,

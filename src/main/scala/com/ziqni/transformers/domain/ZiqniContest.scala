@@ -9,7 +9,7 @@ package com.ziqni.transformers.domain
 
 import org.joda.time.DateTime
 
-abstract class BasicContestModel {
+abstract class ZiqniContest {
 
 	/**
 	  *
@@ -45,7 +45,7 @@ abstract class BasicContestModel {
 	  *
 	  * @return CL id for Contest
 	  */
-	def getClContestId: String
+	def getContestId: String
 
 	/**
 	  *

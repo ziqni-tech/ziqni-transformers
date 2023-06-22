@@ -74,7 +74,7 @@ trait ZiqniApiAsync {
 		* @param createAs      The object to use when creating the product
 		* @return The id used in the Ziqni system
 		*/
-	def getOrCreateMember(id: String, isReferenceId: Boolean, createAs: () => CreateProduct): Future[Option[ZiqniMember]]
+	def getOrCreateMember(id: String, isReferenceId: Boolean, createAs: () => CreateMember): Future[ZiqniMember]
 
 	/**
 	  *
@@ -126,7 +126,7 @@ trait ZiqniApiAsync {
 	  * @param createAs The object to use when creating the product
 	  * @return The id used in the Ziqni system
 	  */
-	def getOrCreateProduct(id: String, isReferenceId: Boolean, createAs: () => CreateProduct): Future[Option[ZiqniProduct]]
+	def getOrCreateProduct(id: String, isReferenceId: Boolean, createAs: () => CreateProduct): Future[ZiqniProduct]
 
 	/**
 	  *
@@ -243,7 +243,7 @@ trait ZiqniApiAsync {
 		* @param unitOfMeasureType The type [OTHER, CURRENCY, MASS, TIME, TEMPERATURE, ELECTRICCURRENT, AMOUNTOFSUBSTANCE, LUMINOUSINTENSITY, DISTANCE]
 		* @return
 		*/
-	def getOrCreateUnitOfMeasure(key: String, createAs: () => CreateUnitOfMeasure): Future[Option[ZiqniUnitOfMeasure]]
+	def getOrCreateUnitOfMeasure(key: String, createAs: () => CreateUnitOfMeasure): Future[ZiqniUnitOfMeasure]
 
 	/**
 	  *

@@ -8,6 +8,8 @@ package com.ziqni.transformers
 import com.ziqni.transformers.domain._
 trait ZiqniMqTransformer {
 
+	val IsReferenceId = true
+
 	/**
 	  * This method gets executed when a message is received on the message queue
 	  * @param message The message

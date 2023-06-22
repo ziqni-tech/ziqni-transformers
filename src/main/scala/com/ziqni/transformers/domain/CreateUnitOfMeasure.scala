@@ -5,6 +5,6 @@ package com.ziqni.transformers.domain
   *  Proprietary and confidential
   *  Written by Ziqni Ltd, 2023
   */
-class CreateUnitOfMeasure(key: String, name: String, isoCode: Option[String], multiplier: Double, unitOfMeasureType: Option[String]) {
+class CreateUnitOfMeasure(key: String, name: String, multiplier: Double, isoCode: Option[String] = None, unitOfMeasureType: Option[String] = None) {
 
 }

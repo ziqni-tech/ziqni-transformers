@@ -83,7 +83,7 @@ trait ZiqniApiAsync {
 	  * @param groupsToUpdate The groups to add this member to
 	  * @return The id used in the Ziqni system
 	  */
-	def updateMember(memberId: String, memberReferenceId: Option[String], displayName: Option[String], tagsToUpdate: Option[Seq[String]], metaData: Option[Map[String, String]]): Future[Option[String]]
+	def updateMember(memberId: String, memberReferenceId: Option[String], displayName: Option[String], tagsToUpdate: Option[Seq[String]], metadata: Option[Map[String, String]]): Future[Option[String]]
 
 	/**
 	  *
@@ -137,7 +137,7 @@ trait ZiqniApiAsync {
 	  * @param defaultAdjustmentFactor The default adjustment factor to apply
 	  * @return The id used in the Ziqni system
 	  */
-	def updateProduct(productId: String, productReferenceId: Option[String], displayName: Option[String], providers: Option[Seq[String]], productType: Option[String], defaultAdjustmentFactor: Option[Double], metaData: Option[Map[String, String]]): Future[Option[String]]
+	def updateProduct(productId: String, productReferenceId: Option[String], displayName: Option[String], providers: Option[Seq[String]], productType: Option[String], defaultAdjustmentFactor: Option[Double], metadata: Option[Map[String, String]]): Future[Option[String]]
 
 
 	/**
@@ -170,7 +170,7 @@ trait ZiqniApiAsync {
 	  * @param action True on success false on failure
 	  * @return
 	  */
-	def createEventAction(action: String, name: Option[String], metaData: Option[Map[String, String]], unitOfMeasureKey: Option[String]): Future[Boolean]
+	def createEventAction(action: String, name: Option[String], metadata: Option[Map[String, String]], unitOfMeasureKey: Option[String]): Future[Boolean]
 
 	/** *
 	  * Get or create the action in your space
@@ -186,7 +186,7 @@ trait ZiqniApiAsync {
 	  * @param action True on success false on failure
 	  * @return
 	  */
-	def updateEventAction(action: String, name: Option[String], metaData: Option[Map[String, String]], unitOfMeasureType: Option[String]): Future[Boolean]
+	def updateEventAction(action: String, name: Option[String], metadata: Option[Map[String, String]], unitOfMeasureType: Option[String]): Future[Boolean]
 
 	/**
 	  *

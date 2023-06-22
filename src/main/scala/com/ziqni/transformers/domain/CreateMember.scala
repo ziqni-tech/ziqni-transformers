@@ -5,6 +5,6 @@ package com.ziqni.transformers.domain
   *  Proprietary and confidential
   *  Written by Ziqni Ltd, 2023
   */
-case class CreateMember(memberReferenceId: String, displayName: String, tags: Seq[String] = Seq.empty, customFields: Map[String,CustomFieldEntry[_<:Any]] = Map.empty, metaData: Map[String, String] = Map.empty) {
+case class CreateMember(memberReferenceId: String, displayName: String, tags: Seq[String] = Seq.empty, customFields: Map[String,CustomFieldEntry[_<:Any]] = Map.empty, metadata: Map[String, String] = Map.empty) {
 
 }

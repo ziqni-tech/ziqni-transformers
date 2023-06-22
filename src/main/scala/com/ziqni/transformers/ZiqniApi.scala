@@ -93,7 +93,7 @@ trait ZiqniApi {
 	  * @return The id used in the Ziqni system
 	  */
 	@Deprecated(since = "v1.0.6")
-	def updateMember(memberId: String, memberReferenceId: Option[String], displayName: Option[String], tagsToUpdate: Option[Seq[String]], metaData: Option[Map[String, String]]): Option[String]
+	def updateMember(memberId: String, memberReferenceId: Option[String], displayName: Option[String], tagsToUpdate: Option[Seq[String]], metadata: Option[Map[String, String]]): Option[String]
 
 	/**
 		* DEPRECATED, use the async methods!
@@ -148,7 +148,7 @@ trait ZiqniApi {
 	  * @return The id used in the Ziqni system
 	  */
 	@Deprecated(since = "v1.0.6")
-	def updateProduct(productId: String, productReferenceId: Option[String], displayName: Option[String], providers: Option[Seq[String]], productType: Option[String], defaultAdjustmentFactor: Option[Double], metaData: Option[Map[String, String]]): Option[String]
+	def updateProduct(productId: String, productReferenceId: Option[String], displayName: Option[String], providers: Option[Seq[String]], productType: Option[String], defaultAdjustmentFactor: Option[Double], metadata: Option[Map[String, String]]): Option[String]
 
 	/**
 		* DEPRECATED, use the async methods!
@@ -187,7 +187,7 @@ trait ZiqniApi {
 	  * @return
 	  */
 	@Deprecated(since = "v1.0.6")
-	def createEventAction(action: String, name: Option[String], metaData: Option[Map[String, String]], unitOfMeasureKey: Option[String]): Boolean
+	def createEventAction(action: String, name: Option[String], metadata: Option[Map[String, String]], unitOfMeasureKey: Option[String]): Boolean
 
 	/** *
 		* DEPRECATED, use the async methods!
@@ -197,7 +197,7 @@ trait ZiqniApi {
 	  * @return
 	  */
 	@Deprecated(since = "v1.0.6")
-	def updateEventAction(action: String, name: Option[String], metaData: Option[Map[String, String]], unitOfMeasureType: Option[String]): Boolean
+	def updateEventAction(action: String, name: Option[String], metadata: Option[Map[String, String]], unitOfMeasureType: Option[String]): Boolean
 
 	/**
 		* DEPRECATED, use the async methods!

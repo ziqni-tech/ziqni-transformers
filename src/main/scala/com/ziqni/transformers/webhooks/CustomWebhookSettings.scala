@@ -85,7 +85,7 @@ case class CustomWebhookSettings(
 	/**
 	 * The required entity change and state change subscriptions based on the selected settings
 	 */
-	val classicEntityChangeSubscriptionRequest: Seq[ZiqniEntityChangeSubscriptionRequest] = {
+	val customEntityChangeSubscriptionRequest: Seq[ZiqniEntityChangeSubscriptionRequest] = {
 
 		val list = new ListBuffer[ZiqniEntityChangeSubscriptionRequest]()
 

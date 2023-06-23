@@ -91,7 +91,7 @@ trait ZiqniApiAsync {
 		* @param createAs      The object to use when creating the product
 		* @return The id used in the Ziqni system
 		*/
-	def getAndOnExitsOrCreateMember(referenceId: String, createAs: () => CreateMemberRequest, onExist: ZiqniMember => ZiqniMember = x=>x): Future[ZiqniMember]
+	def getAndOnExitsOrCreateMember(referenceId: String, onExist: ZiqniMember => Future[ZiqniMember], createAs: () => CreateMemberRequest): Future[ZiqniMember]
 
 	/**
 	  *
@@ -149,7 +149,7 @@ trait ZiqniApiAsync {
 	  * @param createAs The object to use when creating the product
 	  * @return The id used in the Ziqni system
 	  */
-	def getAndOnExitsOrCreateProduct(referenceId: String, createAs: () => CreateProductRequest, onExist: ZiqniProduct => ZiqniProduct = x=>x): Future[ZiqniProduct]
+	def getAndOnExitsOrCreateProduct(referenceId: String, onExist: ZiqniProduct => Future[ZiqniProduct], createAs: () => CreateProductRequest): Future[ZiqniProduct]
 
 	/**
 	  *

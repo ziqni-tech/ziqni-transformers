@@ -85,6 +85,15 @@ trait ZiqniApiAsync {
 	def getOrCreateMember(referenceId: String, createAs: () => CreateMemberRequest): Future[ZiqniMember]
 
 	/**
+		* Get or create a member
+		*
+		* @param referenceId Is the id the ZIQNI id or a reference id
+		* @param createAs      The object to use when creating the product
+		* @return The id used in the Ziqni system
+		*/
+	def getAndUpdateOrCreateMember(referenceId: String, createAs: () => CreateMemberRequest, onExist: ZiqniMember => ZiqniMember = x=>x): Future[ZiqniMember]
+
+	/**
 	  *
 	  * @param clMemberId     CL Member Id
 	  * @param displayName    Display name
@@ -134,6 +143,13 @@ trait ZiqniApiAsync {
 	  * @return The id used in the Ziqni system
 	  */
 	def getOrCreateProduct(referenceId: String, createAs: () => CreateProductRequest): Future[ZiqniProduct]
+	/**
+	  * Get or create a product
+	  * @param referenceId Is the id the ZIQNI id or a reference id
+	  * @param createAs The object to use when creating the product
+	  * @return The id used in the Ziqni system
+	  */
+	def getAndUpdateOrCreateProduct(referenceId: String, createAs: () => CreateProductRequest, onExist: ZiqniProduct => ZiqniProduct = x=>x): Future[ZiqniProduct]
 
 	/**
 	  *

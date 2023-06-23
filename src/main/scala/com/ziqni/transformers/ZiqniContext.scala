@@ -64,7 +64,7 @@ trait ZiqniContext {
 
   def ziqniConnectionParameterKeys(): Set[String]
 
-  def ziqniConnectionParameter[AnyRef](connectionParameterKey:String): Option[AnyRef]
+  def ziqniConnectionParameter(connectionParameterKey:String): Option[AnyRef]
 
   def ziqniSystemLogWriter(message: String, throwable: Throwable, logLevel: LogLevel): Unit
 }

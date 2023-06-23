@@ -28,7 +28,7 @@ case class Event(
                          customFields: Map[String,Any]
                        ) extends CustomFieldEntryImplicits {
 
-  def asBasicEventModel: ZiqniEvent = {
+  def asZiqniEvent: ZiqniEvent = {
 
     def handleSeq(key:String, list:Seq[_]): (String, CustomFieldEntry[_<:Any]) = {
       list.headOption.map {

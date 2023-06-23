@@ -5,6 +5,6 @@ package com.ziqni.transformers.domain
   *  Proprietary and confidential
   *  Written by Ziqni Ltd, 2023
   */
-case class CreateEventAction(action: String, name: Option[String], unitOfMeasureKey: Option[String], metadata: Map[String, String] = Map.empty) {
+case class CreateEventActionRequest(action: String, name: Option[String], unitOfMeasureKey: Option[String], metadata: Map[String, String] = Map.empty) {
 
 }

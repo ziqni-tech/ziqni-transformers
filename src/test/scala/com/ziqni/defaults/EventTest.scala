@@ -38,7 +38,7 @@ class EventTest extends AnyFunSuiteLike with CustomFieldEntryImplicits {
 
     val json = Serialization.write(event)(DefaultFormats)
     val jsonString = json.toString
-    val asBasicEventObject = event.asBasicEventModel
+    val asBasicEventObject = event.asZiqniEventModel
 
     assert(asBasicEventObject.memberId.get == "memberId")
 

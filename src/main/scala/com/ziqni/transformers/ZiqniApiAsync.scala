@@ -73,7 +73,7 @@ trait ZiqniApiAsync {
 	  * @param tags            The groups to add this member to
 	  * @return The id used in the Ziqni system
 	  */
-	def createMember(toCreate: CreateMember): Future[Option[String]]
+	def createMember(toCreate: CreateMemberRequest): Future[Option[String]]
 
 	/**
 		* Get or create a member
@@ -82,7 +82,7 @@ trait ZiqniApiAsync {
 		* @param createAs      The object to use when creating the product
 		* @return The id used in the Ziqni system
 		*/
-	def getOrCreateMember(referenceId: String, createAs: () => CreateMember): Future[ZiqniMember]
+	def getOrCreateMember(referenceId: String, createAs: () => CreateMemberRequest): Future[ZiqniMember]
 
 	/**
 	  *
@@ -125,7 +125,7 @@ trait ZiqniApiAsync {
 	  * @param defaultAdjustmentFactor The default adjustment factor to apply
 	  * @return The id used in the Ziqni system
 	  */
-	def createProduct(toCreate: CreateProduct): Future[Option[String]]
+	def createProduct(toCreate: CreateProductRequest): Future[Option[String]]
 
 	/**
 	  * Get or create a product
@@ -133,7 +133,7 @@ trait ZiqniApiAsync {
 	  * @param createAs The object to use when creating the product
 	  * @return The id used in the Ziqni system
 	  */
-	def getOrCreateProduct(referenceId: String, createAs: () => CreateProduct): Future[ZiqniProduct]
+	def getOrCreateProduct(referenceId: String, createAs: () => CreateProductRequest): Future[ZiqniProduct]
 
 	/**
 	  *
@@ -177,7 +177,7 @@ trait ZiqniApiAsync {
 	  * @param action True on success false on failure
 	  * @return
 	  */
-	def createEventAction(toCreate: CreateEventAction): Future[Boolean]
+	def createEventAction(toCreate: CreateEventActionRequest): Future[Boolean]
 
 	/** *
 	  * Get or create the action in your space
@@ -185,7 +185,7 @@ trait ZiqniApiAsync {
 	  * @param action True on success false on failure
 	  * @return
 	  */
-	def getOrCreateEventAction(action: String, createAs: () => CreateEventAction): Future[String]
+	def getOrCreateEventAction(action: String, createAs: () => CreateEventActionRequest): Future[String]
 
 	/** *
 	  * Update the action in your space
@@ -239,7 +239,7 @@ trait ZiqniApiAsync {
 		* @param unitOfMeasureType The type [OTHER, CURRENCY, MASS, TIME, TEMPERATURE, ELECTRICCURRENT, AMOUNTOFSUBSTANCE, LUMINOUSINTENSITY, DISTANCE]
 		* @return
 		*/
-	def createUnitOfMeasure(toCreate: CreateUnitOfMeasure): Future[Option[String]]
+	def createUnitOfMeasure(toCreate: CreateUnitOfMeasureRequest): Future[Option[String]]
 
 	/**
 		* Get or create unit of measure
@@ -250,7 +250,7 @@ trait ZiqniApiAsync {
 		* @param unitOfMeasureType The type [OTHER, CURRENCY, MASS, TIME, TEMPERATURE, ELECTRICCURRENT, AMOUNTOFSUBSTANCE, LUMINOUSINTENSITY, DISTANCE]
 		* @return
 		*/
-	def getOrCreateUnitOfMeasure(key: String, createAs: () => CreateUnitOfMeasure): Future[ZiqniUnitOfMeasure]
+	def getOrCreateUnitOfMeasure(key: String, createAs: () => CreateUnitOfMeasureRequest): Future[ZiqniUnitOfMeasure]
 
 	/**
 	  *

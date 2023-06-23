@@ -82,7 +82,7 @@ trait ZiqniApi {
 	  * @return The id used in the Ziqni system
 	  */
 	@Deprecated(since = "v1.0.6")
-	def createMember(toCreate: CreateMember): Option[String]
+	def createMember(toCreate: CreateMemberRequest): Option[String]
 
 	/**
 		* DEPRECATED, use the async methods!
@@ -135,7 +135,7 @@ trait ZiqniApi {
 	  * @return The id used in the Ziqni system
 	  */
 	@Deprecated(since = "v1.0.6")
-	def createProduct(toCreate: CreateProduct): Option[String]
+	def createProduct(toCreate: CreateProductRequest): Option[String]
 
 	/**
 		* DEPRECATED, use the async methods!

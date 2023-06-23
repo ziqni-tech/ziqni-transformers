@@ -5,6 +5,6 @@ package com.ziqni.transformers.domain
   *  Proprietary and confidential
   *  Written by Ziqni Ltd, 2023
   */
-class CreateUnitOfMeasure(key: String, name: String, multiplier: Double, isoCode: Option[String] = None, unitOfMeasureType: Option[String] = None) {
+class CreateUnitOfMeasure(val key: String, val name: String, val multiplier: Double, val isoCode: Option[String] = None, val unitOfMeasureType: Option[String] = None, val customFields: Map[String,CustomFieldEntry[_<:Any]] = Map.empty) {
 
 }

@@ -148,7 +148,7 @@ trait ZiqniApi {
 	  * @return The id used in the Ziqni system
 	  */
 	@Deprecated(since = "v1.0.6")
-	def updateProduct(productId: String, productReferenceId: Option[String], displayName: Option[String], providers: Option[Seq[String]], productType: Option[String], defaultAdjustmentFactor: Option[Double], metadata: Option[Map[String, String]]): Option[String]
+	def updateProduct(productId: String, productReferenceId: Option[String], displayName: Option[String], tags: Option[Seq[String]], defaultAdjustmentFactor: Option[Double], metadata: Option[Map[String, String]]): Option[String]
 
 	/**
 		* DEPRECATED, use the async methods!

@@ -144,7 +144,7 @@ trait ZiqniApiAsync {
 	  * @param defaultAdjustmentFactor The default adjustment factor to apply
 	  * @return The id used in the Ziqni system
 	  */
-	def updateProduct(productId: String, productReferenceId: Option[String], displayName: Option[String], providers: Option[Seq[String]], productType: Option[String], defaultAdjustmentFactor: Option[Double], metadata: Option[Map[String, String]]): Future[Option[String]]
+	def updateProduct(productId: String, productReferenceId: Option[String], displayName: Option[String], tags: Option[Seq[String]], defaultAdjustmentFactor: Option[Double], metadata: Option[Map[String, String]]): Future[Option[String]]
 
 
 	/**
@@ -258,6 +258,4 @@ trait ZiqniApiAsync {
 	  * @return Double returns a multiplier associated with the UoM
 	  */
 	def getUoMMultiplierFromKey(unitOfMeasureKey: String): Future[Option[Double]]
-
-	def writeToSystemLog(message: String, throwable: Throwable, logLevel: LogLevel): Unit
 }

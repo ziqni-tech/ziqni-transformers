@@ -43,7 +43,7 @@ abstract class ZiqniContest {
 
 	/**
 	  *
-	  * @return CL id for Contest
+	  * @return ZIQNI id for Contest
 	  */
 	def getContestId: String
 

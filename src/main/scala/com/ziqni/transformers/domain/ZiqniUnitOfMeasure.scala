@@ -25,7 +25,7 @@ abstract class ZiqniUnitOfMeasure {
 
 	/**
 	  *
-	  * @return CL UoM id
+	  * @return ZIQNI UoM id
 	  */
 	def getUnitOfMeasureId: String
 

@@ -35,7 +35,7 @@ abstract class ZiqniAward {
 
 	/**
 	  *
-	  * @return CL Award id
+	  * @return ZIQNI Award id
 	  */
 	def getAwardId: String
 
@@ -71,13 +71,13 @@ abstract class ZiqniAward {
 
 	/**
 	  *
-	  * @return CL Reward type id
+	  * @return ZIQNI Reward type id
 	  */
 	def getRewardTypeId: String
 
 	/**
 	  *
-	  * @return CL Reward Id
+	  * @return ZIQNI Reward Id
 	  */
 	def getRewardId: String
 

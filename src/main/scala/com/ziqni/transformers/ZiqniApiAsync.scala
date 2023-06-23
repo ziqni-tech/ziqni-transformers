@@ -95,7 +95,7 @@ trait ZiqniApiAsync {
 
 	/**
 	  *
-	  * @param clMemberId     CL Member Id
+	  * @param clMemberId     ZIQNI Member Id
 	  * @param displayName    Display name
 	  * @param groupsToUpdate The groups to add this member to
 	  * @return The id used in the Ziqni system
@@ -153,7 +153,7 @@ trait ZiqniApiAsync {
 
 	/**
 	  *
-	  * @param clProductId             CL Product Id
+	  * @param clProductId             ZIQNI Product Id
 	  * @param displayName             Display name
 	  * @param providers               The providers of this product
 	  * @param productType             The type of product

@@ -55,7 +55,7 @@ abstract class ZiqniAchievement {
 
     /**
       *
-      * @return CL id for achievement
+      * @return ZIQNI id for achievement
       */
     def getAchievementId: String
 

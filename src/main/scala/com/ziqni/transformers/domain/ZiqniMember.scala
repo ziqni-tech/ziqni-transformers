@@ -35,7 +35,7 @@ abstract class ZiqniMember {
 
 	/**
 	  *
-	  * @return CL Member id
+	  * @return ZIQNI Member id
 	  */
 	def getMemberId: String
 

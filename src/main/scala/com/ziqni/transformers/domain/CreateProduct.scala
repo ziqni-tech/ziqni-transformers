@@ -5,6 +5,6 @@ package com.ziqni.transformers.domain
   *  Proprietary and confidential
   *  Written by Ziqni Ltd, 2023
   */
-case class CreateProduct(productReferenceId: String, displayName: String, providers: Seq[String], productType: String, defaultAdjustmentFactor: Double, customFields: Map[String,CustomFieldEntry[_<:Any]] = Map.empty, metadata: Map[String, String] = Map.empty) {
+case class CreateProduct(productReferenceId: String, displayName: String, tags: Seq[String], productType: String, defaultAdjustmentFactor: Double, customFields: Map[String,CustomFieldEntry[_<:Any]] = Map.empty, metadata: Map[String, String] = Map.empty) {
 
 }

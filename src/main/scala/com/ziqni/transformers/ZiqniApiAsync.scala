@@ -13,6 +13,15 @@ import scala.concurrent.Future
 
 trait ZiqniApiAsync {
 
+	/** *
+		* Generate a unique time based UUID, this can be used to set the batchId value if
+		* a single event is transformed into multiple distinct events (facts) and a correlation
+		* needs to be maintained
+		*
+		* @return A time based UUID as a string
+		*/
+	def nextId: String
+
 	/**
 		* Insert an event into your Ziqni space
 		*
@@ -46,7 +55,7 @@ trait ZiqniApiAsync {
 	  * @param memberReferenceId The id used to identify this member in the sending system
 	  * @return The id used in the Ziqni system or None if the user does not exist
 	  */
-	def memberIdFromMemberRefId(memberReferenceId: String): Future[Option[String]]
+	def memberFromMemberRefId(memberReferenceId: String): Future[Option[ZiqniMember]]
 
 	/**
 	  * Get the member reference id for the member based on Ziqni id
@@ -54,7 +63,7 @@ trait ZiqniApiAsync {
 	  * @param memberId The id used to identify this member in the sending system
 	  * @return The id used in the Ziqni system or None if the user does not exist
 	  */
-	def memberRefIdFromMemberId(memberId: String): Future[Option[ZiqniMember]]
+	def memberRefIdFromMemberId(memberId: String): Future[Option[String]]
 
 	/**
 	  * Create a member in the Ziqni system
@@ -69,12 +78,11 @@ trait ZiqniApiAsync {
 	/**
 		* Get or create a member
 		*
-		* @param id            The id used to identify this member in the sending system
-		* @param isReferenceId Is the id the ZIQNI id or a reference id
+		* @param referenceId Is the id the ZIQNI id or a reference id
 		* @param createAs      The object to use when creating the product
 		* @return The id used in the Ziqni system
 		*/
-	def getOrCreateMember(id: String, isReferenceId: Boolean, createAs: () => CreateMember): Future[ZiqniMember]
+	def getOrCreateMember(referenceId: String, createAs: () => CreateMember): Future[ZiqniMember]
 
 	/**
 	  *
@@ -121,12 +129,11 @@ trait ZiqniApiAsync {
 
 	/**
 	  * Get or create a product
-	  * @param id The id used to identify this product in the sending system
-	  * @param isReferenceId Is the id the ZIQNI id or a reference id
+	  * @param referenceId Is the id the ZIQNI id or a reference id
 	  * @param createAs The object to use when creating the product
 	  * @return The id used in the Ziqni system
 	  */
-	def getOrCreateProduct(id: String, isReferenceId: Boolean, createAs: () => CreateProduct): Future[ZiqniProduct]
+	def getOrCreateProduct(referenceId: String, createAs: () => CreateProduct): Future[ZiqniProduct]
 
 	/**
 	  *
@@ -170,7 +177,7 @@ trait ZiqniApiAsync {
 	  * @param action True on success false on failure
 	  * @return
 	  */
-	def createEventAction(action: String, name: Option[String], metadata: Option[Map[String, String]], unitOfMeasureKey: Option[String]): Future[Boolean]
+	def createEventAction(toCreate: CreateEventAction): Future[Boolean]
 
 	/** *
 	  * Get or create the action in your space
@@ -232,7 +239,7 @@ trait ZiqniApiAsync {
 		* @param unitOfMeasureType The type [OTHER, CURRENCY, MASS, TIME, TEMPERATURE, ELECTRICCURRENT, AMOUNTOFSUBSTANCE, LUMINOUSINTENSITY, DISTANCE]
 		* @return
 		*/
-	def createUnitOfMeasure(key: String, name: String, isoCode: Option[String], multiplier: Double, unitOfMeasureType: Option[String]): Future[Option[String]]
+	def createUnitOfMeasure(toCreate: CreateUnitOfMeasure): Future[Option[String]]
 
 	/**
 		* Get or create unit of measure
@@ -252,5 +259,5 @@ trait ZiqniApiAsync {
 	  */
 	def getUoMMultiplierFromKey(unitOfMeasureKey: String): Future[Option[Double]]
 
-	def writeToSystemLog(throwable: Throwable, logLevel: LogLevel): Unit
+	def writeToSystemLog(message: String, throwable: Throwable, logLevel: LogLevel): Unit
 }

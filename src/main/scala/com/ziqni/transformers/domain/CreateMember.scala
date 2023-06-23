@@ -1,4 +1,7 @@
 package com.ziqni.transformers.domain
+
+import scala.jdk.CollectionConverters.IterableHasAsJava
+
 /***
   *  Copyright (C) Ziqni Ltd, Inc - All Rights Reserved
   *  Unauthorized copying of this file, via any medium is strictly prohibited

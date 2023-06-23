@@ -7,7 +7,7 @@ package com.ziqni.transformers.domain
   */
 import scala.language.implicitConversions
 
-abstract class CustomFieldEntry[T<:Any] (fieldType: String, value: T)
+abstract class CustomFieldEntry[T<:Any] (fieldType: String, val value: T)
 final case class CustomFieldEntryText(text: String) extends CustomFieldEntry[String](fieldType = "Text", value = text)
 final case class CustomFieldEntryTextArray(texts: Seq[String]) extends CustomFieldEntry[Seq[String]](fieldType = "TextArray", value = texts)
 final case class CustomFieldEntryNumber(number: Double) extends CustomFieldEntry[Double](fieldType = "Number", value = number)

@@ -100,7 +100,7 @@ trait ZiqniApiAsync {
 	  * @param groupsToUpdate The groups to add this member to
 	  * @return The id used in the Ziqni system
 	  */
-	def updateMember(memberId: String, memberReferenceId: Option[String], displayName: Option[String], tagsToUpdate: Option[Seq[String]], metadata: Option[Map[String, String]]): Future[Option[String]]
+	def updateMember(memberId: String, memberReferenceId: Option[String], displayName: Option[String], tagsToUpdate: Option[Seq[String]], customFields: Option[Map[String,CustomFieldEntry[_<:Any]]] = None, metadata: Option[Map[String, String]] = None): Future[Option[String]]
 
 	/**
 	  *
@@ -160,7 +160,7 @@ trait ZiqniApiAsync {
 	  * @param defaultAdjustmentFactor The default adjustment factor to apply
 	  * @return The id used in the Ziqni system
 	  */
-	def updateProduct(productId: String, productReferenceId: Option[String], displayName: Option[String], tags: Option[Seq[String]], defaultAdjustmentFactor: Option[Double], metadata: Option[Map[String, String]]): Future[Option[String]]
+	def updateProduct(productId: String, productReferenceId: Option[String], displayName: Option[String], tags: Option[Seq[String]], defaultAdjustmentFactor: Option[Double], customFields: Option[Map[String,CustomFieldEntry[_<:Any]]] = None, metadata: Option[Map[String, String]] = None): Future[Option[String]]
 
 
 	/**

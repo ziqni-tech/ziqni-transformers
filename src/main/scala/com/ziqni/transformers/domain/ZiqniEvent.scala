@@ -31,5 +31,7 @@ case class ZiqniEvent(
 													transactionTimestamp: DateTime,
 													tags: Seq[String] = Seq.empty,
 													customFields: Map[String, CustomFieldEntry[_<:Any]] = Map.empty
-													)
+													) {
+	override def toString: String = super.toString
+}
 

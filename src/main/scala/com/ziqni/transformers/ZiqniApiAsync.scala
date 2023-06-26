@@ -55,7 +55,7 @@ trait ZiqniApiAsync {
 	  * @param memberReferenceId The id used to identify this member in the sending system
 	  * @return The id used in the Ziqni system or None if the user does not exist
 	  */
-	def memberFromMemberRefId(memberReferenceId: String): Future[Option[ZiqniMember]]
+	def memberFromMemberRefId(memberReferenceId: String): Future[ZiqniMember]
 
 	/**
 	  * Get the member reference id for the member based on Ziqni id
@@ -63,7 +63,7 @@ trait ZiqniApiAsync {
 	  * @param memberId The id used to identify this member in the sending system
 	  * @return The id used in the Ziqni system or None if the user does not exist
 	  */
-	def memberRefIdFromMemberId(memberId: String): Future[Option[String]]
+	def memberRefIdFromMemberId(memberId: String): Future[String]
 
 	/**
 	  * Create a member in the Ziqni system
@@ -73,7 +73,7 @@ trait ZiqniApiAsync {
 	  * @param tags            The groups to add this member to
 	  * @return The id used in the Ziqni system
 	  */
-	def createMember(toCreate: CreateMemberRequest): Future[Option[String]]
+	def createMember(toCreate: CreateMemberRequest): Future[ZiqniMember]
 
 	/**
 		* Get or create a member
@@ -100,7 +100,7 @@ trait ZiqniApiAsync {
 	  * @param groupsToUpdate The groups to add this member to
 	  * @return The id used in the Ziqni system
 	  */
-	def updateMember(memberId: String, memberReferenceId: Option[String], displayName: Option[String], tagsToUpdate: Option[Seq[String]], customFields: Option[Map[String,CustomFieldEntry[_<:Any]]] = None, metadata: Option[Map[String, String]] = None): Future[Option[String]]
+	def updateMember(memberId: String, memberReferenceId: Option[String], displayName: Option[String], tagsToUpdate: Option[Seq[String]], customFields: Option[Map[String,CustomFieldEntry[_<:Any]]] = None, metadata: Option[Map[String, String]] = None): Future[ZiqniMember]
 
 	/**
 	  *
@@ -123,7 +123,7 @@ trait ZiqniApiAsync {
 	  * @param productId The id used to identify this product in the sending system
 	  * @return The id used in the Ziqni system or None if the product does not exist
 	  */
-	def productRefIdFromProductId(productId: String): Future[Option[String]]
+	def productRefIdFromProductId(productId: String): Future[String]
 
 	/**
 	  *
@@ -134,7 +134,7 @@ trait ZiqniApiAsync {
 	  * @param defaultAdjustmentFactor The default adjustment factor to apply
 	  * @return The id used in the Ziqni system
 	  */
-	def createProduct(toCreate: CreateProductRequest): Future[Option[String]]
+	def createProduct(toCreate: CreateProductRequest): Future[String]
 
 	/**
 	  * Get or create a product
@@ -160,7 +160,7 @@ trait ZiqniApiAsync {
 	  * @param defaultAdjustmentFactor The default adjustment factor to apply
 	  * @return The id used in the Ziqni system
 	  */
-	def updateProduct(productId: String, productReferenceId: Option[String], displayName: Option[String], tags: Option[Seq[String]], defaultAdjustmentFactor: Option[Double], customFields: Option[Map[String,CustomFieldEntry[_<:Any]]] = None, metadata: Option[Map[String, String]] = None): Future[Option[String]]
+	def updateProduct(productId: String, productReferenceId: Option[String], displayName: Option[String], tags: Option[Seq[String]], defaultAdjustmentFactor: Option[Double], customFields: Option[Map[String,CustomFieldEntry[_<:Any]]] = None, metadata: Option[Map[String, String]] = None): Future[ZiqniProduct]
 
 
 	/**
@@ -176,7 +176,7 @@ trait ZiqniApiAsync {
 	  * @param productId Ziqni Product Id
 	  * @return BasicProductModel returns a basic product object
 	  */
-	def getProduct(productId: String): Future[Option[ZiqniProduct]]
+	def getProduct(productId: String): Future[ZiqniProduct]
 
 
 	/**
@@ -216,28 +216,28 @@ trait ZiqniApiAsync {
 	  * @param achievementId Ziqni Achievement Id
 	  * @return BasicAchievementModel returns a basic achievement object
 	  */
-	def getAchievement(achievementId: String): Future[Option[ZiqniAchievement]]
+	def getAchievement(achievementId: String): Future[ZiqniAchievement]
 
 	/**
 	  *
 	  * @param contestId Ziqni Contest Id
 	  * @return BasicContestModel returns a basic contest object
 	  */
-	def getContest(contestId: String): Future[Option[ZiqniContest]]
+	def getContest(contestId: String): Future[ZiqniContest]
 
 	/**
 	  *
 	  * @param rewardId Ziqni Reward Id
 	  * @return BasicRewardModel returns a basic reward object
 	  */
-	def getReward(rewardId: String): Future[Option[ZiqniReward]]
+	def getReward(rewardId: String): Future[ZiqniReward]
 
 	/**
 	  *
 	  * @param awardId Ziqni Award Id
 	  * @return BasicAwardModel returns a basic award object
 	  */
-	def getAward(awardId: String): Future[Option[ZiqniAward]]
+	def getAward(awardId: String): Future[ZiqniAward]
 
 	/**
 	  *
@@ -255,7 +255,7 @@ trait ZiqniApiAsync {
 		* @param unitOfMeasureType The type [OTHER, CURRENCY, MASS, TIME, TEMPERATURE, ELECTRICCURRENT, AMOUNTOFSUBSTANCE, LUMINOUSINTENSITY, DISTANCE]
 		* @return
 		*/
-	def createUnitOfMeasure(toCreate: CreateUnitOfMeasureRequest): Future[Option[String]]
+	def createUnitOfMeasure(toCreate: CreateUnitOfMeasureRequest): Future[String]
 
 	/**
 		* Get or create unit of measure
@@ -273,5 +273,5 @@ trait ZiqniApiAsync {
 	  * @param unitOfMeasureKey Ziqni UoM key
 	  * @return Double returns a multiplier associated with the UoM
 	  */
-	def getUoMMultiplierFromKey(unitOfMeasureKey: String): Future[Option[Double]]
+	def getUoMMultiplierFromKey(unitOfMeasureKey: String): Future[Double]
 }

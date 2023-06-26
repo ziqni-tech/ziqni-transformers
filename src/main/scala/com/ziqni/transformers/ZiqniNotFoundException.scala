@@ -6,6 +6,6 @@
   */
 package com.ziqni.transformers
 
-case class ZiqniNotFoundException(val message: String) extends Exception(message) {
+case class ZiqniNotFoundException(val message: String) extends RuntimeException(message) {
   override def toString: EventbusAddress = message
 }

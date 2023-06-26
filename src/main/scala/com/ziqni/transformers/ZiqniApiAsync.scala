@@ -107,7 +107,7 @@ trait ZiqniApiAsync {
 	  * @param memberId Ziqni Reward Id
 	  * @return BasicMemberModel returns a basic member object
 	  */
-	def getMember(memberId: String): Future[Option[ZiqniMember]]
+	def getMember(memberId: String): Future[ZiqniMember]
 
 	/**
 	  * Get the Ziqni id for the product based on your reference id
@@ -115,7 +115,7 @@ trait ZiqniApiAsync {
 	  * @param productReferenceId The id used to identify this product in the sending system
 	  * @return The id used in the Ziqni system or None if the product does not exist
 	  */
-	def productFromProductRefId(productReferenceId: String): Future[Option[ZiqniProduct]]
+	def productFromProductRefId(productReferenceId: String): Future[ZiqniProduct]
 
 	/**
 	  * Get the product id for the product based on your Ziqni id
@@ -134,7 +134,7 @@ trait ZiqniApiAsync {
 	  * @param defaultAdjustmentFactor The default adjustment factor to apply
 	  * @return The id used in the Ziqni system
 	  */
-	def createProduct(toCreate: CreateProductRequest): Future[String]
+	def createProduct(toCreate: CreateProductRequest): Future[ZiqniProduct]
 
 	/**
 	  * Get or create a product

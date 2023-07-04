@@ -7,7 +7,6 @@ import org.json4s.jackson.JsonMethods.parse
 import org.json4s.jackson.Serialization
 import org.json4s.{DefaultFormats, JValue}
 import com.ziqni.transformers.domain._
-import jdk.jfr.internal.LogLevel
 
 import java.nio.charset.Charset
 

@@ -70,4 +70,5 @@ trait ZiqniContext {
   def ziqniConnectionParameterAsDouble(connectionParameterKey:String): Option[Double] = ziqniConnectionParameter(connectionParameterKey).map(_.toString.toDouble)
 
   def ziqniSystemLogWriter(message: String, throwable: Throwable, logLevel: LogLevel): Unit
+  def ziqniSystemLogWriter(message: String, description: String, logLevel: LogLevel): Unit = ziqniSystemLogWriter(message, new Exception(description), logLevel)
 }

@@ -65,5 +65,9 @@ trait ZiqniContext {
 
   def ziqniConnectionParameter(connectionParameterKey:String): Option[AnyRef]
 
+  def ziqniConnectionParameterAsString(connectionParameterKey:String): Option[String] = ziqniConnectionParameter(connectionParameterKey).map(_.toString)
+  def ziqniConnectionParameterAsInt(connectionParameterKey:String): Option[Int] = ziqniConnectionParameter(connectionParameterKey).map(_.toString.toInt)
+  def ziqniConnectionParameterAsDouble(connectionParameterKey:String): Option[Double] = ziqniConnectionParameter(connectionParameterKey).map(_.toString.toDouble)
+
   def ziqniSystemLogWriter(message: String, throwable: Throwable, logLevel: LogLevel): Unit
 }

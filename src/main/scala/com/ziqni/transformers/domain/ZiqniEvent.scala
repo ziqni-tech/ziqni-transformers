@@ -18,7 +18,8 @@ import org.joda.time.DateTime
   * @param sourceValue The value assigned to this event
   * @param transactionTimestamp The date and time in UTC when this transaction occurred
   * @param tags Additional meta data describing this event
-  * @param metadata Additional meta data in key value format describing this event
+  * @param customFields Additional data
+  * @param unitOfMeasure The unit of measure key, like USD or EUR that describes this source value type
   */
 case class ZiqniEvent(
 													memberId: Option[String],
@@ -30,7 +31,8 @@ case class ZiqniEvent(
 													sourceValue: Double,
 													transactionTimestamp: DateTime,
 													tags: Seq[String] = Seq.empty,
-													customFields: Map[String, CustomFieldEntry[_<:Any]] = Map.empty
+													customFields: Map[String, CustomFieldEntry[_<:Any]] = Map.empty,
+													unitOfMeasure: Option[String] = None
 													) {
 	override def toString: String = super.toString
 }

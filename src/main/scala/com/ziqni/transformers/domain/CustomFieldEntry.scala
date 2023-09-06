@@ -29,6 +29,7 @@ trait CustomFieldEntryImplicits {
   implicit def toNumIntArrList(v: List[Int]): CustomFieldEntry[_ <: Any] = CustomFieldEntryNumberArray(v.map(i=>i.doubleValue()))
 
   implicit def toNumDouble(v: Double): CustomFieldEntry[_ <: Any] = CustomFieldEntryNumber(v)
+  implicit def toNumDoubleFromOption(v: Option[Double]): CustomFieldEntryNumber = CustomFieldEntryNumber(v.getOrElse(0.0))
   implicit def toNumDoubleArr(v: Seq[Double]): CustomFieldEntry[_ <: Any] = CustomFieldEntryNumberArray(v)
 
   implicit def toNumLong(v: Long): CustomFieldEntry[_ <: Any] = CustomFieldEntryNumber(v)

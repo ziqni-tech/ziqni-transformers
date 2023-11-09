@@ -74,15 +74,17 @@ trait CustomWebhooks {
         onCompetitionRewardIssued()
       }
       else if (entityType.equalsIgnoreCase(Contest)) {
-        onContestRewardIssued()
         if(claimed)
           onContestRewardClaimedZiqniEntityChanged()
+        else
+          onContestRewardIssued()
+
       }
       else if (entityType.equalsIgnoreCase(Achievement)) {
-        onAchievementRewardIssued()
         if (claimed)
           onAchievementRewardClaimedZiqniEntityChanged()
-
+        else
+          onAchievementRewardIssued()
       }
     }
   }

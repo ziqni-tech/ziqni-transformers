@@ -506,7 +506,7 @@ trait CustomWebhooks {
       } yield {
         val body = Map[String, Any](
           "achievementId" -> ziqniEntityChanged.metadata.get("parentId"),
-          "memberId" -> ziqniEntityChanged.metadata.get("memberId"),
+          "memberId" -> memberId,
           "memberRefId" -> memberRefId,
           "awardId" -> ziqniEntityChanged.entityId,
           "resourcePath" -> s"/awards?id=${ziqniEntityChanged.entityId}",

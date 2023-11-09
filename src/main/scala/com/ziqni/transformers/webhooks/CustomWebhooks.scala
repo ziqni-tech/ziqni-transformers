@@ -525,7 +525,7 @@ trait CustomWebhooks {
   def onAchievementRewardClaimed()(implicit settings:CustomWebhookSettings, ziqniEntityStateChanged: ZiqniEntityStateChanged, timestamp: DateTime, additionalFields: Map[String,Any], ziqniContext: ZiqniContext): Unit =
     if(settings.onAchievementRewardClaimedEnabled) {
       implicit val e: ExecutionContextExecutor = ziqniContext.ziqniExecutionContext
-      val memberId = ziqniEntityStateChanged.metadata.getOrElse("memberId", "")
+      val memberId = ziqniEntityStateChanged.metadata.getOrElse("memberId", ziqniEntityStateChanged.memberId)
 
       for {
         memberRefId <- ziqniContext.ziqniApiAsync.memberRefIdFromMemberId(memberId)

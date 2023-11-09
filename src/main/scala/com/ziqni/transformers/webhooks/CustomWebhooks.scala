@@ -123,7 +123,8 @@ trait CustomWebhooks {
 
     else if (Award.equalsIgnoreCase(change.entityType)) {
       val entityType = change.metadata.getOrElse(ParentType, Unknown)
-      val claimed = change.metadata.getOrElse(Claimed, "false").toBoolean
+      val claimed = change.metadata.getOrElse(Claimed,false).toString.toBoolean
+
 
       if(claimed && change.currentState > 0 && entityType.equalsIgnoreCase(Contest))
         onContestRewardClaimed()
@@ -269,7 +270,7 @@ trait CustomWebhooks {
         memberRefId <- ziqniContext.ziqniApiAsync.memberRefIdFromMemberId(memberId)
       } yield {
         val body = Map[String, Any](
-          "competitionId" -> ziqniEntityChanged.metadata.get("competitionId"),
+          "competitionId" -> ziqniEntityChanged.metadata.get("parentId"),
           "memberId" -> memberId,
           "memberRefId" -> memberRefId,
           "awardId" -> ziqniEntityChanged.entityId,
@@ -392,7 +393,7 @@ trait CustomWebhooks {
     if(settings.onContestRewardIssuedEnabled) {
 
       val body = Map[String, Any](
-        "contestId" -> ziqniEntityChanged.metadata.get("contestId"),
+        "contestId" -> ziqniEntityChanged.metadata.get("parentId"),
         "memberId" -> ziqniEntityChanged.metadata.get("memberId"),
         "memberRefId" -> ziqniEntityChanged.metadata.get("memberRefId"),
         "awardId" -> ziqniEntityChanged.entityId,
@@ -417,7 +418,7 @@ trait CustomWebhooks {
         memberRefId <- ziqniContext.ziqniApiAsync.memberRefIdFromMemberId(memberId)
       } yield {
         val body = Map[String, Any](
-          "contestId" -> ziqniEntityStateChanged.metadata.get("contestId"),
+          "contestId" -> ziqniEntityStateChanged.metadata.get("parentId"),
           "memberId" -> memberId,
           "memberRefId" -> memberRefId,
           "awardId" -> ziqniEntityStateChanged.entityId,
@@ -443,7 +444,7 @@ trait CustomWebhooks {
         memberRefId <- ziqniContext.ziqniApiAsync.memberRefIdFromMemberId(memberId)
       } yield {
         val body = Map[String, Any](
-          "contestId" -> ziqniEntityChanged.metadata.get("contestId"),
+          "contestId" -> ziqniEntityChanged.metadata.get("parentId"),
           "memberId" -> memberId,
           "memberRefId" -> memberRefId,
           "awardId" -> ziqniEntityChanged.entityId,
@@ -502,7 +503,7 @@ trait CustomWebhooks {
         memberRefId <- ziqniContext.ziqniApiAsync.memberRefIdFromMemberId(memberId)
       } yield {
         val body = Map[String, Any](
-          "achievementId" -> ziqniEntityChanged.metadata.get("achievementId"),
+          "achievementId" -> ziqniEntityChanged.metadata.get("parentId"),
           "memberId" -> ziqniEntityChanged.metadata.get("memberId"),
           "memberRefId" -> memberRefId,
           "awardId" -> ziqniEntityChanged.entityId,
@@ -528,7 +529,7 @@ trait CustomWebhooks {
         memberRefId <- ziqniContext.ziqniApiAsync.memberRefIdFromMemberId(memberId)
       } yield {
         val body = Map[String, Any](
-          "achievementId" -> ziqniEntityStateChanged.metadata.get("achievementId"),
+          "achievementId" -> ziqniEntityStateChanged.metadata.get("parentId"),
           "memberId" -> memberId,
           "memberRefId" -> memberRefId,
           "awardId" -> ziqniEntityStateChanged.entityId,
@@ -554,7 +555,7 @@ trait CustomWebhooks {
         memberRefId <- ziqniContext.ziqniApiAsync.memberRefIdFromMemberId(memberId)
       } yield {
         val body = Map[String, Any](
-          "achievementId" -> ziqniEntityChanged.metadata.get("achievementId"),
+          "achievementId" -> ziqniEntityChanged.metadata.get("parentId"),
           "memberId" -> memberId,
           "memberRefId" -> memberRefId,
           "awardId" -> ziqniEntityChanged.entityId,

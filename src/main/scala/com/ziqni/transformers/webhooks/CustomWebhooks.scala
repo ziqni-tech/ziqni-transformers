@@ -8,11 +8,13 @@ package com.ziqni.transformers.webhooks;
  */
 
 import org.joda.time.DateTime
-import com.ziqni.transformers.ZiqniContext
+import com.ziqni.transformers.{LogLevel, ZiqniContext}
 import com.ziqni.transformers.webhooks.CustomWebhookSettings._
 import com.ziqni.transformers.domain._
+
 import scala.concurrent.ExecutionContextExecutor
 import scala.language.implicitConversions
+import scala.util.control.NonFatal
 
 /**
  * This is an implementation of the custom webhooks for backwards compatibility and ease of customisation.
@@ -152,7 +154,7 @@ trait CustomWebhooks {
     if(settings.onNewProductEnabled){
       implicit val e: ExecutionContextExecutor = ziqniContext.ziqniExecutionContext
 
-      for {
+      val result = for {
         productRefId <- ziqniContext.ziqniApiAsync.productRefIdFromProductId(ziqniEntityChanged.entityId)
       } yield
       {
@@ -170,13 +172,17 @@ trait CustomWebhooks {
 
         doHttpPostAsMap(settings.url, json, headers, settings.basicAuth, settings.sendCompressed, "onNewProduct")
       }
+
+      result.recover({
+        case NonFatal(e) => ziqniContext.ziqniSystemLogWriter("onNewProduct", e, LogLevel.ERROR)
+      })
     }
 
   def onNewMember()(implicit settings:CustomWebhookSettings, ziqniEntityChanged: ZiqniEntityChanged, timestamp: DateTime, additionalFields: Map[String,Any], ziqniContext: ZiqniContext): Unit =
     if(settings.onNewMemberEnabled) {
       implicit val e: ExecutionContextExecutor = ziqniContext.ziqniExecutionContext
 
-      for {
+      val result = for {
         memberRefId <- ziqniContext.ziqniApiAsync.memberRefIdFromMemberId(ziqniEntityChanged.entityId)
       } yield {
         val body = Map[String, Any](
@@ -193,6 +199,10 @@ trait CustomWebhooks {
 
         doHttpPostAsMap(settings.url, json, headers, None, settings.sendCompressed, "onNewMember")
       }
+
+      result.recover({
+        case NonFatal(e) => ziqniContext.ziqniSystemLogWriter("onNewMember", e, LogLevel.ERROR)
+      })
     }
 
   def onCompetitionCreated()(implicit settings:CustomWebhookSettings, ziqniEntityChanged: ZiqniEntityChanged, timestamp: DateTime, additionalFields: Map[String,Any], ziqniContext: ZiqniContext): Unit =
@@ -268,7 +278,7 @@ trait CustomWebhooks {
       implicit val e: ExecutionContextExecutor = ziqniContext.ziqniExecutionContext
       val memberId = ziqniEntityChanged.metadata.getOrElse("memberId","")
 
-      for {
+      val result = for {
         memberRefId <- ziqniContext.ziqniApiAsync.memberRefIdFromMemberId(memberId)
       } yield {
         val body = Map[String, Any](
@@ -287,6 +297,10 @@ trait CustomWebhooks {
 
         doHttpPostAsMap(settings.url, json, headers, None, settings.sendCompressed, "onCompetitionRewardIssued")
       }
+
+      result.recover({
+        case NonFatal(e) => ziqniContext.ziqniSystemLogWriter("onCompetitionRewardIssued", e, LogLevel.ERROR)
+      })
     }
   }
 
@@ -416,7 +430,7 @@ trait CustomWebhooks {
       implicit val e: ExecutionContextExecutor = ziqniContext.ziqniExecutionContext
       val memberId = ziqniEntityStateChanged.metadata.getOrElse("memberId", "")
 
-      for {
+      val result = for {
         memberRefId <- ziqniContext.ziqniApiAsync.memberRefIdFromMemberId(memberId)
       } yield {
         val body = Map[String, Any](
@@ -435,6 +449,10 @@ trait CustomWebhooks {
 
         doHttpPostAsMap(settings.url, json, headers, None, settings.sendCompressed, "onContestRewardClaimed")
       }
+
+      result.recover({
+        case NonFatal(e) => ziqniContext.ziqniSystemLogWriter("onContestRewardClaimed", e, LogLevel.ERROR)
+      })
     }
 
   def onContestRewardClaimedZiqniEntityChanged()(implicit settings:CustomWebhookSettings, ziqniEntityChanged: ZiqniEntityChanged, timestamp: DateTime, additionalFields: Map[String,Any], ziqniContext: ZiqniContext): Unit =
@@ -442,7 +460,7 @@ trait CustomWebhooks {
       implicit val e: ExecutionContextExecutor = ziqniContext.ziqniExecutionContext
       val memberId = ziqniEntityChanged.metadata.getOrElse("memberId", "")
 
-      for {
+      val result = for {
         memberRefId <- ziqniContext.ziqniApiAsync.memberRefIdFromMemberId(memberId)
       } yield {
         val body = Map[String, Any](
@@ -461,6 +479,10 @@ trait CustomWebhooks {
 
         doHttpPostAsMap(settings.url, json, headers, None, settings.sendCompressed, "onContestRewardClaimed")
       }
+
+      result.recover({
+        case NonFatal(e) => ziqniContext.ziqniSystemLogWriter("onContestRewardClaimed", e, LogLevel.ERROR)
+      })
     }
 
   def onAchievementCreated()(implicit settings:CustomWebhookSettings, ziqniEntityChanged: ZiqniEntityChanged, timestamp: DateTime, additionalFields: Map[String,Any], ziqniContext: ZiqniContext): Unit =
@@ -501,7 +523,7 @@ trait CustomWebhooks {
       implicit val e: ExecutionContextExecutor = ziqniContext.ziqniExecutionContext
       val memberId = ziqniEntityChanged.metadata.getOrElse("memberId", "")
 
-      for {
+      val result = for {
         memberRefId <- ziqniContext.ziqniApiAsync.memberRefIdFromMemberId(memberId)
       } yield {
         val body = Map[String, Any](
@@ -520,6 +542,10 @@ trait CustomWebhooks {
 
         doHttpPostAsMap(settings.url, json, headers, None, settings.sendCompressed, "onAchievementRewardIssued")
       }
+
+      result.recover({
+        case NonFatal(e) => ziqniContext.ziqniSystemLogWriter("onAchievementRewardIssued", e, LogLevel.ERROR)
+      })
     }
 
   def onAchievementRewardClaimed()(implicit settings:CustomWebhookSettings, ziqniEntityStateChanged: ZiqniEntityStateChanged, timestamp: DateTime, additionalFields: Map[String,Any], ziqniContext: ZiqniContext): Unit =
@@ -527,7 +553,7 @@ trait CustomWebhooks {
       implicit val e: ExecutionContextExecutor = ziqniContext.ziqniExecutionContext
       val memberId = ziqniEntityStateChanged.metadata.getOrElse("memberId", ziqniEntityStateChanged.memberId)
 
-      for {
+      val result = for {
         memberRefId <- ziqniContext.ziqniApiAsync.memberRefIdFromMemberId(memberId)
       } yield {
         val body = Map[String, Any](
@@ -546,6 +572,10 @@ trait CustomWebhooks {
 
         doHttpPostAsMap(settings.url, json, headers, None, settings.sendCompressed, "onAchievementRewardClaimed")
       }
+
+      result.recover({
+        case NonFatal(e) => ziqniContext.ziqniSystemLogWriter("onAchievementRewardClaimed", e, LogLevel.ERROR)
+      })
     }
 
   def onAchievementRewardClaimedZiqniEntityChanged()(implicit settings:CustomWebhookSettings, ziqniEntityChanged: ZiqniEntityChanged, timestamp: DateTime, additionalFields: Map[String,Any], ziqniContext: ZiqniContext): Unit =
@@ -553,7 +583,7 @@ trait CustomWebhooks {
       implicit val e: ExecutionContextExecutor = ziqniContext.ziqniExecutionContext
       val memberId = ziqniEntityChanged.metadata.getOrElse("memberId", "")
 
-      for {
+      val result = for {
         memberRefId <- ziqniContext.ziqniApiAsync.memberRefIdFromMemberId(memberId)
       } yield {
         val body = Map[String, Any](
@@ -572,6 +602,10 @@ trait CustomWebhooks {
 
         doHttpPostAsMap(settings.url, json, headers, None, settings.sendCompressed, "onAchievementRewardClaimed")
       }
+
+      result.recover({
+        case NonFatal(e) => ziqniContext.ziqniSystemLogWriter("onAchievementRewardClaimed", e, LogLevel.ERROR)
+      })
     }
 
   private implicit def stringToOpt(s:String): Option[String] = Option(s)

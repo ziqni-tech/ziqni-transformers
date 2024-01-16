@@ -56,7 +56,7 @@ trait ZiqniApiAsync {
 	 * @param eventsToCache The events previously added. The result is the new stored value
 	 * @return True on success, false on duplicate and exception if malformed
 	 */
-	def pushEventTransactionAndThen(event: ZiqniEvent, eventsToCache: Seq[ZiqniEvent] => Seq[ZiqniEvent]): Future[Boolean]
+	def pushEventTransaction(event: ZiqniEvent, eventsToCache: Seq[ZiqniEvent] => Seq[ZiqniEvent]): Future[Boolean]
 
 	def findByBatchId(batchId: String): Future[Seq[ZiqniEvent]]
 

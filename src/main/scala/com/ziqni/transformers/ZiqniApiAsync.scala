@@ -47,6 +47,17 @@ trait ZiqniApiAsync {
 		*/
 	def pushEventTransaction(event: ZiqniEvent): Future[Boolean]
 
+	/**
+	 * Insert an event into your Ziqni space
+	 * and also keep a local copy based on batch id for up to 5 minutes
+	 * Note that work is done in a single threaded executor so make sure it is fast
+	 *
+	 * @param event The events to push
+	 * @param eventsToCache The events previously added. The result is the new stored value
+	 * @return True on success, false on duplicate and exception if malformed
+	 */
+	def pushEventAndSetTransactionCache(event: ZiqniEvent, eventsToCache: Seq[ZiqniEvent] => Seq[ZiqniEvent]): Future[Boolean]
+
 	def findByBatchId(batchId: String): Future[Seq[ZiqniEvent]]
 
 	/**

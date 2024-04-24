@@ -65,6 +65,15 @@ trait ZiqniMqTransformer {
 		)
 
 	/**
+	 * This method gets executed when the scheduler emits a tick event
+	 * @param ziqniContext - The Ziqni Context
+	 */
+	def scheduled(ziqniContext: ZiqniContext): Unit =
+		apply(
+			Array.empty, ziqniContext, Map.empty
+		)
+
+	/**
 		* Get the subscription to use for this transformer to be notified of changes in the system
 		* @return
 		*/

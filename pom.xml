@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.ziqni</groupId>
     <artifactId>ziqni-transformers</artifactId>
-    <version>2.0.5</version>
+    <version>2.0.6</version>
     <packaging>jar</packaging>
 
     <name>Ziqni Transformers</name>
@@ -199,24 +199,6 @@
                 <configuration>
                     <failOnError>false</failOnError>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-gpg-plugin</artifactId>
-                <version>1.5</version>
-                <executions>
-                    <execution>
-                        <id>sign-artifacts</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>sign</goal>
-                        </goals>
-                        <configuration>
-                            <keyname>${gpg.keyname}</keyname>
-                            <passphrase>${gpg.passphrase}</passphrase>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
 <!--            <plugin>-->
 <!--                <groupId>org.apache.maven.plugins</groupId>-->

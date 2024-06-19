@@ -1,6 +1,6 @@
 package com.ziqni.transformers.aws
 
-import software.amazon.awssdk.services.sqs.model.SendMessageRequest
+import software.amazon.awssdk.services.sqs.model.{SendMessageRequest, SendMessageResponse}
 import software.amazon.awssdk.services.sqs.SqsClient
 
 case class AwsSQS(ziqniAwsCredentials: AwsCredentials, region: String, queueUrl: String) {
@@ -19,14 +19,15 @@ case class AwsSQS(ziqniAwsCredentials: AwsCredentials, region: String, queueUrl:
     }
   }
 
-  def sendMessage(messageBody: String, messageGroupId: String = "ziqni-prod", messageDeduplicationId: String = "1"): Unit = {
+  def sendMessage(messageBody: String, messageGroupId: String = "ziqni-prod", messageDeduplicationId: String = "1", f: SendMessageResponse => Unit): Unit = {
     val sendMsgRequest: SendMessageRequest.Builder = SendMessageRequest.builder()
       .queueUrl(queueUrl)
       .messageBody(messageBody)
       .messageGroupId(messageGroupId) // required for FIFO queues
       .messageDeduplicationId(messageDeduplicationId) // required unless the queue is configured to generate deduplication IDs automatically
 
-    client.sendMessage(sendMsgRequest.build())
+    val r = client.sendMessage(sendMsgRequest.build())
+    f.apply(r)
   }
 
 }

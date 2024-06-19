@@ -24,13 +24,14 @@ case class AwsS3(ziqniAwsCredentials: AwsCredentials, bucketName: String, region
     }
   }
 
-  def listObjects(): mutable.Seq[S3Object] = {
+  def listObjects(f :mutable.Seq[S3Object] => Unit): Unit  = {
     val listObjectsRequest = ListObjectsV2Request.builder()
       .bucket(bucketName)
       .build()
 
     val listObjectsResponse = s3Client.listObjectsV2(listObjectsRequest)
-    listObjectsResponse.contents().asScala
+    val seq = listObjectsResponse.contents().asScala
+    f.apply(seq)
   }
 
   /**
@@ -38,7 +39,7 @@ case class AwsS3(ziqniAwsCredentials: AwsCredentials, bucketName: String, region
    * @param prefix Like folderA or FolderA/folderB
    * @return
    */
-  def listObjectSubFolders(prefix:String): mutable.Seq[S3Object] = {
+  def listObjectSubFolders(prefix:String, f :mutable.Seq[S3Object] => Unit): Unit  = {
     val p = {
       if(prefix.endsWith("/")) prefix
       else prefix+"/"
@@ -49,26 +50,29 @@ case class AwsS3(ziqniAwsCredentials: AwsCredentials, bucketName: String, region
       .build()
 
     val listObjectsResponse = s3Client.listObjectsV2(listObjectsRequest)
-    listObjectsResponse.contents().asScala
+    val seq = listObjectsResponse.contents().asScala
+    f.apply(seq)
   }
 
   // Get an object from the bucket
-  def getObject(key: String): ResponseInputStream[GetObjectResponse] = {
+  def getObject(key: String, f :ResponseInputStream[GetObjectResponse] => Unit): Unit  = {
     val getObjectRequest = GetObjectRequest.builder()
       .bucket(bucketName)
       .key(key)
       .build()
 
-    s3Client.getObject(getObjectRequest)
+    val s = s3Client.getObject(getObjectRequest)
+    f.apply(s)
   }
 
   // Delete an object from the bucket
-  def deleteObject(key: String): DeleteObjectResponse = {
+  def deleteObject(key: String, f :DeleteObjectResponse => Unit): Unit  = {
     val deleteObjectRequest = DeleteObjectRequest.builder()
       .bucket(bucketName)
       .key(key)
       .build()
 
-    s3Client.deleteObject(deleteObjectRequest)
+    val r = s3Client.deleteObject(deleteObjectRequest)
+    f.apply(r)
   }
 }

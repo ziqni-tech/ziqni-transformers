@@ -72,11 +72,4 @@ trait ZiqniContext {
 
   def ziqniSystemLogWriter(message: String, throwable: Throwable, logLevel: LogLevel): Unit
   def ziqniSystemLogWriter(message: String, description: String, logLevel: LogLevel): Unit = ziqniSystemLogWriter(message, new Exception(description), logLevel)
-
-  /**
-   * This is required to get around the, Dynamic Compilation Limitations
-   * Scala's ToolBox is used for dynamically compiling and executing code. However, it sometimes struggles with Java interoperability, especially with complex or nested Java structures.
-   * The ToolBox may not always correctly handle the classpath or dependencies required for these Java classes.
-   **/
-  lazy val aws: ZiqniAwsHelpers = new ZiqniAwsHelpers
 }

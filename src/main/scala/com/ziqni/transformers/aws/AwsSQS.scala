@@ -3,7 +3,7 @@ package com.ziqni.transformers.aws
 import software.amazon.awssdk.services.sqs.model.SendMessageRequest
 import software.amazon.awssdk.services.sqs.SqsClient
 
-case class ZiqniAwsSQS(ziqniAwsCredentials: ZiqniAwsCredentials, region: String, queueUrl: String) {
+case class AwsSQS(ziqniAwsCredentials: AwsCredentials, region: String, queueUrl: String) {
 
   private val client:SqsClient = SqsClient.builder()
     .credentialsProvider(ziqniAwsCredentials.awsStaticCredentialsProvider)

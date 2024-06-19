@@ -8,7 +8,7 @@ import software.amazon.awssdk.regions.Region
 import scala.collection.mutable
 import scala.jdk.CollectionConverters._
 
-case class ZiqniAwsS3(ziqniAwsCredentials: ZiqniAwsCredentials, bucketName: String, region: String) {
+case class AwsS3(ziqniAwsCredentials: AwsCredentials, bucketName: String, region: String) {
 
   private val s3Client = S3Client.builder()
     .region(Region.of(region))

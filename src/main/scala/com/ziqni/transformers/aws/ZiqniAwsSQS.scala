@@ -5,7 +5,7 @@ import software.amazon.awssdk.services.sqs.SqsClient
 
 case class ZiqniAwsSQS(ziqniAwsCredentials: ZiqniAwsCredentials, region: String, queueUrl: String) {
 
-  val client:SqsClient = SqsClient.builder()
+  private val client:SqsClient = SqsClient.builder()
     .credentialsProvider(ziqniAwsCredentials.awsStaticCredentialsProvider)
     .region(software.amazon.awssdk.regions.Region.of(region))
     .build()

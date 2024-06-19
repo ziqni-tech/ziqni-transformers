@@ -10,7 +10,7 @@ import software.amazon.awssdk.auth.credentials.{AwsBasicCredentials, StaticCrede
  **/
 case class ZiqniAwsCredentials(accessKeyId:String, secretAccessKey:String) {
 
-  val awsBasicCredentials: AwsBasicCredentials = AwsBasicCredentials.create(accessKeyId, secretAccessKey)
+  private val awsBasicCredentials: AwsBasicCredentials = AwsBasicCredentials.create(accessKeyId, secretAccessKey)
 
   lazy val awsStaticCredentialsProvider: StaticCredentialsProvider = StaticCredentialsProvider.create(awsBasicCredentials)
 }

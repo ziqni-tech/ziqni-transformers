@@ -1,19 +1,16 @@
 package com.ziqni.transformers.aws
 
-package com.ziqni.transformers.aws
-
 import software.amazon.awssdk.core.ResponseInputStream
 import software.amazon.awssdk.services.s3.S3Client
 import software.amazon.awssdk.services.s3.model.{DeleteObjectRequest, DeleteObjectResponse, GetObjectRequest, GetObjectResponse, ListObjectsV2Request, S3Object}
 import software.amazon.awssdk.regions.Region
 
-import java.io.{BufferedReader, InputStreamReader}
 import scala.collection.mutable
 import scala.jdk.CollectionConverters._
 
 case class ZiqniAwsS3(ziqniAwsCredentials: ZiqniAwsCredentials, bucketName: String, region: String) {
 
-  val s3Client = S3Client.builder()
+  private val s3Client = S3Client.builder()
     .region(Region.of(region))
     .credentialsProvider(ziqniAwsCredentials.awsStaticCredentialsProvider)
     .build()

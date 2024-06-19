@@ -53,7 +53,7 @@ case class ZiqniAwsS3(ziqniAwsCredentials: ZiqniAwsCredentials, bucketName: Stri
   }
 
   // Get an object from the bucket
-  def get(key: String): ResponseInputStream[GetObjectResponse] = {
+  def getObject(key: String): ResponseInputStream[GetObjectResponse] = {
     val getObjectRequest = GetObjectRequest.builder()
       .bucket(bucketName)
       .key(key)

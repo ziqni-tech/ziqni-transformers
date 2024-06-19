@@ -11,10 +11,18 @@ trait ZiqniMqTransformer {
 	val IsReferenceId = true
 
 	/**
-	 * This method gets executed when the transformer is initialized
+	 * This method gets executed when the transformer is started
 	 * @param ziqniContext The Ziqni Context
 	 */
-	def initializer(ziqniContext: ZiqniContext): Unit = {
+	def started(ziqniContext: ZiqniContext): Unit = {
+
+	}
+
+	/**
+	 * This method gets executed when the transformer is stopped
+	 * @param ziqniContext The Ziqni Context
+	 */
+	def stopped(ziqniContext: ZiqniContext): Unit = {
 
 	}
 

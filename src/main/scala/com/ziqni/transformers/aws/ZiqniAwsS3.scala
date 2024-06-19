@@ -24,7 +24,7 @@ case class ZiqniAwsS3(ziqniAwsCredentials: ZiqniAwsCredentials, bucketName: Stri
     }
   }
 
-  def list(): mutable.Seq[S3Object] = {
+  def listObjects(): mutable.Seq[S3Object] = {
     val listObjectsRequest = ListObjectsV2Request.builder()
       .bucket(bucketName)
       .build()
@@ -38,7 +38,7 @@ case class ZiqniAwsS3(ziqniAwsCredentials: ZiqniAwsCredentials, bucketName: Stri
    * @param prefix Like folderA or FolderA/folderB
    * @return
    */
-  def listSubFolders(prefix:String): mutable.Seq[S3Object] = {
+  def listObjectSubFolders(prefix:String): mutable.Seq[S3Object] = {
     val p = {
       if(prefix.endsWith("/")) prefix
       else prefix+"/"
@@ -63,7 +63,7 @@ case class ZiqniAwsS3(ziqniAwsCredentials: ZiqniAwsCredentials, bucketName: Stri
   }
 
   // Delete an object from the bucket
-  def delete(key: String): DeleteObjectResponse = {
+  def deleteObject(key: String): DeleteObjectResponse = {
     val deleteObjectRequest = DeleteObjectRequest.builder()
       .bucket(bucketName)
       .key(key)

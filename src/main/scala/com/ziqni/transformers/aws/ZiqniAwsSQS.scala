@@ -10,6 +10,15 @@ case class ZiqniAwsSQS(ziqniAwsCredentials: ZiqniAwsCredentials, region: String,
     .region(software.amazon.awssdk.regions.Region.of(region))
     .build()
 
+  def close(): Unit = {
+    try {
+      client.close()
+    }
+    catch {
+      case e: Exception => e.printStackTrace()
+    }
+  }
+
   def sendMessage(messageBody: String, messageGroupId: String = "ziqni-prod", messageDeduplicationId: String = "1"): Unit = {
     val sendMsgRequest: SendMessageRequest.Builder = SendMessageRequest.builder()
       .queueUrl(queueUrl)

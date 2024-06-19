@@ -49,6 +49,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.github.seratch</groupId>
+            <artifactId>awscala_2.13</artifactId>
+            <version>0.9.2</version>
+        </dependency>
+        <dependency>
             <groupId>software.amazon.awssdk</groupId>
             <artifactId>auth</artifactId>
             <version>${software.amazon.awssdk.version}</version>

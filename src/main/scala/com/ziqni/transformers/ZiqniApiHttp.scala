@@ -27,6 +27,7 @@ trait ZiqniApiHttp {
 	  */
 	def httpGet(url: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[ZiqniAuthCredentials] = None, sendCompressed: Boolean = true, ziqniContext: ZiqniContext): HttpResponseEntity = httpGetWithLogMessage(url, headers, basicAuthCredentials, sendCompressed, None, ziqniContext)
 
+	@Deprecated
 	def httpGetWithLogMessage(url: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[ZiqniAuthCredentials] = None, sendCompressed: Boolean = true, logMessage: Option[String], ziqniContext: ZiqniContext): HttpResponseEntity
 	def httpGetWithLogMessageAsync(url: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[ZiqniAuthCredentials] = None, sendCompressed: Boolean = true, logMessage: Option[String], ziqniContext: ZiqniContext): Future[HttpResponseEntity]
 
@@ -40,6 +41,7 @@ trait ZiqniApiHttp {
 	  */
 	def httpPut(url: String, body: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[ZiqniAuthCredentials] = None, sendCompressed: Boolean = true, ziqniContext: ZiqniContext): HttpResponseEntity = httpPutWithLogMessage(url, body, headers, basicAuthCredentials, sendCompressed, None, ziqniContext)
 
+	@Deprecated
 	def httpPutWithLogMessage(url: String, body: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[ZiqniAuthCredentials] = None, sendCompressed: Boolean = true, logMessage: Option[String], ziqniContext: ZiqniContext): HttpResponseEntity
 	def httpPutWithLogMessageAsync(url: String, body: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[ZiqniAuthCredentials] = None, sendCompressed: Boolean = true, logMessage: Option[String], ziqniContext: ZiqniContext): Future[HttpResponseEntity]
 
@@ -53,6 +55,7 @@ trait ZiqniApiHttp {
 	  */
 	def httpPost(url: String, body: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[ZiqniAuthCredentials] = None, sendCompressed: Boolean = true, ziqniContext: ZiqniContext): HttpResponseEntity = httpPostWithLogMessage(url, body, headers, basicAuthCredentials, sendCompressed, None, ziqniContext)
 
+	@Deprecated
 	def httpPostWithLogMessage(url: String, body: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[ZiqniAuthCredentials] = None, sendCompressed: Boolean = true, logMessage: Option[String], ziqniContext: ZiqniContext): HttpResponseEntity
 	def httpPostWithLogMessageAsync(url: String, body: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[ZiqniAuthCredentials] = None, sendCompressed: Boolean = true, logMessage: Option[String], ziqniContext: ZiqniContext): Future[HttpResponseEntity]
 
@@ -65,6 +68,7 @@ trait ZiqniApiHttp {
 	  */
 	def httpDelete(url: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[ZiqniAuthCredentials] = None, sendCompressed: Boolean = true, ziqniContext: ZiqniContext): HttpResponseEntity = httpDeleteWithLogMessage(url, headers, basicAuthCredentials, sendCompressed, None, ziqniContext)
 
+	@Deprecated
 	def httpDeleteWithLogMessage(url: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[ZiqniAuthCredentials] = None, sendCompressed: Boolean = true, logMessage: Option[String], ziqniContext: ZiqniContext): HttpResponseEntity
 	def httpDeleteWithLogMessageAsync(url: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[ZiqniAuthCredentials] = None, sendCompressed: Boolean = true, logMessage: Option[String], ziqniContext: ZiqniContext): Future[HttpResponseEntity]
 }

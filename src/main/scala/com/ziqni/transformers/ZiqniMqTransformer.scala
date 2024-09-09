@@ -11,6 +11,22 @@ trait ZiqniMqTransformer {
 	val IsReferenceId = true
 
 	/**
+	 * This method gets executed when the transformer is preparing to start
+	 * @param ziqniContext The Ziqni Context
+	 */
+	def preparingToStart(ziqniContext: ZiqniContext): Unit = {
+
+	}
+
+	/**
+	 * This method gets executed when the transformer is preparing to stop
+	 * @param ziqniContext The Ziqni Context
+	 */
+	def preparingToStop(ziqniContext: ZiqniContext): Unit = {
+
+	}
+
+	/**
 	  * This method gets executed when a message is received on the message queue
 	  * @param message The message
 	  * @param ziqniContext The Ziqni Context

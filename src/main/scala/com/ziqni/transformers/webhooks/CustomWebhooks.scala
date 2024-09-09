@@ -19,7 +19,7 @@ import scala.util.control.NonFatal
 /**
  * This is an implementation of the custom webhooks for backwards compatibility and ease of customisation.
  */
-trait CustomWebhooks {
+class CustomWebhooks {
 
   ////////////////////////////////////////////////////////////
   /// >>             CUSTOM WEBHOOK REPLACEMENT         << ///

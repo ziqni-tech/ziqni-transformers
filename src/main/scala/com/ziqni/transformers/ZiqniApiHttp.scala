@@ -6,8 +6,10 @@
   */
 package com.ziqni.transformers
 import com.ziqni.transformers.domain._
+
+import scala.concurrent.Future
 trait ZiqniApiHttp {
-	
+
 	def HTTPDefaultHeader(accountId: String = "", onEvent: String = ""): Map[EventbusAddress, Seq[EventbusAddress]] = Map(
 		"Content-Type" -> Seq("application/json"),
 		"Content-Encoding" -> Seq("gzip"),
@@ -26,6 +28,7 @@ trait ZiqniApiHttp {
 	def httpGet(url: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[ZiqniAuthCredentials] = None, sendCompressed: Boolean = true, ziqniContext: ZiqniContext): HttpResponseEntity = httpGetWithLogMessage(url, headers, basicAuthCredentials, sendCompressed, None, ziqniContext)
 
 	def httpGetWithLogMessage(url: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[ZiqniAuthCredentials] = None, sendCompressed: Boolean = true, logMessage: Option[String], ziqniContext: ZiqniContext): HttpResponseEntity
+	def httpGetWithLogMessageAsync(url: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[ZiqniAuthCredentials] = None, sendCompressed: Boolean = true, logMessage: Option[String], ziqniContext: ZiqniContext): Future[HttpResponseEntity]
 
 	/**
 	  * Send a http put request
@@ -38,6 +41,7 @@ trait ZiqniApiHttp {
 	def httpPut(url: String, body: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[ZiqniAuthCredentials] = None, sendCompressed: Boolean = true, ziqniContext: ZiqniContext): HttpResponseEntity = httpPutWithLogMessage(url, body, headers, basicAuthCredentials, sendCompressed, None, ziqniContext)
 
 	def httpPutWithLogMessage(url: String, body: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[ZiqniAuthCredentials] = None, sendCompressed: Boolean = true, logMessage: Option[String], ziqniContext: ZiqniContext): HttpResponseEntity
+	def httpPutWithLogMessageAsync(url: String, body: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[ZiqniAuthCredentials] = None, sendCompressed: Boolean = true, logMessage: Option[String], ziqniContext: ZiqniContext): Future[HttpResponseEntity]
 
 	/**
 	  * Send a http post request
@@ -50,6 +54,7 @@ trait ZiqniApiHttp {
 	def httpPost(url: String, body: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[ZiqniAuthCredentials] = None, sendCompressed: Boolean = true, ziqniContext: ZiqniContext): HttpResponseEntity = httpPostWithLogMessage(url, body, headers, basicAuthCredentials, sendCompressed, None, ziqniContext)
 
 	def httpPostWithLogMessage(url: String, body: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[ZiqniAuthCredentials] = None, sendCompressed: Boolean = true, logMessage: Option[String], ziqniContext: ZiqniContext): HttpResponseEntity
+	def httpPostWithLogMessageAsync(url: String, body: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[ZiqniAuthCredentials] = None, sendCompressed: Boolean = true, logMessage: Option[String], ziqniContext: ZiqniContext): Future[HttpResponseEntity]
 
 	/**
 	  * Send a http delete request
@@ -61,4 +66,5 @@ trait ZiqniApiHttp {
 	def httpDelete(url: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[ZiqniAuthCredentials] = None, sendCompressed: Boolean = true, ziqniContext: ZiqniContext): HttpResponseEntity = httpDeleteWithLogMessage(url, headers, basicAuthCredentials, sendCompressed, None, ziqniContext)
 
 	def httpDeleteWithLogMessage(url: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[ZiqniAuthCredentials] = None, sendCompressed: Boolean = true, logMessage: Option[String], ziqniContext: ZiqniContext): HttpResponseEntity
+	def httpDeleteWithLogMessageAsync(url: String, headers: Map[String, Seq[String]] = HTTPDefaultHeader(), basicAuthCredentials: Option[ZiqniAuthCredentials] = None, sendCompressed: Boolean = true, logMessage: Option[String], ziqniContext: ZiqniContext): Future[HttpResponseEntity]
 }

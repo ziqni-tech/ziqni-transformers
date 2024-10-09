@@ -286,8 +286,4 @@ trait ZiqniApiAsync {
 	  */
 	def getUoMMultiplierFromKey(unitOfMeasureKey: String): Future[Double]
 
-	/**
-	 * For internal use only
-	 */
-	def $[T](cst:String): T
 }

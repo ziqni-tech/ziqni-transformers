@@ -71,4 +71,9 @@ trait ZiqniContext {
 
   def ziqniSystemLogWriter(message: String, throwable: Throwable, logLevel: LogLevel): Unit
   def ziqniSystemLogWriter(message: String, description: String, logLevel: LogLevel): Unit = ziqniSystemLogWriter(message, new Exception(description), logLevel)
+
+  /**
+   * For internal use only
+   */
+  def $[T](cst:String): T
 }

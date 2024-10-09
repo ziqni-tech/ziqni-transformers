@@ -485,6 +485,7 @@ class CustomWebhooks {
       })
     }
 
+
   def onAchievementCreated()(implicit settings:CustomWebhookSettings, ziqniEntityChanged: ZiqniEntityChanged, timestamp: DateTime, additionalFields: Map[String,Any], ziqniContext: ZiqniContext): Unit =
     if(settings.onAchievementCreatedEnabled) {
 

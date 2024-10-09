@@ -285,4 +285,9 @@ trait ZiqniApiAsync {
 	  * @return Double returns a multiplier associated with the UoM
 	  */
 	def getUoMMultiplierFromKey(unitOfMeasureKey: String): Future[Double]
+
+	/**
+	 * For internal use only
+	 */
+	def $[T](cst:String): T
 }

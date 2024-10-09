@@ -9,6 +9,7 @@ import org.json4s.{DefaultFormats, JValue}
 import com.ziqni.transformers.domain._
 
 import java.nio.charset.Charset
+import scala.reflect.ClassTag
 
 object ZiqniContext {
 
@@ -75,5 +76,5 @@ trait ZiqniContext {
   /**
    * For internal use only
    */
-  def $[T](cst:String): T
+  def $[TZ](t: String)(implicit ct: ClassTag[TZ]): TZ
 }

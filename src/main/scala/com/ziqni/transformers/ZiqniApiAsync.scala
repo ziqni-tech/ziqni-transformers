@@ -249,11 +249,15 @@ trait ZiqniApiAsync {
 	  * @return BasicAwardModel returns a basic award object
 	  */
 	def getAward(awardId: String): Future[ZiqniAward]
+
 	/**
-	  *
-	  * @param awardId Ziqni Award Id
-	  * @return BasicAwardModel returns a basic award object
-	  */
+	 * Update the state of an award
+	 * @param action The action to take
+	 * @param constraints The constraints to apply
+	 * @param transactionReferenceId The transaction reference id
+	 * @param reasonForChange The reason for the change
+	 * @return The updated award
+	 */
 	def updateAwardsState(action: AwardStateActions, constraints: Seq[String], transactionReferenceId: String, reasonForChange: String): Future[ZiqniAward]
 
 	/**

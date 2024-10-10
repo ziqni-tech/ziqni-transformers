@@ -251,6 +251,17 @@ trait ZiqniApiAsync {
 	def getAward(awardId: String): Future[ZiqniAward]
 
 	/**
+	 * Get awards by status code and created date
+	 * @param statusCodeFrom The status code from
+	 * @param statusCodeTo The status code to
+	 * @param createdFrom The created from in epoch seconds
+	 * @param createdUntil The created until in epoch seconds
+	 * @return The awards
+	 */
+	def getAwardsByStatusCodeCreatedDate(statusCodeFrom: Int, statusCodeTo: Int, createdFrom: Long, createdUntil: Long): Seq[ZiqniAward]
+
+
+	/**
 	 * Update the state of an award
 	 * @param action The action to take
 	 * @param constraints The constraints to apply

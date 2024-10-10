@@ -254,12 +254,17 @@ trait ZiqniApiAsync {
 	 * Get awards by status code and created date
 	 * @param statusCodeFrom The status code from
 	 * @param statusCodeTo The status code to
-	 * @param createdFrom The created from in epoch seconds
-	 * @param createdUntil The created until in epoch seconds
+	 * @param skip The number of records to skip
+	 * @param limit The number of records to return
+	 * @param activeFrom The active from in epoch seconds
+	 * @param activeUntil The active until in epoch seconds
+	 * @param rewardTypeKey The reward type key
+	 * @param memberId The member id
+	 * @param rewardId The reward id
+	 * @param entityId The entity id
 	 * @return The awards
 	 */
-	def getAwardsByStatusCodeCreatedDate(statusCodeFrom: Int, statusCodeTo: Int, createdFrom: Long, createdUntil: Long): Seq[ZiqniAward]
-
+	def getAwardsBy(statusCodeFrom: Int, statusCodeTo: Int, skip: Int, limit: Int, activeFrom: Option[Long], activeUntil: Option[Long], rewardTypeKey: Option[String], memberId: Option[String], rewardId: Option[String], entityId: Option[String]): Future[Seq[ZiqniAward]]
 
 	/**
 	 * Update the state of an award

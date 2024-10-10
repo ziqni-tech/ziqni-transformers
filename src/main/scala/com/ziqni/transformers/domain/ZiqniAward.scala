@@ -87,4 +87,21 @@ abstract class ZiqniAward {
 	  */
 	def getRewardMetaData: Option[Map[String, String]]
 
+	/**
+	 * Get the status code of the response
+	 * @return The status code
+	 */
+	def getStatusCode: Int
+
+	/**
+	 * The is active from this epoch date time in seconds
+	 * @return The active from date
+	 */
+	def getActiveFrom: Long
+
+	/**
+	 * The is active until this epoch date time in seconds
+	 * @return The active until date
+	 */
+	def getActiveUntil: Long
 }

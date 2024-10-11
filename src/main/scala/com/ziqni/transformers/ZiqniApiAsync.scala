@@ -264,7 +264,7 @@ trait ZiqniApiAsync {
 	 * @param entityId The entity id
 	 * @return The awards
 	 */
-	def getAwardsBy(statusCodeFrom: Int, statusCodeTo: Int, skip: Int, limit: Int, activeFrom: Option[Long], activeUntil: Option[Long], rewardTypeKey: Option[String], memberId: Option[String], rewardId: Option[String], entityId: Option[String]): Future[ZiqniQueryResult[ZiqniAward]]
+	def getAwardsBy(statusCodeFrom: Int, statusCodeTo: Int, skip: Int, limit: Int, activeFrom: Option[Long], activeUntil: Option[Long], rewardTypeKey: Option[String], memberId: Option[String], rewardId: Option[String], entityId: Option[String]): Future[ZiqniQueryResult[_<:ZiqniAward]]
 
 	/**
 	 * Update the state of an award

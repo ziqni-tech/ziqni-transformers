@@ -268,13 +268,14 @@ trait ZiqniApiAsync {
 
 	/**
 	 * Update the state of an award
+	 * @param awardId The award id
 	 * @param action The action to take
 	 * @param constraints The constraints to apply
 	 * @param transactionReferenceId The transaction reference id
 	 * @param reasonForChange The reason for the change
 	 * @return The updated award
 	 */
-	def updateAwardsState(action: AwardStateActions, constraints: Option[Seq[String]], transactionReferenceId: Option[String], reasonForChange: Option[String]): Future[ZiqniAward]
+	def updateAwardsState(awardId: String, action: AwardStateActions, constraints: Option[Seq[String]], transactionReferenceId: Option[String], reasonForChange: Option[String]): Future[ZiqniAward]
 
 	/**
 	  *

@@ -313,4 +313,11 @@ trait ZiqniApiAsync {
 	  */
 	def getUoMMultiplierFromKey(unitOfMeasureKey: String): Future[Double]
 
+	/**
+		* Get the goal metrics for the given member and entity
+		* @param memberIds The member identifiers
+		* @param entityIds The entity identifiers
+	  * @return The goal metrics or an error if they could not be retrieved
+		*/
+	def getGoalMetrics(memberIds: Seq[String], entityIds: Seq[String]): Future[Seq[ZiqniGoalMetric]]
 }

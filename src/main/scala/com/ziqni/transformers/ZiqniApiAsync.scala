@@ -320,4 +320,12 @@ trait ZiqniApiAsync {
 	  * @return The goal metrics or an error if they could not be retrieved
 		*/
 	def getGoalMetrics(memberIds: Seq[String], entityIds: Seq[String]): Future[Seq[ZiqniGoalMetric]]
+
+	/**
+		* Get the goal metrics for the given member and entity
+		* @param memberId The member identifier
+		* @param entityId The entity identifier
+	  * @return The goal metric or an error if they could not be retrieved
+		*/
+	def getGoalMetric(memberId: String, entityId: String): Future[ZiqniGoalMetric]
 }

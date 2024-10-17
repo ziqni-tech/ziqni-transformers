@@ -5,12 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.ziqni</groupId>
     <artifactId>ziqni-transformers</artifactId>
-    <version>2.0.11</version>
-    <packaging>jar</packaging>
+    <version>2.0.12</version>
 
     <name>Ziqni Transformers</name>
     <description>Ziqni transformers project.</description>
     <url>https://www.ziqni.com/</url>
+    <packaging>jar</packaging>
 
     <licenses>
         <license>
